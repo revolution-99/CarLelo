@@ -1,0 +1,1 @@
+Type ActiveRecord::Base.connection_db_config in rails console to know the database type

@@ -1,0 +1,9 @@
+<span class="fs-4">
+    Hii <%=@user.first_name%> <%=@user.last_name%>
+</span>
+<p>
+    Welcome to CarLelo! We are building an engaged community of buyers and sellers.
+
+    We are excited to have you on-board and there's just one step to verify if it's actually your e-mail address:
+</p>
+<%= link_to "Confirm Email", confirm_email_url(@user.confirm_token) %>

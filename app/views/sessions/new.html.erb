@@ -1,0 +1,22 @@
+<div class="d-flex flex-column align-items-center justify-content-center">
+    <h1> Welcome to Login page </h1>
+</div>
+
+<%= form_with model: @user, url:login_path do |form| %>
+ <div class="d-flex align-items-center justify-content-center flex-column">
+  <div class="mb-3">
+    <%= form.label :Enter_Your_Email%>
+    <%= form.text_field :email,  placeholder: "xyz@abc.com", class: "form-control"%>
+  </div>
+  <div class="mb-3">
+    <%= form.label :Enter_Your_Password %>
+    <%= form.password_field :password, placeholder: "xyz123", class: "form-control"%>
+  </div>
+  <div class="mb-3">
+    <%= form.submit "Login", class:"btn btn-primary"%>
+  </div>
+  <span>
+    New User? <%= link_to "Signup Here", users_path%>
+  </span>
+  </div>
+<% end %>

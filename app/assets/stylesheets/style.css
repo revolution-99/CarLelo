@@ -1,0 +1,65 @@
+/* .form-select{
+    padding-right: 8rem;
+} */
+
+.name{
+    gap: 1rem
+}
+
+.filter{
+    margin: 24px 0 26px;
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+}
+.filter .filter--section, .filter--section__content {
+    width: 100%;
+    position: relative;
+}
+.filter--section__content {
+    padding: 11px 18px;
+    background: #fff;
+    border: 1px solid #dde5eb;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #465166;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.car-card{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-body-custom{
+    margin-bottom: 16px;
+    display: flex;
+    list-style: none;
+}
+.card-body-custom li{
+    margin-right: 18px;
+    max-width: 118px;
+    flex: 1;
+    height: 30px;
+    background: #ebf4f9;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+    color: #465166;
+    list-style: none;
+}
