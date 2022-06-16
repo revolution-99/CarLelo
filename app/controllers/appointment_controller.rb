@@ -1,16 +1,18 @@
 class AppointmentController < ApplicationController
-    before_action :require_login
 
     def new
-        
+        @appointment = Appointment.new
     end
     def create
-        redirect_to root_path, notice: "You will be notified about your appointment soon."
-    end
-
-    def require_login
-        unless current_user
-            redirect_to login_path, notice: "You must logged in first"
+        @appointment = Appointment.new(appointment_date: params[:appointment_date], user_id: current_user.id)
+        if @appointment.save
+            session[:appointment_id] = @appointment_id
+            UserMailer.appointment_confirmation(current_user,@appointment).deliver_later
+            # redirect_to appointment_path, notice: "The best price for your car is here."
+            redirect_to root_path, notice: "You will be notified about your appointment soon."
+        else
+            render :new
         end
+        # redirect_to root_path, notice: "You will be notified about your appointment soon."
     end
 end

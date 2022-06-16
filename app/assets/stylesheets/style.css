@@ -1,6 +1,6 @@
-/* .form-select{
-    padding-right: 8rem;
-} */
+.form-select{
+    width: auto;
+}
 
 .name{
     gap: 1rem
@@ -37,6 +37,9 @@
     align-items: center;
     cursor: pointer;
     white-space: nowrap;
+}
+.card{
+    border: none;
 }
 .car-card{
     display: flex;

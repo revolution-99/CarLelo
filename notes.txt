@@ -1,1 +1,5 @@
 Type ActiveRecord::Base.connection_db_config in rails console to know the database type
+
+Adding placeholder in form.select alternative : https://stackoverflow.com/questions/65332934/placeholder-in-form-for-select-field
+
+Changing datatypes in migration : https://www.youtube.com/watch?v=jO_AZXg_Lfc
