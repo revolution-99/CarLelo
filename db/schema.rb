@@ -14,9 +14,11 @@ ActiveRecord::Schema.define(version: 2022_06_15_111121) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "car_id"
     t.date "appointment_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["car_id"], name: "index_appointments_on_car_id"
     t.index ["user_id"], name: "index_appointments_on_user_id"
   end
 

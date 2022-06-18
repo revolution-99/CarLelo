@@ -58,3 +58,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'mail_form'
 
 gem 'net-smtp', '~> 0.2.1'
+
+gem 'geocoder'

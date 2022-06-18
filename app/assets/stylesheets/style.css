@@ -42,9 +42,9 @@
     border: none;
 }
 .car-card{
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2rem;
 }
 
 .card-body-custom{

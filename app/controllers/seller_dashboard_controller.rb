@@ -1,6 +1,6 @@
 class SellerDashboardController < ApplicationController
     # before_action :require_password
-    protect_from_forgery except: :dashboard_edit
+    protect_from_forgery except: :edit
 
     def new
         

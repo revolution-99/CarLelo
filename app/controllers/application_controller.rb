@@ -8,6 +8,11 @@ class ApplicationController < ActionController::Base
         end
     end
     helper_method :current_user
+    
+    def current_car
+        @current_car = Car.find_by(params[:id])
+    end
+    helper_method :current_car
 
     # def require_login
     #     unless current_user

@@ -9,6 +9,7 @@ class UserMailer < ApplicationMailer
     def appointment_confirmation(user, appointment)
         @user = user
         @appointment = appointment
-        mail(to: @user.email, subject: "Appointment Confirmation")
+        @subject = "Appointment Confirmation for #{@user.first_name} #{@user.last_name} at #{@appointment.created_at}"
+        mail(to: @user.email, subject: @subject)
     end
 end

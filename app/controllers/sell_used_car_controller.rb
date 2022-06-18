@@ -8,10 +8,10 @@ class SellUsedCarController < ApplicationController
     end
 
     def create
-        @car = Car.new(car_params)
-        @car.user_id = current_user.id
+        @car = current_user.cars.create(car_params)
+        # @car.user_id = current_user.id
         if @car.save
-            session[:car_id] = @car_id
+            # session[:car_id] = @car_id
             redirect_to appointment_path, notice: "The best price for your car is here."
         else
             render :new

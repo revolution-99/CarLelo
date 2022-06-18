@@ -4,15 +4,6 @@ Rails.application.routes.draw do
 
   get "/users", to:"users#new"
   post "/users", to:"users#create"
-
-  # get "/econfirm", to:"users#create"
-  # post "/econfirm", to:"users#create"
-
-  # resources :users do
-  #   member do
-  #     get :confirm_email
-  #   end
-  # end
   
   get '/:token/confirm_email/', :to => "users#confirm_email", as: 'confirm_email'
 
@@ -22,7 +13,7 @@ Rails.application.routes.draw do
 
   constraints SellerRouteConstraint.new do
     get "/dashboard", to:"seller_dashboard#new", as: :seller_dashboard
-    post "/dashboard/edit", to:"seller_dashboard#edit"
+    get "/dashboard/edit", to:"seller_dashboard#edit"
   end
   get "/dashboard", to:"buyer_dashboard#new", as: :buyer_dashboard 
 
