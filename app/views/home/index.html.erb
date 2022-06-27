@@ -1,79 +1,41 @@
 <div class="d-flex flex-column align-items-center justify-content-center">
     <h1> Welcome to Car Lelo </h1>
-    <%= form_with do |form| %>
-        <ul class="filter">
-            <li class="filter--section">
-                <%= form.select(:city, ["Cuttack", "New Delhi", "Bangalore", "Hyderabad", "Kollata", "Others"],{prompt: 'Select your city'}, {class: 'form-select' })%>
-            </li>
-            <li class="filter--section">
-                    <%
-=begin%>
- <span>Price</span> 
-<%
-=end%>
-                    <%= form.select(:price, ["Cars under 2 lakh", "Cars from 2 lakh - 5 lakh", "Cars from 5 lakh - 10 lakh", "Cars above 10 lakh"], {prompt: 'Price'}, {class: "form-select"})%>
-            </li>
-            <li class="filter--section">
-                    <%= form.select(:year, [2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],{prompt: 'Year'}, {class: "form-select"})%>
-            </li>
-            <li class="filter--section">
-                    <%= form.select(:km, ["Upto 10000 Km", "10,000 - 20,000 K m", "20,000 - 40,000 Km", "40,000 - 70,000 Km", "70,000 - 1,00,000 Km", "1,00,000 - 1,20,000 Km", "Above 1,20,000 Km"],{prompt: 'KMs Driven'}, {class: 'form-select' })%>
-            </li>
-            <li class="filter--section">
-                    <%= form.select(:brand, ["Tata", "Maruti", "Hyundai", "Honda", "Mahindra", "Toyota", "Ford", "Chevrolet", "Volkswagen", "Renault", "Skoda", "BMW", "Mercedes Benz", "Audi", "Nissan", "Fiat", "Datsun", "Kia", "MG", "Landrover", "Jaguar", "Volvo"], {prompt: 'Brand'},{class: "form-select"})%>
-            </li>
-            <li class="filter--section">
-                    <%= form.select(:brand, ["Tata", "Maruti", "Hyundai", "Honda", "Mahindra", "Toyota", "Ford", "Chevrolet", "Volkswagen", "Renault", "Skoda", "BMW", "Mercedes Benz", "Audi", "Nissan", "Fiat", "Datsun", "Kia", "MG", "Landrover", "Jaguar", "Volvo"], {prompt: 'Model'},{class: "form-select"})%>
-            </li>
-            <li class="filter--section">
-                    <%= form.select(:state, ["AP", "AR", "AS", "BR", "DN", "DD", "GA", "HJ", "HR", "HP", "JK", "KA", "KL", "MP", "MH", "MZ", "NL", "OD", "PB", "RJ", "SK", "TN", "TS", "TR", "UP", "UK", "WB", "AN", "CH", "DM", "DD", "DL", "LA", "LD", "PY"], {prompt: 'RTO'}, {class: 'form-select' })%>
-            </li>
-            <li class="filter--section">
-                    <%= form.select(:variant, ["Petrol", "Disel", "CNG"], {prompt: 'Variant'},{class: "form-select"})%>
-            </li>
-            <li class="filter--section">
-                <div class="form-control">
-                    <i class="fa fa-search"></i>
-                    <%
-=begin%>
- <%= button_to "", {}, {class: 'fa fa-search'} %>    
-<%
-=end%>
-                </div>
-            </li>
-        </ul>
-    <%end%>
+    <%= render partial: "filter" %>
     <div class="car-card">
         <% @cars.each do |car| %>
-            <div class="card" style="width: 18rem;">
-                 <%= image_tag "nano.jpg", class:"card-img-top"%>
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <%= car.year %>
+            <a href="/appointment">
+                <div class="card" style="width: 18rem;">
+                    <%= image_tag "nano.jpg", class:"card-img-top"%>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= car.year %>
 
-                        <%= car.brand%>
+                            <%= car.brand%>
 
-                        <%= car.model%>
-                        <%= car.id%>
-                    </h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <%= car.model%>
+                            <%= car.id%>
+                        </h5>
+                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="card-body-custom">
+                        <li><%= car.state%></li>
+                        <li><%= car.city%></li>
+                    </ul>
+                    <ul class="card-body-custom">
+                        <li><%= car.km%></li>
+                        <li><%= car.variant%></li>
+                    </ul>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">₹9,73,899</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                    </ul>
                 </div>
-                <ul class="card-body-custom">
-                    <li><%= car.state%></li>
-                    <li><%= car.city%></li>
-                </ul>
-                <ul class="card-body-custom">
-                    <li><%= car.km%></li>
-                    <li><%= car.variant%></li>
-                </ul>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">₹9,73,899</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                </ul>
-
-            </div>
+            </a>
         <% end %>
     </div>
+</div>
+<div class="car-card--filtered">
+
 </div>
 

@@ -1,0 +1,32 @@
+<div class="appointment--heading"> 
+    <div class="col-2 text-sm-center text-md-start align-self-center"> 
+        <h1 class="h5 fw-bold">Appointment ID</h1> 
+    </div> 
+    <div class="col-2 align-self-center"> 
+        <h1 class="h5 fw-bold">Booked on</h1> 
+    </div> 
+    <div class="col-2 align-self-center"> 
+        <h1 class="h5 fw-bold">Appointment Date</h1> 
+    </div>  
+    <div class="col-2 align-self-center"> 
+        <h1 class="h5 fw-bold">Status</h1> 
+    </div>
+</div>
+
+<% @appointments.each do |app| %>
+    <div class="appointment--list__details"> 
+        <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
+                    <h1 class="h6">BCK7R<%= app.id%></h1> 
+                </div> 
+        <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
+                    <h1 class="h6"><%= app.created_at%></h1>
+                </div> 
+        <div class="col-md-3 text-sm-center text-md-strt align-self-center my-2"> 
+                    <h1 class="h6"><%= app.appointment_date%></h1>
+                </div> 
+        <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
+                    <h1 class="h6"><%= app.status %></h1>
+                </div> 
+        </div>
+<%end%>
+

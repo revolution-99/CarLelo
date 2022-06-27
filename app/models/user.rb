@@ -16,7 +16,7 @@ class User < ApplicationRecord
     format:{with: /\A\d{10}\z/, message: "Invalid Phone Number. Please put a valid one."}
 
     validates :first_name, presence: true
-    validates :password, length: { in: 6..20 }
+    validates :password, length: { in: 6..20 }, :if => :password
 
     def email_activate
         self.email_confirmed = true

@@ -10,6 +10,11 @@ class SessionsController < ApplicationController
         redirect_to login_path, notice: "Log out Successfully. Visit again."
     end
 
+    def destroy_in_dashbaord
+        session[:user_id] = nil
+        redirect_to login_path, notice:"Welcome back. Your Profile is updated successfully. Please login with your credentials to continue." 
+    end
+
     def create
         user = User.find_by(email: params[:email])
         if user.present? && user.authenticate(params[:password]) && user.email_confirmed == true

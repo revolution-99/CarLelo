@@ -18,9 +18,10 @@ class SellUsedCarController < ApplicationController
         end
     end
 
-    # def edit
+    # def index
 
     # end
+
     def car_params
         params.require(:car).permit(:city, :brand, :model, :year, :variant, :state, :km, :mobile_no)
     end

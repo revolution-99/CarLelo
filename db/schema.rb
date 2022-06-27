@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2022_06_15_111121) do
     t.integer "user_id"
     t.integer "car_id"
     t.date "appointment_date"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["car_id"], name: "index_appointments_on_car_id"

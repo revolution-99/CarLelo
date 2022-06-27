@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
     end
     helper_method :current_car
 
+    def current_appointment
+        @current_appointment = Appointment.find_by(params[:id])
+    end
+    helper_method :current_appointment
+
     # def require_login
     #     unless current_user
     #         redirect_to login_path, notice: "You must logged in first"

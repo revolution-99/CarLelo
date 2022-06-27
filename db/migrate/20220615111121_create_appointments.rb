@@ -5,7 +5,7 @@ class CreateAppointments < ActiveRecord::Migration[6.1]
       t.belongs_to :car
 
       t.date :appointment_date
-
+      t.integer :status, :default => 0
       t.timestamps
     end
   end

@@ -1,0 +1,38 @@
+<div class="d-flex flex-column align-items-center justify-content-center">
+    <h1> Welcome to Car Lelo </h1>
+    <%= render partial: "filter" %>
+
+    <div class="car-card">
+        <% @cars.each do |car| %>
+            <a href="/appointment">
+                <div class="card" style="width: 18rem;">
+                    <%= image_tag "nano.jpg", class:"card-img-top"%>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= car.year %>
+
+                            <%= car.brand%>
+
+                            <%= car.model%>
+                            <%= car.id%>
+                        </h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                    <ul class="card-body-custom">
+                        <li><%= car.state%></li>
+                        <li><%= car.city%></li>
+                    </ul>
+                    <ul class="card-body-custom">
+                        <li><%= car.km%></li>
+                        <li><%= car.variant%></li>
+                    </ul>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">₹9,73,899</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A third item</li>
+                    </ul>
+                </div>
+            </a>
+        <% end %>
+    </div>
+</div>

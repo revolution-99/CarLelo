@@ -47,6 +47,10 @@
     gap: 2rem;
 }
 
+.car-card a{
+    color: black;
+    text-decoration: none;
+}
 .card-body-custom{
     margin-bottom: 16px;
     display: flex;
@@ -65,4 +69,45 @@
     text-align: center;
     color: #465166;
     list-style: none;
+}
+.dashboard{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 1rem;
+}
+.dashboard a{
+    color: #363636;
+    text-decoration: none;
+}
+/* .dashboard #content{
+    position: relative;
+    top: 3rem;
+    left: 25rem;
+} */
+.card-profile{
+    background-color: #fff;
+}
+
+.appointment--heading{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background-color: #e3f2fd;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 1rem 1rem 1rem;
+}
+.appointment--list{
+    display: flex;
+    flex-direction: column;
+}
+.appointment--list__details{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background-color: #ededed;
+    padding: 0.1rem 1.2rem 0.1rem 1.2rem;
+    border-radius: 0.5rem;
+    margin: 1rem 1rem 1rem 1rem;
+    border-bottom: 2px;
 }
