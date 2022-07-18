@@ -1,0 +1,9 @@
+$('#partial_notification').html("<%= escape_javascript(render :partial => 'notification')%>")
+
+document.addEventListener('click', function(e) {
+    var container = document.getElementById('container');
+    if (container.contains(e.target) || notification__button.clicked == true) {
+        partial_notification.style.display = 'none';
+        location.reload()
+    }
+});

@@ -1,55 +1,54 @@
-<%= form_for @user, url:dashbaord_update_path do |form| %>
-    <%if @user.errors.any?%>
-        <div class="alert alert-danger">
-        <% @user.errors.full_messages.each do |message|%>
-        <div><%=message%></div>
-        <%end%>
-        </div>
-    <%end%>
-    <div class="card-profile">
-        <div class="d-flex align-items-center mb-3 name">
-            <div class="mr-3">
-                <%= form.label :First_Name, class:"fw-bolder"%>
-                    <div class="form-control"><%=current_user.first_name%></div>
-            </div>
-            <div class="mr-3">
-                <%= form.label :Last_Name, class:"fw-bolder"%>
-                    <div class="form-control"><%=current_user.last_name%></div>
-            </div>
-        </div>
-        <div class="mb-3">
-            <%= form.label :Email, class:"fw-bolder"%>
-            <div class="form-control"><%=current_user.email%></div>
-        </div>
-        <div class="dropdown mb-3 ">
-            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show fw-bolder" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
-            Change Mail id
-            </a>
-            <div class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                <div class="mb-3">
-                    <%= form.email_field :email,  placeholder: "Enter your new email id", class: "form-control"%>
-                </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <%= form.submit "Change Mail id", class:"btn btn-primary"%>
-                </div>
-            </div>
-        </div>
-        <div class="mb-3">
-            <%= form.label :Mobile_no, class:"fw-bolder"%>
-            <div class="form-control"><%=current_user.mobile_no%></div>
-        </div>
-        <div class="dropdown mb-3 ">
-            <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle show fw-bolder" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="true">
-            Change Mobile No.
-            </a>
-            <div class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                <div class="mb-3">
-                    <%= form.text_field :mobile_no,  placeholder: "Enter your new mobile no.", class: "form-control"%>
-                </div>
-                <div class="d-flex align-items-center justify-content-center">
-                    <%= form.submit "Change Mobile No.", class:"btn btn-primary"%>
-                </div>
-            </div>
-        </div> 
-    </div>
-<%end%>
+Map here
+
+<div id="map"></div>
+
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ ENV['API_KEY'] }&libraries=places&callback=initialize"%>
+
+<script>
+    var map;
+    var service;
+    var infowindow;
+    var place
+    
+    function initialize() {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                var longi = position.coords.longitude;
+                var lati = position.coords.latitude;
+        
+                var pyrmont = new google.maps.LatLng(lati, longi);
+        
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: pyrmont,
+                    zoom: 16
+                });
+        
+                var request = {
+                    location: pyrmont,
+                    radius: '500',
+                    type: ['restaurant']
+                };
+        
+                service = new google.maps.places.PlacesService(map);
+                service.nearbySearch(request, callback);
+            })
+        }
+    }
+      
+    function createMarker(place) {
+        new google.maps.Marker({
+            position: place.geometry.location,
+            map: map
+        });
+    }
+
+    function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+            //   console.log(results[i]);
+            createMarker(results[i]);
+            }
+        }
+    }
+</script>

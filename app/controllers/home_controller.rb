@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   
+  skip_before_action :require_login
+  
   def index
     @cars = Car.all
   end
@@ -11,6 +13,12 @@ class HomeController < ApplicationController
     end
   end
   
+  def search
+    @q = params[:search_query]
+    if @q
+      @cars = Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant'])
+    end
+  end
 
   private
   def filtering_params(params)

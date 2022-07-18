@@ -1,0 +1,18 @@
+<ul class="notification__content">
+    <div class="notification__content--heading">
+        <h4>Notifications</h4>
+    </div>
+
+    <% @notifications.each do |notification|%>
+        <li>
+            <%= current_user.first_name%>, Your appointment for <%= notification.car.brand%> <%= notification.car.model%> is booked with appointment id  <%= notification.appointment_id%> on <%= notification.appointment.appointment_date%>
+            <hr>
+        </li>
+    <%end%>
+    <%if @notifications.count == 0%>
+        <li>
+            No notifications yet
+        </li>
+    <%end%> 
+</ul>
+

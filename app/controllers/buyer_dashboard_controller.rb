@@ -1,4 +1,7 @@
 class BuyerDashboardController < ApplicationController
+    
+    skip_before_action :require_login
+
     def new
         
     end
@@ -13,6 +16,7 @@ class BuyerDashboardController < ApplicationController
             # format.html{}
             format.js 
         end
+        @appointments = @appointments.filter_by_status(params[:status]) if params[:status].present?
     end
 
     def update

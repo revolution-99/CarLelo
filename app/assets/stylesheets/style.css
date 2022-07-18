@@ -38,6 +38,7 @@
     cursor: pointer;
     white-space: nowrap;
 }
+
 .card{
     border: none;
 }
@@ -79,6 +80,18 @@
     color: #363636;
     text-decoration: none;
 }
+.nav a{
+    color: #363636;
+    text-decoration: none;
+}
+.navbar-nav{
+    align-items: center;
+    gap: 0.5rem;
+}
+.nav-link a{
+    color: #000000b3;
+    text-decoration: none;
+}
 /* .dashboard #content{
     position: relative;
     top: 3rem;
@@ -110,4 +123,70 @@
     border-radius: 0.5rem;
     margin: 1rem 1rem 1rem 1rem;
     border-bottom: 2px;
+}
+
+#map {
+    height: 600px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+}
+
+.filter__appointment{
+    margin: 24px 20px 26px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    list-style: none;
+    gap: 1rem;
+}
+.filter__appointment .filter__appointment--section, .filter--section__content {
+    /* width: 25%; */
+    position: relative;
+}
+
+.notification{
+    /* display: block; */
+    width: 350px;
+    padding: 1rem 1rem 1rem 1rem;
+    margin-left: -14rem;
+    border: none;
+    border-radius: 15px;
+	background: #f4f8fa;
+	border-bottom: 1px solid #ddd;
+}
+.notification a{
+    color: #363636;
+    text-decoration: none;
+}
+
+.notification__render a{ 
+    font-size: 1rem;
+    color: #000000e6;
+}
+.notification__content{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: absolute;
+    z-index: 1;
+    top: 3.5rem;
+    right: 1rem;
+    width: 350px;
+    padding: 1rem 1rem 1rem 1rem;
+    margin-left: -14rem;
+    border: none;
+    border-radius: 15px;
+	background: #f4f8fa;
+	border-bottom: 1px solid #ddd;
+    list-style: none;
+    font-size: 1rem;
+    color: #000000e6;
+}
+.notification__content--heading{
+    display: flex;
+    justify-content: center;
+    background-color: #dcebf9;
+    border-radius: 0.7rem;
+    padding: 0.5rem 0rem 0.2rem 0rem;
 }

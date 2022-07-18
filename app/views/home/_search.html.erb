@@ -1,0 +1,6 @@
+<%= form_with model: @car , url: home_searched_path, method: :get do |form| %>
+    <%= form.search_field :search_query, class:"search--bar"%>
+    <%= button_tag(type: 'submit', class: "btn btn-outline-primary") do %>
+        <i class="bi bi-search"></i> search
+    <% end %>
+<% end %>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #e3f2fd;">
+<nav class="navbar navbar-expand-lg mb-3" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">Car Lelo</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,29 +6,46 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" href="">Buy used Car</a>
-        </li>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/sell_used_car">Sell Used Car</a>
-        </li>
+        <%if current_user%>
+          <%if current_user.is_seller%>
+              <li class="nav-item">
+                <a class="nav-link" href="/sell_used_car">Sell Used Car</a>
+              </li>
+          <%else%>
+              <li class="nav-item">
+                <a class="nav-link active" href="">Buy used Car</a>
+              </li>
+          <%end%>
+        <%else%>
+            <li class="nav-item">
+                <a class="nav-link" href="/sell_used_car">Sell Used Car</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="">Buy used Car</a>
+            </li>
+        <%end%>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <%if current_user%>
-            <li class="nav-item">
-              <a class="nav-link" href="/dashboard">Dashboard</a>
-            </li>
-            <li class="nav-item">
-              <%= button_to "Log Out", logout_path, method: :delete %>
-            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+              </li>
+              <li class="nav-item notification__render">
+                  <%= link_to notifications_path,remote: true do %>
+                      <i class="bi bi-bell"></i>
+                      <div id="partial_notification"></div>
+                  <%end%>
+              </li>
+              <li class="nav-link">
+                <%= link_to "Log Out", logout_path, method: :delete %>
+              </li>
           <%else%>
-            <li class="nav-item">
-              <a class="nav-link" href="/login">LOGIN</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/users">SIGN UP</a>
-            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">LOGIN</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/users">SIGN UP</a>
+              </li>
           <%end%>
       </ul>
     </div>

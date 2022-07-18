@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "home#index"
   get "/filter", to:"home#filter", as: :home_filtered
+  get "/search", to:"home#search", as: :home_searched
+  get "/notification", to:"notification#index",  as: :notifications
 
 
   get "/users", to:"users#new"
@@ -17,8 +19,10 @@ Rails.application.routes.draw do
   constraints SellerRouteConstraint.new do
     get "/dashboard", to:"seller_dashboard#new", as: :seller_dashboard
     get "/dashboard/edit/:partial", to:"seller_dashboard#edit", as: :seller_dashboard_edit
+    # get "/dashboard/edit/:partial/filter", to:"seller_dashboard#filter", as: :seller_dashboard_edit_filtered
     patch "/dashboard/edit", to:"seller_dashboard#update", as: :dashbaord_update
     # post "/dashboard/update/mobile", to:"seller_dashboard#mobile_update"
+    # get "/verification", to:"seller_dashboard#verify_password"
   end
   get "/dashboard", to:"buyer_dashboard#new", as: :buyer_dashboard 
   get "/dashboard/edit/:partial", to:"buyer_dashboard#edit", as: :buyer_dashboard_edit

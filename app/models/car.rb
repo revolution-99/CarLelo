@@ -1,6 +1,15 @@
 class Car < ApplicationRecord
+
+    # searchkick
+    # Car.reindex
+    # include Elasticsearch::Model
+    # include Elasticsearch::Model::Callbacks
+
     belongs_to :user
-    has_one :appointment
+    has_many :appointments
+    # has_noticed_notifications model_name: 'Notification'
+    # has_many :notifications, through: :user, foreign_key: :actor_id
+    has_many :notifications
     validates :city, presence: true
     validates :brand, presence: true
     validates :model, presence: true
@@ -8,7 +17,6 @@ class Car < ApplicationRecord
     validates :variant, presence: true
     validates :state, presence: true
     validates :km, presence: true
-    validates :mobile_no, presence: true, format:{with: /\A\d{10}\z/, message: "Invalid Phone Number. Please put a valid one."}
 
     scope :filter_by_city, -> (city){where city: city}
     scope :filter_by_year, -> (year){where year: year}

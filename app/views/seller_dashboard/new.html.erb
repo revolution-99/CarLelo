@@ -8,7 +8,7 @@
     </span>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
+      <li class="mb-3">
 
         <%= link_to seller_dashboard_edit_path(partial: 1), remote: true do%>
           <i class="bi bi-bookmark-check-fill" width="32" height="32"></i>
@@ -16,20 +16,22 @@
         <%end%> 
 
       </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <i class="bi bi-geo-alt-fill"></i>
-          Locate Nearby Branches
-        </a>
+      <li class="mb-3">
+        <%= link_to seller_dashboard_edit_path(partial: 2), remote: true do%>
+          <i class="bi bi-geo-alt-fill" width="32" height="32"></i>
+          <strong>Locate Nearby Branches</strong>
+        <%end%>
       </li>
-      <li>
-        <a href="#" class="nav-link link-dark">
-          <i class="bi bi-activity"></i>
-          Check Car Status
-        </a>
+          
+      <li class="mb-3">
+        <%= link_to seller_dashboard_edit_path(partial: 3), remote: true do%>
+          <i class="bi bi-activity" width="32" height="32"></i>
+          <strong>Check Appointment Status</strong>
+        <%end%>
       </li>
-      <li>
-        <%= link_to seller_dashboard_edit_path(partial: 2), remote: true  do%>
+          
+      <li class="mb-3">
+        <%= link_to seller_dashboard_edit_path(partial: 4), remote: true  do%>
           <i class="bi bi-person-circle " width="32" height="32"></i>
           <strong>Profile</strong>
         <%end%>

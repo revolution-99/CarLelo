@@ -1,5 +1,6 @@
 <div class="d-flex flex-column align-items-center justify-content-center">
     <h1> Welcome to Car Lelo </h1>
+    <%= render partial: "search" %>
     <%= render partial: "filter" %>
     <div class="car-card">
         <% @cars.each do |car| %>

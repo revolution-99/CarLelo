@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_15_111121) do
+ActiveRecord::Schema.define(version: 2022_07_09_142027) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "car_id"
     t.date "appointment_date"
     t.integer "status", default: 0
+    t.boolean "is_approved", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["car_id"], name: "index_appointments_on_car_id"
@@ -32,10 +33,29 @@ ActiveRecord::Schema.define(version: 2022_06_15_111121) do
     t.string "state"
     t.string "km"
     t.string "year"
-    t.integer "mobile_no"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_cars_on_user_id"
+  end
+
+  create_table "maps", force: :cascade do |t|
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "car_id"
+    t.integer "appointment_id"
+    t.string "action"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["appointment_id"], name: "index_notifications_on_appointment_id"
+    t.index ["car_id"], name: "index_notifications_on_car_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

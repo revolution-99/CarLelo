@@ -9,7 +9,6 @@ class CreateCars < ActiveRecord::Migration[6.1]
       t.string :state
       t.string :km
       t.string :year
-      t.integer :mobile_no
       t.timestamps
     end
   end

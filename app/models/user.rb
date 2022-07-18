@@ -1,8 +1,10 @@
 class User < ApplicationRecord
     before_save :confirmation_token
     
-    has_many :cars
-    has_many :appointments
+    has_many :cars, dependent: :destroy
+    has_many :appointments, dependent: :destroy
+    # has_many :notifications, foreign_key: :recipient_id
+    has_many :notifications, dependent: :destroy
     has_secure_password
 
     validates :email,
