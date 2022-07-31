@@ -11,7 +11,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="/sell_used_car">Sell Used Car</a>
               </li>
-          <%else%>
+          <%elsif current_user.is_buyer%>
               <li class="nav-item">
                 <a class="nav-link active" href="">Buy used Car</a>
               </li>
@@ -27,9 +27,15 @@
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <%if current_user%>
+            <%if current_user.is_admin%>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+              </li>
+            <%else%>
               <li class="nav-item">
                 <a class="nav-link" href="/dashboard">Dashboard</a>
               </li>
+            <%end%>
               <li class="nav-item notification__render">
                   <%= link_to notifications_path,remote: true do %>
                       <i class="bi bi-bell"></i>

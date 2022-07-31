@@ -18,9 +18,7 @@ class ApplicationController < ActionController::Base
     helper_method :current_car
 
     def current_appointment
-        if session[:car_id]
-            @current_appointment = Appointment.find_by(params[:id])
-        end
+        @current_appointment = Appointment.find_by(params[:id])
     end
     helper_method :current_appointment
 

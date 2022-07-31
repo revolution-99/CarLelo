@@ -60,3 +60,11 @@ gem 'mail_form'
 gem 'net-smtp', '~> 0.2.1'
 
 gem 'geocoder'
+
+gem 'searchkick'
+gem 'elasticsearch-rails'
+# gem 'elasticsearch-model'
+gem "opensearch-ruby"
+
+# gem 'notifications'
+# gem "noticed", "~> 1.5"

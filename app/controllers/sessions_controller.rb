@@ -24,6 +24,8 @@ class SessionsController < ApplicationController
             redirect_to seller_dashboard_path,notice: "Logged in Successfully as a seller"
            elsif user.is_buyer == true
             redirect_to buyer_dashboard_path,notice: "Logged in Successfully as a buyer"
+           elsif user.is_admin == true
+            redirect_to admin_dashboard_path,notice: "Logged in Successfully as an admin"
            end
         else
             flash[:alert] = "Invalid email id or password"

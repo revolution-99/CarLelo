@@ -190,3 +190,38 @@
     border-radius: 0.7rem;
     padding: 0.5rem 0rem 0.2rem 0rem;
 }
+
+.admin_dashoard_heading{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.admin_dashoard_heading1{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.action__button{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.admin__status{
+    display: flex;
+}
+
+.table tr th{
+    text-align: center;
+}
+.table td{
+    text-align: center;
+}
+.table--wrap{
+    padding: 2rem 5rem 2rem 5rem;
+}
+.table--wrap--button{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
