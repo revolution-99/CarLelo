@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
     end
     # helper_method :logger
 
+    def authorized_only_to_admin!
+        redirect_to root_path unless  current_user.is_admin == true;
+    end
+
     # private
     # def set_notifications
     #     @notifications = Notification.where(recipient: current_user).newest_first.limit(9)

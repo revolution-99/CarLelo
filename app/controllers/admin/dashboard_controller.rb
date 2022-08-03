@@ -1,5 +1,8 @@
 module Admin
     class DashboardController < ApplicationController
+        
+        before_action :authorized_only_to_admin!
+        
         def new
         end
 

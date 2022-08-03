@@ -1,6 +1,8 @@
 module Admin
     class CarController < ApplicationController
 
+        before_action :authorized_only_to_admin!
+        
         def create
             @car = current_user.cars.create(car_params)
             # @car.user_id = current_user.id
@@ -28,6 +30,7 @@ module Admin
                 redirect_to admin_dashboard_path, notice: "Your changes are upadted successully"
             end
         end
+        
         private
         def car_params
             params.require(:car).permit(:city, :brand, :model, :year, :variant, :state, :km)

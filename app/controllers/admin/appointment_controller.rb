@@ -1,5 +1,8 @@
 module Admin
     class AppointmentController < ApplicationController
+
+        before_action :authorized_only_to_admin!
+        
         def create
             @appointment = Appointment.new(appointment_params)
             @appointment.user_id = current_user.id
@@ -19,8 +22,6 @@ module Admin
 
         def update
             @appointment = Appointment.find_by(id: params[:id])
-            # @appointment.user_id = current_user.id
-            # @appointment.car_id = current_car.id
             if @appointment.update!(appointment_params)
                 redirect_to admin_dashboard_path, notice: "Your changes are upadted successully"
             else

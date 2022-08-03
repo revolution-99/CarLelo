@@ -6,10 +6,11 @@ class Car < ApplicationRecord
     # include Elasticsearch::Model::Callbacks
 
     belongs_to :user
-    has_many :appointments
+    has_many :appointments, dependent: :destroy
     # has_noticed_notifications model_name: 'Notification'
     # has_many :notifications, through: :user, foreign_key: :actor_id
-    has_many :notifications
+    has_many :notifications, dependent: :destroy
+
     validates :city, presence: true
     validates :brand, presence: true
     validates :model, presence: true
