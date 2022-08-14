@@ -1,8 +1,7 @@
 class NotificationController < ApplicationController
     
     def index
-        @notifications = current_user.notifications
-        # @carr = Car.find_by(id: params[:id])
+        @notifications = current_user.notifications.order('notifications.created_at DESC')
         
         respond_to do |format|
             # format.html{}

@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
     end
     helper_method :current_car
 
+    def selected_car
+        @selected_car = Car.find_by(id: params[:id])
+    end
+    helper_method :selected_car
+
     def current_appointment
         @current_appointment = Appointment.find_by(params[:id])
     end
@@ -33,10 +38,5 @@ class ApplicationController < ActionController::Base
         redirect_to root_path unless  current_user.is_admin == true;
     end
 
-    # private
-    # def set_notifications
-    #     @notifications = Notification.where(recipient: current_user).newest_first.limit(9)
-    #     # @unread = notifications.unread
-    #     # @read = notifications.read
-    # end
 end
+

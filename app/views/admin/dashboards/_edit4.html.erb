@@ -1,0 +1,5 @@
+<div class="d-flex flex-column align-items-center justify-content-center mt-3">
+    <h5> You must create a car record first to create an appointment </h5>
+    <span class="mb-3"> You can create a car record here </span>
+    <%= button_to "Create a car record", admin_dashboard_edit_path(partial: 2), remote: true, method: :get, class: "btn btn-primary"%>
+</div>

@@ -13,7 +13,7 @@ class UsersController < ApplicationController
             # @user.confirmation_token
             @user.save(validate: false)
             UserMailer.registration_confirmation(@user).deliver_now
-            redirect_to login_path, notice: "A verification link is sent to your mail account"
+            redirect_to login_path, notice: "A verification link is sent to your mail account. Verify your account on clicking the link. "
         else
             render :new
         end

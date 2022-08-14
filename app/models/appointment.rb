@@ -1,5 +1,7 @@
 class Appointment < ApplicationRecord
-    after_create :notify_user
+    after_create :notify_create
+    after_update :notify_update
+    # after_destroy :notify_update_delete
     belongs_to :user
     belongs_to :car
 
@@ -11,19 +13,29 @@ class Appointment < ApplicationRecord
 
     scope :filter_by_status, -> (status){where status: status}
 
-    # has_many :notifications, through: :user, dependent: :destroy
     has_many :notifications, dependent: :destroy
 
-    # before_destroy :cleanup_notifications
-    # has_noticed_notifications model_name: "Notification"
-
-    def notify_user
-        # Notification.create!(recipient:user, actor:car, action:"booked", notifiable: self)
-        Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action:"booked")
+    def notify_create
+            Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action:"booked")
         # session[:car_id] = nil
     end
 
-    # def cleanup_notification
-    #     notifications_as_appointment.destroy_all
+    def notify_update
+        if saved_change_to_is_approved?
+            if is_approved == true
+                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action:"approved")
+            end
+        else 
+            if saved_change_to_status?
+                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action:"status_changed")
+                UserMailer.appointment_status_update(user, self).deliver_later
+            elsif saved_change_to_appointment_date?
+                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action:"rescheduled")
+           end
+        end
+    end
+
+    # def notify_update_delete
+    #     Notification.create(user_id: user.id, action:"rejected")
     # end
 end

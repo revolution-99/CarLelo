@@ -5,9 +5,7 @@ Rails.application.routes.draw do
   get "/search", to:"home#search", as: :home_searched
   get "/notification", to:"notification#index",  as: :notifications
 
-
-  get "/users", to:"users#new"
-  post "/users", to:"users#create"
+  resource :users, only:[:new, :create]
   
   get '/:token/confirm_email/', :to => "users#confirm_email", as: 'confirm_email'
 
@@ -29,26 +27,19 @@ Rails.application.routes.draw do
     patch "/dashboard/edit", to:"buyer_dashboard#update", as: :dashbaord_update_buyer
   # end
 
-
-  get "/sell_used_car", to:"sell_used_car#new"
-  post "/sell_used_car", to:"sell_used_car#create"
-
-  get "/appointment", to:"appointment#new"
-  post "/appointment", to:"appointment#create"
-
+  resources :cars, only:[:show, :create] do
+    resource :appointment, only:[:new, :create]
+  end
 
   # For admin
   namespace :admin do
-      get "dashboard", to:"dashboard#new"
-      post "dashboard/car", to:"car#create"
-      get "update/car/:id", to:"car#show"
-      patch "update/car/:id", to:"car#update", as: :update_car
+      resource :dashboards, only:[:show] do
+        resources :cars, only:[:create, :show, :destroy, :update] do
+          resources :appointments, only:[:create, :index, :destroy, :update]
+        end
+      end
 
-      # post "dashboard/appointment", to:"appointment#create"
-      patch "update/appointment/:id", to:"appointment#update", as: :update_appointment
-      delete "delete/appointment/:id", to:"appointment#delete", as: :delete_appointment
+      get "dashboard/edit/:partial", to:"dashboards#edit", as: :dashboard_edit
       
-      get "dashboard/edit/:partial", to:"dashboard#edit", as: :dashboard_edit
-      delete "delete/car/:id", to:"car#delete", as: :delete_car
   end
 end

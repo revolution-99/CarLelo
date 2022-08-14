@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_09_142027) do
+ActiveRecord::Schema.define(version: 2022_08_11_080630) do
 
   create_table "appointments", force: :cascade do |t|
     t.integer "user_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2022_07_09_142027) do
     t.string "year"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "condition", default: "0"
     t.index ["user_id"], name: "index_cars_on_user_id"
   end
 
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 2022_07_09_142027) do
     t.integer "car_id"
     t.integer "appointment_id"
     t.string "action"
+    t.datetime "read_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["appointment_id"], name: "index_notifications_on_appointment_id"

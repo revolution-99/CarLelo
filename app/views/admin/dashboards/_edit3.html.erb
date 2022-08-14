@@ -1,0 +1,59 @@
+<table class="table table-striped">
+  <thead>
+    <tr class="table-dark">
+      <th scope="col">ID</th>
+      <th scope="col">Date Created</th>
+      <th scope="col">Appointment Date</th>
+      <th scope="col">Reschedule Appointment</th>
+      <th scope="col">Status</th>
+      <th scope="col">Set Status</th>
+      <th scope="col">Approval Status</th>
+      <th scope="col">Set Approval</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cars.each do |car|%>
+
+    <% @appointments.each do |app|%>
+      <tr>
+        <th scope="row"><%= app.id %></th>
+        <td><%= app.created_at %></td>
+        <td><%= app.appointment_date %></td>
+        <td>
+          <%= form_for:@appointment, url:admin_dashboards_car_appointment_path(car.id, app.id), method: :patch do |form| %>
+            <div class="admin__status">
+                <%= form.date_field :appointment_date, class: "form-control" %>
+                <%= form.submit "Reschedule",  class:"btn btn-info"%>
+            </div>
+          <%end%>
+        </td>
+        <td><%= app.status %></td>
+        <td>
+          <%= form_for:@appointment, url:admin_dashboards_car_appointment_path(car.id, app.id), method: :patch do |form| %>
+            <div class="admin__status">
+                <%= form.select(:status, ["Processing", "Investigating", "Sold"],{prompt: "Change Status"}, {class: "form-select"})%>
+                <%= form.submit "Update",  class:"btn btn-info"%>
+            </div>
+          <%end%>
+        </td>
+        <td><%= app.is_approved %></td>
+        <td>
+          <%= form_for:@appointment, url:admin_dashboards_car_appointment_path(car.id, app.id), method: :patch do |form| %>
+            <div class="admin__status">
+                <%= form.select(:is_approved, [true, false],{prompt: "Approve or Reject"}, {class: "form-select"})%>
+                <%= form.submit "Update", class:"btn btn-info"%>
+            </div>
+          <%end%>
+        </td>
+        <td>
+          <div class="action__button">
+            <%= button_to "Reject", admin_dashboards_car_appointment_path(car.id, app.id), class: "btn btn-danger", method: :delete%>
+          </div> 
+        </td>
+      </tr>
+    <%end%>
+    <%break%>
+    <%end%>
+  </tbody>
+</table>

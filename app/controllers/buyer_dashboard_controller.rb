@@ -10,13 +10,12 @@ class BuyerDashboardController < ApplicationController
         @user = current_user
         @cars = @user.cars
         @appointments = @user.appointments
-        # @appointments = Appointment.all.includes(:user)
         @partial_to_render = params[:partial]
         respond_to do |format|
             # format.html{}
             format.js 
         end
-        @appointments = @appointments.filter_by_status(params[:status]) if params[:status].present?
+        @appointments = @appointments.filter_by_status(params[:status]) if params[:status].present? 
     end
 
     def update

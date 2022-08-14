@@ -3,7 +3,7 @@
     <%= render partial: "search" %>
     <%= render partial: "filter" %>
 
-    <div class="car-card">
+    <div class="car--card">
         <% @cars.each do |car| %>
             <a href="/appointment">
                 <div class="card" style="width: 18rem;">
@@ -17,20 +17,33 @@
                             <%= car.model%>
                             <%= car.id%>
                         </h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
-                    <ul class="card-body-custom">
+                    <ul class="card--body--custom">
                         <li><%= car.state%></li>
                         <li><%= car.city%></li>
                     </ul>
-                    <ul class="card-body-custom">
+                    <ul class="card--body--custom">
                         <li><%= car.km%></li>
                         <li><%= car.variant%></li>
                     </ul>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">₹9,73,899</li>
-                        <li class="list-group-item">A second item</li>
-                        <li class="list-group-item">A third item</li>
+                     <% if car.condition == 'Fair'%>
+                            <li class="list-group-item">
+                            ₹ 1,00,000 - ₹ 2,00,000
+                            </li>
+                        <% elsif car.condition == 'Good'%>
+                            <li class="list-group-item">
+                            ₹ 2,00,000 - ₹ 5,00,000
+                            </li>
+                        <% elsif car.condition == 'Very_Good'%>
+                            <li class="list-group-item">
+                            ₹ 5,00,000 - ₹ 10,00,000
+                            </li>
+                        <% elsif car.condition == 'Excellent'%>
+                            <li class="list-group-item">
+                            Above ₹ 10,00,000
+                            </li>
+                        <%end%>
                     </ul>
                 </div>
             </a>

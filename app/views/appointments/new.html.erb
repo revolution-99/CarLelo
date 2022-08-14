@@ -1,0 +1,27 @@
+<div class="d-flex flex-column align-items-center justify-content-center">
+    <h1> Your estimated car price is : </h1>
+
+    <%if @appointment.errors.any?%>
+        <div class="alert alert-danger">
+        <% @appointment.errors.full_messages.each do |message|%>
+        <div><%=message%></div>
+        <%end%>
+        </div>
+    <%end%>
+    <%= form_for @appointment, url:car_appointment_path do |form| %>
+        <div class="mb-3">
+            <%= form.label :Your_Mobile_No, class:"fw-bolder"%>
+            <div class="form-control"><%=current_user.mobile_no%></div>
+        </div>
+        <div class="d-flex align-items-center justify-content-center flex-column">
+            <div class="mb-3">
+                <%= form.label :Select_your_preferable_date%>
+                <br>
+                <%= form.date_field :appointment_date, class: "form-control"%>
+            </div>
+            <div class="d-flex align-items-center justify-content-center mt-3">
+                <%= form.submit "Book Appointment", class:"btn btn-primary"%>
+            </div>
+        </div>
+    <%end%>
+</div>

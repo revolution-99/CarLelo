@@ -1,15 +1,22 @@
 class Car < ApplicationRecord
 
-    # searchkick
-    # Car.reindex
+    searchkick
+    Car.reindex
     # include Elasticsearch::Model
     # include Elasticsearch::Model::Callbacks
 
+    after_update :notify_update
+
     belongs_to :user
     has_many :appointments, dependent: :destroy
-    # has_noticed_notifications model_name: 'Notification'
-    # has_many :notifications, through: :user, foreign_key: :actor_id
     has_many :notifications, dependent: :destroy
+
+    enum condition:{
+        Fair: "0", 
+        Good: "1", 
+        Very_Good: "2", 
+        Excellent: "3",
+    }
 
     validates :city, presence: true
     validates :brand, presence: true
@@ -26,4 +33,13 @@ class Car < ApplicationRecord
     scope :filter_by_model, -> (model){where model: model}
     scope :filter_by_state, -> (state){where state: state}
     scope :filter_by_variant, -> (variant){where variant: variant}
+
+    def notify_update
+        if saved_change_to_condition?
+            appointments.each do |app|
+                Notification.create(user_id: user.id, car_id: id, appointment_id: app.id, action:"condition_updated")
+                # UserMailer.appointment_status_update(user, self).deliver_later
+            end    
+        end
+    end
 end

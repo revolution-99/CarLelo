@@ -4,10 +4,72 @@
     </div>
 
     <% @notifications.each do |notification|%>
-        <li>
-            <%= current_user.first_name%>, Your appointment for <%= notification.car.brand%> <%= notification.car.model%> is booked with appointment id  <%= notification.appointment_id%> on <%= notification.appointment.appointment_date%>
-            <hr>
-        </li>
+        <%if notification.action == "booked" %>
+            <li>
+                <span>
+                    <%= current_user.first_name%>, Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> is booked with appointment id  <b><%= notification.appointment_id%></b> on <%= notification.appointment.appointment_date%> Your booking is pending for approval. We will notify you soon once your appointment is approved.
+                </span>
+                <hr>
+            </li>
+        <%elsif notification.action == "approved"%>
+            <li>
+                <span>
+                    Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is now <b>approved</b>. We will notify you once the status is updated.
+                </span>
+                <hr>
+            </li>
+        <%elsif notification.action == "rejected"%>
+            <li>
+                <span>
+                    Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is <b>rejected.</b> Sorry for the inconvinenece.
+                </span>
+                <hr>
+            </li>
+        <%elsif notification.action == "status_changed"%>
+            <li>
+                <span>
+                    Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is now in <b><%= notification.appointment.status%></b> phase. We will notify you once the status is further updated.
+                </span>
+                <hr>
+            </li>
+        <%elsif notification.action == "rescheduled"%>
+            <li>
+                <span>
+                    Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is rescheduled on  <b><%= notification.appointment.appointment_date%></b>
+                </span>
+                <hr>
+            </li>
+        <%elsif notification.action == "condition_updated"%>
+            <% if notification.car.condition == "Fair"%>
+                <li>
+                    <span>
+                        <%= current_user.first_name%>, based on your car <b><%= notification.car.brand%> <%= notification.car.model%></b>'s condition, the estimated price is in between the range 1,00,000 to 2,00,000.
+                    </span>
+                    <hr>
+                </li>
+            <%elsif notification.car.condition == "Good"%>
+                <li>
+                    <span>
+                        <%= current_user.first_name%>, based on your car <b><%= notification.car.brand%> <%= notification.car.model%></b>'s condition, the estimated price is in between the range 2,00,000 to 5,00,000.
+                    </span>
+                    <hr>
+                </li>
+            <%elsif notification.car.condition == "Very_Good"%>
+                <li>
+                    <span>
+                        <%= current_user.first_name%>, based on your car <b><%= notification.car.brand%> <%= notification.car.model%></b>'s condition, the estimated price is in between the range 5,00,000 to 10,00,000.
+                    </span>
+                    <hr>
+                </li>
+            <%elsif notification.car.condition == "Excellent"%>
+                <li>
+                    <span>
+                        <%= current_user.first_name%>, based on your car <b><%= notification.car.brand%> <%= notification.car.model%></b>'s condition, the estimated price is above 10,00,000.
+                    </span>
+                    <hr>
+                </li>
+            <%end%>
+        <%end%>
     <%end%>
     <%if @notifications.count == 0%>
         <li>
@@ -15,4 +77,3 @@
         </li>
     <%end%> 
 </ul>
-
