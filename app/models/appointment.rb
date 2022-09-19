@@ -5,37 +5,33 @@ class Appointment < ApplicationRecord
     belongs_to :user
     belongs_to :car
 
-    enum status:{
+    enum status: {
         Processing: 0,
         Investigating: 1,
-        Sold: 2,
+        Sold: 2
     }
 
-    scope :filter_by_status, -> (status){where status: status}
+    validates :appointment_date, presence: true
+    scope :filter_by_status, ->(status) { where status: status }
 
     has_many :notifications, dependent: :destroy
 
     def notify_create
-            Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action:"booked")
-        # session[:car_id] = nil
+        Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'booked')
     end
 
     def notify_update
         if saved_change_to_is_approved?
             if is_approved == true
-                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action:"approved")
+                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'approved')
             end
-        else 
+        else
             if saved_change_to_status?
-                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action:"status_changed")
+                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'status_changed')
                 UserMailer.appointment_status_update(user, self).deliver_later
             elsif saved_change_to_appointment_date?
-                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action:"rescheduled")
-           end
+                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'rescheduled')
+            end
         end
     end
-
-    # def notify_update_delete
-    #     Notification.create(user_id: user.id, action:"rejected")
-    # end
 end

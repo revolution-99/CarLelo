@@ -6,7 +6,7 @@ class CreateNotifications < ActiveRecord::Migration[6.1]
       t.belongs_to :user
       t.belongs_to :car
       t.belongs_to :appointment
-      t.string :action
+      t.text :action
       # t.string :notifiable_type
       # t.integer :notifiable_id
       # t.date :notifiable_date

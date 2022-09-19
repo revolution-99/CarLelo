@@ -6,13 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create_or_find_by(
+User.create_or_find_by!(
     first_name: 'Admin',
     last_name: 'User',
     email: 'admin@carlelo.com',
-    password_digest: BCrypt::Password.create('sanu123'),
+    password_digest: BCrypt::Password.create('superadmin'),
     is_admin: true,
     email_confirmed: true,
     confirm_token: nil,
-    # mobile_no: 1234567890
+    mobile_no: 1234567890
 )

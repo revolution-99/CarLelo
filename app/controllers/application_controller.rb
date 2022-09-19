@@ -1,19 +1,14 @@
 class ApplicationController < ActionController::Base
-
     before_action :require_login
     # before_action :set_notifications, if: :current_user
 
     def current_user
-        if session[:user_id]
-            @current_user = User.find_by(id: session[:user_id])
-        end
+        @current_user = User.find_by(id: session[:user_id]) if session[:user_id]
     end
     helper_method :current_user
     
     def current_car
-        if session[:car_id]
-            @current_car = Car.find_by(id: session[:car_id])
-        end
+        @current_car = Car.find_by(id: session[:car_id]) if session[:car_id]
     end
     helper_method :current_car
 
@@ -28,15 +23,11 @@ class ApplicationController < ActionController::Base
     helper_method :current_appointment
 
     def require_login
-        unless current_user
-            redirect_to login_path, notice: "You must logged in first"
-        end
+        redirect_to login_path, notice: 'You must logged in first' unless current_user
     end
     # helper_method :logger
 
     def authorized_only_to_admin!
-        redirect_to root_path unless  current_user.is_admin == true;
+        redirect_to root_path unless current_user.is_admin == true
     end
-
 end
-

@@ -36,7 +36,7 @@
                         <%= form.text_field :city, class: "form-control"%>
                     </td>
                     <td>
-                        <%= form.select(:brand, [ "Maruti", "Hyundai", "Honda", "Mahindra", "Toyota", "Renault", "Ford", "Tata", "BMW", "Volkswagen", "Skoda", "Mercedes-Benz", "MG", "Kia", "Audi", "Chevrolet", "Fiat", "Nissan"], {option:'disabled selected value'}, {id: "brand", class: "form-select"}) %>
+                        <%= form.select(:brand, [ "Maruti", "Hyundai", "Honda", "Mahindra", "Toyota", "Renault", "Ford", "Tata", "BMW", "Volkswagen", "Skoda", "Mercedes-Benz", "MG", "Kia", "Audi", "Chevrolet", "Fiat", "Nissan"], {include_blank: true}, {id: "brand", class: "form-select"}) %>
                     </td>
                     <td>
                         <%= form.select(:model, [], {prompt: "Choose model"},{id: "model", class: "form-select"})%>

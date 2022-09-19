@@ -6,7 +6,7 @@ ruby '3.1.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.6'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
+# gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -68,3 +68,11 @@ gem "opensearch-ruby"
 
 # gem 'notifications'
 # gem "noticed", "~> 1.5"
+gem 'pg'
+
+group :development, :test do
+  gem 'rspec-rails', '~> 6.0.0.rc1'
+  gem 'shoulda-matchers', '~> 5.0'
+  gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+end
