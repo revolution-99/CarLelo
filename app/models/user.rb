@@ -14,6 +14,7 @@ class User < ApplicationRecord
 
     validates :mobile_no,
               presence: { message: 'Mobile number can not be blank' },
+              numericality: { only_integer: true, message: 'Phone number must be an integer'},
               uniqueness: { scope: [:is_seller, :is_buyer], message: 'Sorry! This phone number has alredy been taken' },
               format: { with: /\A\d{10}\z/,
                         message: 'Invalid Phone Number. Please put a valid one.'
