@@ -22,8 +22,12 @@ module Admin
         end
 
         def update
-            @car = Car.find_by(id: params[:id])
-            redirect_to admin_dashboards_path, notice: 'Your changes are upadted successully' if @car.update(car_params)
+            @current_car = Car.find_by(id: params[:id])
+            if @current_car.update(car_params)
+                redirect_to admin_dashboards_path, notice: 'Your changes are upadted successully'
+            else
+                render :show
+            end
         end
 
         private

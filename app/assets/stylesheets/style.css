@@ -76,6 +76,12 @@
 .profile--card{
     background-color: #fff;
 }
+.profile--card a{
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    right: 3rem;
+}
 
 /* My Appointments in the dashbaord */
 .appointment--heading{
@@ -188,3 +194,49 @@
     gap: 1rem;
 }
 /* Ends Admin Styling */
+
+
+/* Responsive Styling */
+@media (max-width: 480px) {
+    html {
+        font-size: 75%;
+      }
+    .car--card {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .filter {
+        margin: 24px 0px 38px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        list-style: none;
+        gap: 1rem;
+    }
+    .notification__content {
+        right: 2rem;
+    }
+    .dashboard {
+        display: grid;
+        grid-template-columns: repeat(1,2fr);
+        gap: 1rem;
+    }
+    .profile--card{
+        margin: 2rem 6rem 2rem 6rem;
+    }
+    .profile--card a{
+        flex-direction: row;
+        position: relative;
+        left: 5rem;
+        top: 17rem;
+        font-size: 1rem;
+    }
+    #edit--profile{
+        margin: 2rem 6rem 2rem 6rem;
+    }
+    #sell--car{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        margin: 2rem 6rem 2rem 6rem;
+    }
+}

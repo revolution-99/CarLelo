@@ -7,14 +7,14 @@ class User < ApplicationRecord
 
     validates :email,
               presence: { message: 'Email can not be blank' },
-              uniqueness: { message: 'Sorry! This email has alredy been taken' },
+              uniqueness: { case_sensitive: false, message: 'Sorry! This email has alredy been taken' },
               format: { with: /\A[\w.+-]+@\w+\.\w+\z/,
                         message: 'Invalid mail id. Please put a valid one.'
                       }
 
     validates :mobile_no,
               presence: { message: 'Mobile number can not be blank' },
-              uniqueness: { message: 'Sorry! This phone no. has alredy been taken' },
+              uniqueness: { scope: [:is_seller, :is_buyer], message: 'Sorry! This phone number has alredy been taken' },
               format: { with: /\A\d{10}\z/,
                         message: 'Invalid Phone Number. Please put a valid one.'
                       }

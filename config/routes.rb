@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "/search", to:"home#search", as: :home_searched
   get "/notification", to:"notification#index",  as: :notifications
 
-  resource :users, only:[:new, :create]
+  resource :users, only:[:new, :create, :show, :update]
   
   get '/:token/confirm_email/', :to => "users#confirm_email", as: 'confirm_email'
 

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     end
 
     def create
-        user = User.find_by(email: params[:email])
+        user = User.find_by(email: params[:email].downcase)
         if user.present? && user.authenticate(params[:password]) && user.email_confirmed == true
             session[:user_id] = user.id
            if user.is_seller == true

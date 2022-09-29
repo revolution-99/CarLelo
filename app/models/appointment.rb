@@ -2,6 +2,7 @@ class Appointment < ApplicationRecord
     after_create :notify_create
     after_update :notify_update
     # after_destroy :notify_update_delete
+    validate :appointment_date_can_not_be_in_past
     belongs_to :user
     belongs_to :car
 
@@ -15,6 +16,12 @@ class Appointment < ApplicationRecord
     scope :filter_by_status, ->(status) { where status: status }
 
     has_many :notifications, dependent: :destroy
+
+    def appointment_date_can_not_be_in_past 
+        if appointment_date < Date.today
+            errors.add(:appointment_date, 'can not be in the past')            
+        end
+    end
 
     def notify_create
         Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'booked')

@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 2022_09_03_064609) do
     t.boolean "email_confirmed", default: false
     t.text "confirm_token"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["mobile_no"], name: "index_users_on_mobile_no", unique: true
+    t.index ["mobile_no", "is_seller", "is_buyer"], name: "index_users_on_mobile_no_and_is_seller_and_is_buyer", unique: true
   end
 
 end
