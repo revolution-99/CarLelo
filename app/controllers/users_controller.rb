@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         if @user.save
             # session[:user_id] = @user_id
             # @user.confirmation_token
-            @user.save
+            # @user.save
             UserMailer.registration_confirmation(@user).deliver_now
             redirect_to login_path, notice: 'A verification link is sent to your mail account. Verify your account on clicking the link.'
         else

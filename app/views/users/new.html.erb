@@ -2,7 +2,7 @@
     <h1> Welcome to signup page </h1>
 </div>
 
-<%= form_for @user, url: users_path do |form| %>
+<%= form_for @user, url: users_path, "data-turbolinks": "false" do |form| %>
  <%if @user.errors.any?%>
     <div class="alert alert-danger">
       <% @user.errors.each do |attr, message|%>
@@ -10,7 +10,7 @@
       <%end%>
     </div>
   <%end%>
- <div class="d-flex align-items-center justify-content-center flex-column">
+ <div class="d-flex align-items-center justify-content-center flex-column signup--container">
       <div class="d-flex align-items-center mb-3 name">
         <div class="mr-3">
             <%= form.label :Enter_Your_First_Name%>
@@ -37,12 +37,28 @@
         <%= form.label :Please_Renter_Your_Password %>
         <%= form.password_field :password_confirmation,  placeholder: "xyz123", class: "form-control"%>
       </div>
-        <div class="mb-3 pr-3">
+
+      <div class="mb-3 pr-3">
           <%= form.radio_button :is_seller, "is_seller" %>
           <%= form.label :role_is_seller, "I am a Seller"%>
           <%= form.radio_button :is_buyer, "is_buyer" %>
           <%= form.label :role_is_buyer, "I am a Buyer" %>
-      </div>
+      </div> 
+
       <%= form.submit "Create Account", class:"btn btn-primary"%>
     </div>
 <% end %>
+
+<script>
+    $(document).ready(function() {
+    $("input[type=radio]").prop("checked", false);
+    $("input[type=radio]:first").prop("checked", true);
+
+    $("input[type=radio]").click(function(event) {
+      $("input[type=radio]").prop("checked", false);
+      $(this).prop("checked", true);
+
+      //event.preventDefault();
+    });
+  });
+</script>

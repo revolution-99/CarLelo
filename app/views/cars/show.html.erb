@@ -1,8 +1,10 @@
-<div class="d-flex flex-column align-items-center justify-content-center mb-3">
+<div class="sell__car--heading">
     <h1> Welcome to Car Lelo </h1>
-    <h5>
-    Sell From Your Home || Instant Payment || Free RC Transfer
-</h5>
+    <div class="sell__car--heading--content">
+      <h5>Sell From Your Home ||&nbsp</h5>
+      <h5> Instant Payment ||&nbsp</h5>
+      <h5> Free RC Transfer</h5>
+    </div>
 </div>
 
 
@@ -14,7 +16,7 @@
     <%end%>
     </div>
   <%end%>
- <div class="d-flex align-items-center justify-content-center" id="sell--car">
+ <div class="sell__car--content">
       <div class="mx-3 w-0">
           <%= form.label :Your_City%>
           <%= form.text_field :city, class: "form-control"%>
@@ -48,6 +50,7 @@
       <div class="d-flex align-items-center justify-content-center mt-3">
         <%= form.submit "Get Car Price", class:"btn btn-primary"%>
       </div>
+    </div>
 <% end %>
 
 <%= javascript_pack_tag 'form' %>
