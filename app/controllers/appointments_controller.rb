@@ -28,7 +28,7 @@ class AppointmentsController < ApplicationController
 
     def require_car_registration
         if current_user.is_seller
-            redirect_to root_path, notice: 'You must fill the car details for the appointment' unless current_car
+            redirect_to root_path, notice: 'A seller must fill the car details for the appointment' unless current_car
         end
     end
 end

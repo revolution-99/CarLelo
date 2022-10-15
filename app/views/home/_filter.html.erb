@@ -10,7 +10,7 @@
                     <%= form.select(:km, ["Upto 10000 Km", "10,000 - 20,000 K m", "20,000 - 40,000 Km", "40,000 - 70,000 Km", "70,000 - 1,00,000 Km", "1,00,000 - 1,20,000 Km", "Above 1,20,000 Km"],{prompt: 'KMs Driven'}, {class: 'form-select' })%>
             </li>
             <li class="filter--section">
-                <%= form.select(:brand, [ "Maruti", "Hyundai", "Honda", "Mahindra", "Toyota", "Renault", "Ford", "Tata", "BMW", "Volkswagen", "Skoda", "Mercedes-Benz", "MG", "Kia", "Audi", "Chevrolet", "Fiat", "Nissan"], {option:'disabled selected value'}, {id: "brand", class: "form-select"}) %>
+                <%= form.select(:brand, [ "Maruti", "Hyundai", "Honda", "Mahindra", "Toyota", "Renault", "Ford", "Tata", "BMW", "Volkswagen", "Skoda", "Mercedes-Benz", "MG", "Kia", "Audi", "Chevrolet", "Fiat", "Nissan"], {prompt: "Choose brand"}, {id: "brand", class: "form-select"}) %>
             </li>
             <li class="filter--section">
                 <%= form.select(:model, [], {prompt: "Choose model"},{id: "model", class: "form-select"})%>

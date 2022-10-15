@@ -142,7 +142,9 @@
     list-style: none;
     gap: 1rem;
 }
-
+.filter__appointment--section a{
+    color: white;
+}
 /* Notification Styling */
 .notification{
     /* display: block; */

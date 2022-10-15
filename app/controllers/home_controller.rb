@@ -10,6 +10,7 @@ class HomeController < ApplicationController
     filtering_params(params).each do |key, value|
       @cars = @cars.public_send("filter_by_#{key}", value) if value.present?
     end
+    # @cars = @cars.paginate(page: params[:page], per_page: 5)
   end
   
   def search

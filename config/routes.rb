@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   get "/notification", to:"notification#index",  as: :notifications
 
   resource :users, only:[:new, :create, :show, :update]
-  get '/users', to: redirect('/users/new')
   
   get '/:token/confirm_email/', :to => "users#confirm_email", as: 'confirm_email'
 
