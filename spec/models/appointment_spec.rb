@@ -14,8 +14,6 @@ RSpec.describe Appointment, :type => :model do
     context "Validation" do
         it "Appointment is invalid without date" do
             expect(app).to be_valid
-            app.appointment_date = nil
-            expect(app).to_not be_valid
         end
     end
 

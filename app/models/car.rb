@@ -25,13 +25,13 @@ class Car < ApplicationRecord
     validates :state, presence: true
     validates :km, presence: true
 
-    scope :filter_by_city, ->(city) { where city: city}
-    scope :filter_by_year, ->(year) { where year: year}
-    scope :filter_by_km, ->(km) { where km: km}
-    scope :filter_by_brand, ->(brand) { where brand: brand}
-    scope :filter_by_model, ->(model) { where model: model}
-    scope :filter_by_state, ->(state) { where state: state}
-    scope :filter_by_variant, ->(variant) { where variant: variant}
+    scope :filter_by_city, ->(city) { where city: city }
+    scope :filter_by_year, ->(year) { where year: year }
+    scope :filter_by_km, ->(km) { where km: km }
+    scope :filter_by_brand, ->(brand) { where brand: brand }
+    scope :filter_by_model, ->(model) { where model: model }
+    scope :filter_by_state, ->(state) { where state: state }
+    scope :filter_by_variant, ->(variant) { where variant: variant }
 
     def notify_update
         if saved_change_to_condition?

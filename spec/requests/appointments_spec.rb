@@ -22,7 +22,7 @@ RSpec.describe "Appointments", type: :request do
         expect {
           post "/cars/#{car1.id}/appointment", params: {
             appointment: {
-              appointment_date: "25 Sep 2022", 
+              appointment_date: "01 Jan 2023", 
               status: "Processing"
             }
           }
@@ -39,7 +39,7 @@ RSpec.describe "Appointments", type: :request do
         expect {
           post "/cars/#{car1.id}/appointment", params: {
             appointment: {
-              appointment_date: "", 
+              appointment_date: "25 May 2022", 
               status: "Processing"
             }
           }
