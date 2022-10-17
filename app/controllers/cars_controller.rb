@@ -1,7 +1,7 @@
 class CarsController < ApplicationController
     # protect_from_forgery except: :edit
 
-    def show
+    def new
         @car = Car.new
     end
 
@@ -12,7 +12,7 @@ class CarsController < ApplicationController
             session[:car_id] = @car.id
             redirect_to new_car_appointment_path(@car.id), notice: 'The best price for your car is here.'
         else
-            render :show
+            render :new
         end
     end
     

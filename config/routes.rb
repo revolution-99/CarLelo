@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: "home#index"
   get "/filter", to:"home#filter", as: :home_filtered
   get "/search", to:"home#search", as: :home_searched
+  get "/car/details/:id", to:"home#show", as: :car_details
   get "/notification", to:"notification#index",  as: :notifications
 
   resource :users, only:[:new, :create, :show, :update]
@@ -27,7 +28,7 @@ Rails.application.routes.draw do
     patch "/dashboard/edit", to:"buyer_dashboard#update", as: :dashbaord_update_buyer
   # end
 
-  resources :cars, only:[:show, :create] do
+  resources :cars, only:[:new, :create] do
     resource :appointment, only:[:new, :create]
   end
 

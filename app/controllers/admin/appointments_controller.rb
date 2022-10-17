@@ -12,11 +12,11 @@ module Admin
             end
         end
 
-        def delete
+        def destroy
             @appointment = Appointment.find_by(id: params[:id])
             @appointment.is_approved = false
             @appointment.destroy
-            redirect_to root_path, notice: 'Appointment record is destroyed successfully'
+            redirect_to admin_dashboards_path, notice: 'Appointment record is destroyed successfully'
         end
 
         def update

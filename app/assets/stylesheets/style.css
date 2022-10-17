@@ -46,7 +46,22 @@
     color: #465166;
     list-style: none;
 }
-
+.car__details--bottom{
+    display: flex;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+.car__details--bottom--content{
+    display: flex;
+    flex-direction: column;
+}
+.car__details--bottom--content span{
+    margin-bottom: 1.5rem;
+}
+.car__details--bottom--buttons{
+    display: flex;
+    gap: 30rem;
+}
 /* Sell Used Car Section */
 .sell__car--heading{
     display: flex;
@@ -190,7 +205,20 @@
     border-radius: 0.7rem;
     padding: 0.5rem 0rem 0.2rem 0rem;
 }
-
+footer{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    font-size: 0.85rem;
+    font-family: 'Nunito', sans-serif;
+    width: 100%;
+    /* border-top: 0.2rem dashed #89b0bc; */
+    opacity: 0.8;
+  }
 /* Admin Dashboard */
 .admin__action--button{
     display: flex;

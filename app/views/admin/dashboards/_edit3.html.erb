@@ -2,6 +2,7 @@
   <thead>
     <tr class="table-dark">
       <th scope="col">ID</th>
+      <th scope="col">Car ID</th>
       <th scope="col">Date Created</th>
       <th scope="col">Appointment Date</th>
       <th scope="col">Reschedule Appointment</th>
@@ -18,6 +19,7 @@
     <% @appointments.each do |app|%>
       <tr>
         <th scope="row"><%= app.id %></th>
+        <th scope="row"><%= app.car_id %></th>
         <td><%= app.created_at %></td>
         <td><%= app.appointment_date %></td>
         <td>

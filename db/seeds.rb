@@ -16,3 +16,25 @@ User.create_or_find_by!(
     confirm_token: nil,
     mobile_no: 1234567890
 )
+User.create_or_find_by!(
+    first_name: 'Buyer',
+    last_name: 'User',
+    email: 'buyer@carlelo.com',
+    password_digest: BCrypt::Password.create('superbuyer'),
+    is_buyer: true,
+    is_seller: false,
+    email_confirmed: true,
+    confirm_token: nil,
+    mobile_no: 9114678902
+)
+User.create_or_find_by!(
+    first_name: 'Seller',
+    last_name: 'User',
+    email: 'seller@carlelo.com',
+    password_digest: BCrypt::Password.create('superseller'),
+    is_seller: true,
+    is_buyer: false,
+    email_confirmed: true,
+    confirm_token: nil,
+    mobile_no: 9114890123
+)

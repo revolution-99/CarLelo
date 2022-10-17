@@ -1,22 +1,23 @@
 <nav class="navbar navbar-expand-lg mb-3" style="background-color: #e3f2fd;">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">Car Lelo</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <%if current_user%>
           <%if current_user.is_seller%>
+              <a class="navbar-brand" href="/">Car Lelo</a>
               <li class="nav-item">
                 <a class="nav-link" href="/cars/new">Sell Used Car</a>
               </li>
           <%elsif current_user.is_buyer%>
+              <a class="navbar-brand" href="/">Car Lelo</a>
               <li class="nav-item">
                 <a class="nav-link" href="/">Buy used Car</a>
               </li>
+          <%elsif current_user.is_admin%>
+              <a class="navbar-brand me--auto" href="/admin/dashboards">Car Lelo</a>
           <%end%>
         <%else%>
+            <a class="navbar-brand" href="/">Car Lelo</a>
             <li class="nav-item">
                 <a class="nav-link" href="/cars/new">Sell Used Car</a>
             </li>

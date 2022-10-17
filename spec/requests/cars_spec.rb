@@ -9,7 +9,7 @@ RSpec.describe "Cars", type: :request do
   describe "GET /cars" do
     it "will render a page to create the car record" do
       post login_path, params: { email: admin1.email, password: admin1.password }
-      get "/cars/#{car1.id}"
+      get "/cars/new"
       expect(response).to have_http_status(200)
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe "Cars", type: :request do
             }
           }
         }.to change(User, :count).by(0)
-        expect(response).to render_template(:show)
+        expect(response).to render_template(:new)
       end
     end
   end

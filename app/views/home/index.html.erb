@@ -8,7 +8,7 @@
     <%= render partial: "filter" %>
     <div class="car--card">
         <% @cars.each do |car| %>
-            <%= link_to new_car_appointment_path(car.id) do %>
+            <%= link_to car_details_path(car.id) do %>
                 <div class="card" style="width: 18rem;">
                     <%= image_tag "carrr.jpg", class:"card-img-top"%>
                     <div class="card-body">

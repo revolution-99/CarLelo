@@ -2,7 +2,12 @@ class HomeController < ApplicationController
   skip_before_action :require_login
   
   def index
-    @cars = Car.all
+    @cars = Car.joins(:appointments).where('is_approved=true').distinct
+  end
+
+  def show
+    @car = Car.find_by(id: params[:id])
+    @appointment = Appointment.find_by(id: @car.id)
   end
 
   def filter
@@ -10,7 +15,6 @@ class HomeController < ApplicationController
     filtering_params(params).each do |key, value|
       @cars = @cars.public_send("filter_by_#{key}", value) if value.present?
     end
-    # @cars = @cars.paginate(page: params[:page], per_page: 5)
   end
   
   def search
