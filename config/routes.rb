@@ -36,11 +36,14 @@ Rails.application.routes.draw do
   namespace :admin do
       resource :dashboards, only:[:show] do
         resources :cars, only:[:create, :show, :destroy, :update] do
-          resources :appointments, only:[:create, :index, :destroy, :update]
+          resources :appointments, only:[:create, :index, :destroy, :update, :edit]
         end
       end
 
       get "dashboard/edit/:partial", to:"dashboards#edit", as: :dashboard_edit
       
   end
+  resources :cities
+  resources :brands
+  resources :models
 end

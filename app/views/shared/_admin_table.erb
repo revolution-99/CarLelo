@@ -1,0 +1,47 @@
+<% unless object == [] %>
+  <div class="d-flex flex-column align-items-center justify-content-center mb-2">
+    <h1>List of <%= name.capitalize %></h1>
+  </div>
+  <div class="table--wrap">
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <% if name == "models" %>
+            <th scope="col">Brand Name</th>
+          <% end %>
+          <th scope="col" colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">  
+        <% object.each do |obj| %>
+          <tr>
+            <td><%= obj.id %></td>
+            <td><%= obj.name %></td>
+            <% if name == "models" %>
+              <td><%= get_brand(obj).name %></td>
+            <% end %>
+            <td><%= link_to "Edit", "/"+name+"/"+obj.id.to_s+"/edit", class: "btn btn-primary" %></td>
+            <td><%= link_to "Destroy", "/"+name+"/"+obj.id.to_s, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class= "jumbotron text-center">
+    <h1>No <%= name.capitalize %> is currently added</h1>
+    <p>Add new <%= name.capitalize %> by clicking the below button, then it will show up in the list</p>
+  </div>
+<% end %>
+<div class="car__details--bottom">
+  <div class="car__details--bottom--buttons">
+    <%= link_to admin_dashboards_path, class: "btn btn-info" do %>
+        <i class="bi bi-caret-left-fill"></i>Back to Home
+    <%end%>
+    <%= link_to "/"+name+"/new", class: "btn btn-success" do%>
+        Add new <%= name.capitalize %><i class="bi bi-caret-right-fill"></i>
+    <%end%>
+  </div>
+</div>

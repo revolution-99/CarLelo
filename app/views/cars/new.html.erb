@@ -20,12 +20,19 @@
       <div class="mx-3 w-0">
           <%= form.label :Your_City%>
           <%= form.text_field :city, class: "form-control"%>
+          <div class="form-group">
+          <%= form.label :city %>          
+          <%= form.collection_select :city, City.all, :name, :name, { prompt: "Please Select" }, { class: "form-control" } %>
+        </div>
       </div>
       <div class="mx-3">
           <%= form.label :Brand%>
           <%= form.select(:brand, [ "Maruti", "Hyundai", "Honda", "Mahindra", "Toyota", "Renault", "Ford", "Tata", "BMW", "Volkswagen", "Skoda", "Mercedes-Benz", "MG", "Kia", "Audi", "Chevrolet", "Fiat", "Nissan"],  {prompt: "Select"}, {id: "brand", class: "form-select"}) %>
       </div>
-
+                <div class="form-group">
+          <%= form.label :brand %>          
+          <%= form.collection_select :brand, Brand.all, :name, :name, { prompt: "Please Select" }, { class: "form-control" } %>
+        </div>
       <div class="mx-3">
         <%= form.label :Model%>
         <%= form.select(:model, [], {prompt: "Choose model"},{id: "model", class: "form-select"})%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_03_064609) do
+ActiveRecord::Schema.define(version: 2022_10_19_065001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 2022_09_03_064609) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["car_id"], name: "index_appointments_on_car_id"
     t.index ["user_id"], name: "index_appointments_on_user_id"
+  end
+
+  create_table "brands", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "cars", force: :cascade do |t|
@@ -42,12 +48,26 @@ ActiveRecord::Schema.define(version: 2022_09_03_064609) do
     t.index ["user_id"], name: "index_cars_on_user_id"
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "maps", force: :cascade do |t|
     t.text "address"
     t.float "latitude"
     t.float "longitude"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "models", force: :cascade do |t|
+    t.bigint "brand_id"
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["brand_id"], name: "index_models_on_brand_id"
   end
 
   create_table "notifications", force: :cascade do |t|

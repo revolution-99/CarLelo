@@ -1,0 +1,9 @@
+<% if var.errors.any? %>
+  <div id="error_details">
+    <div class="alert alert-danger">
+      <% var.errors.each do |attr, message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

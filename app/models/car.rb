@@ -1,6 +1,6 @@
 class Car < ApplicationRecord
-    searchkick
-    Car.reindex
+    # searchkick
+    # Car.reindex
     # include Elasticsearch::Model
     # include Elasticsearch::Model::Callbacks
 
