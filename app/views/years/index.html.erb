@@ -1,0 +1,43 @@
+<% unless @years == [] %>
+  <div class="d-flex flex-column align-items-center justify-content-center mb-2">
+    <h1>List of Year Ranges</h1>
+  </div>
+  <div class="table--wrap">
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">ID</th>
+          <th scope="col">Start Year</th>
+          <th scope="col">End Year</th>
+          <th scope="col" colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">  
+        <% @years.each do |year| %>
+          <tr>
+            <td><%= year.id %></td>
+            <td><%= year.begin %></td>
+            <td><%= year.end %></td>
+            <td><%= link_to "Edit", edit_year_path(year.id), class: "btn btn-primary" %></td>
+            <td><%= link_to "Destroy", year_path(year.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class= "jumbotron text-center">
+    <h1>No Year Range is currently added</h1>
+    <p>Add new Year Range by clicking the below button, then it will show up in the list</p>
+  </div>
+<% end %>
+<div class="car__details--bottom">
+  <div class="car__details--bottom--buttons">
+    <%= link_to admin_dashboards_path, class: "btn btn-info" do %>
+        <i class="bi bi-caret-left-fill"></i>Back to Home
+    <%end%>
+    <%= link_to new_year_path, class: "btn btn-success" do%>
+        Add new year range<i class="bi bi-caret-right-fill"></i>
+    <%end%>
+  </div>
+</div>

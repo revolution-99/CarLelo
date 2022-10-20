@@ -4,20 +4,20 @@ class BrandsController < ApplicationController
     # before_action :get_brand, only: [:edit, :update, :destroy]
   
     def index
-      @brands = Brand.all
+        @brands = Brand.all
     end
   
     def new
-      @brand = Brand.new
+        @brand = Brand.new
     end
   
     def create
-      @brand = Brand.new(model_params(:brand))
-      if @brand.save
-        redirect_to brands_path, notice: 'Brand added Succesfully'
-      else
-        render :new
-      end
+        @brand = Brand.new(model_params(:brand))
+        if @brand.save
+          redirect_to brands_path, notice: 'Brand added Succesfully'
+        else
+          render :new
+        end
     end
   
     def edit
@@ -25,23 +25,19 @@ class BrandsController < ApplicationController
     end
   
     def update
-      @brand = Brand.find_by(id: params[:id])
-      if @brand.update(model_params(:brand))
-        redirect_to brands_path, notice: 'Brand has been succesfully Updated'
-      else
-        render :edit
-      end
+        @brand = Brand.find_by(id: params[:id])
+        if @brand.update(model_params(:brand))
+          redirect_to brands_path, notice: 'Brand has been succesfully Updated'
+        else
+          render :edit
+        end
     end
   
     def destroy
-      @brand = Brand.find_by(id: params[:id])
-      @brand.destroy
-      redirect_to brands_path, notice: 'Brand has been succesfully deleted'
+        @brand = Brand.find_by(id: params[:id])
+        @brand.destroy
+        redirect_to brands_path, notice: 'Brand has been succesfully deleted'
     end
-  
-    # def get_brand
-    #   @brand = Brand.find(params[:id])
-    # end
     
   end
   

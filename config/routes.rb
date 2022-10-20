@@ -19,7 +19,6 @@ Rails.application.routes.draw do
     get "/dashboard", to:"seller_dashboard#new", as: :seller_dashboard
     get "/dashboard/edit/:partial", to:"seller_dashboard#edit", as: :seller_dashboard_edit
     patch "/dashboard/edit", to:"seller_dashboard#update", as: :dashbaord_update
-    # get "/verification", to:"seller_dashboard#verify_password"
   end
 
   # constraints BuyerRouteConstraint.new do
@@ -41,9 +40,13 @@ Rails.application.routes.draw do
       end
 
       get "dashboard/edit/:partial", to:"dashboards#edit", as: :dashboard_edit
-      
   end
+
   resources :cities
   resources :brands
   resources :models
+  resources :years
+  resources :variants
+  resources :kilometers
+  resources :states
 end

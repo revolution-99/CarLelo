@@ -1,0 +1,21 @@
+<div class="mb-4">
+  <%= form_for @year do |form| %>
+    <%= render partial: "shared/error_messages", locals: { var: @year } %>
+      <%= form.label :Start_Year%>
+      <%= form.text_field :begin, class: "form-control mb-3"%>
+      <%= form.label :End_Year%>
+      <%= form.text_field :end, class: "form-control mb-3"%>
+        <div class="d-flex align-items-center justify-content-center mt-3">
+            <%= form.submit message, class: "btn btn-success" do %>
+            <i class="bi bi-caret-right-fill"></i>
+            <%end%>
+        </div>
+  <%end%>
+</div>
+<div class="car__details--bottom">
+    <div class="car__details--bottom--buttons">
+        <%= link_to years_path, class: "btn btn-info" do %>
+            <i class="bi bi-caret-left-fill"></i>Back
+        <%end%>
+</div>
+ 

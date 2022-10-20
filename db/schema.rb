@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_19_065001) do
+ActiveRecord::Schema.define(version: 2022_10_19_183714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,12 @@ ActiveRecord::Schema.define(version: 2022_10_19_065001) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "kilometers", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "maps", force: :cascade do |t|
     t.text "address"
     t.float "latitude"
@@ -83,6 +89,12 @@ ActiveRecord::Schema.define(version: 2022_10_19_065001) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
+  create_table "states", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.text "first_name", null: false
     t.text "last_name"
@@ -98,6 +110,19 @@ ActiveRecord::Schema.define(version: 2022_10_19_065001) do
     t.text "confirm_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["mobile_no", "is_seller", "is_buyer"], name: "index_users_on_mobile_no_and_is_seller_and_is_buyer", unique: true
+  end
+
+  create_table "variants", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "years", force: :cascade do |t|
+    t.integer "begin", null: false
+    t.integer "end", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
 end

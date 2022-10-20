@@ -1,0 +1,22 @@
+<div class="mb-4">
+  <%= form_for(object) do |form| %>
+    <%= render partial: "shared/error_messages", locals: { var: object } %>
+      <div class="form-group ">
+        <%= form.label :Brand %>
+        <%= form.collection_select :brand_id, Brand.all, :id, :name, { prompt: "Please Select a Brand" }, { required: true, class: "form-control" } %>
+      </div>
+        <%= form.label :Name%>
+        <%= form.text_field :name, class: "form-control mb-3"%>
+        <div class="d-flex align-items-center justify-content-center mt-3">
+            <%= form.submit message, class: "btn btn-success" do %>
+            <i class="bi bi-caret-right-fill"></i>
+            <%end%>
+        </div>
+  <%end%>
+</div>
+<div class="car__details--bottom">
+    <div class="car__details--bottom--buttons">
+        <%= link_to "/"+name, class: "btn btn-info" do %>
+            <i class="bi bi-caret-left-fill"></i>Back
+        <%end%>
+</div>
