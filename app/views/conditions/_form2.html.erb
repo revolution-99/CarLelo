@@ -1,0 +1,21 @@
+<div class="mb-4">
+  <%= form_for @condition do |form| %>
+    <%= render partial: "shared/error_messages", locals: { var: @condition } %>
+      <%= form.label :Condition%>
+      <%= form.text_field :condition, class: "form-control mb-3"%>
+      <%= form.label :Cost%>
+      <%= form.text_field :cost, class: "form-control mb-3"%>
+        <div class="d-flex align-items-center justify-content-center mt-3">
+            <%= form.submit message, class: "btn btn-success" do %>
+            <i class="bi bi-caret-right-fill"></i>
+            <%end%>
+        </div>
+  <%end%>
+</div>
+<div class="car__details--bottom">
+    <div class="car__details--bottom--buttons">
+        <%= link_to conditions_path, class: "btn btn-info" do %>
+            <i class="bi bi-caret-left-fill"></i>Back
+        <%end%>
+</div>
+ 

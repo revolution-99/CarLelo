@@ -49,4 +49,5 @@ Rails.application.routes.draw do
   resources :variants
   resources :kilometers
   resources :states
+  resources :conditions
 end

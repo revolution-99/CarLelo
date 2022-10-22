@@ -2,6 +2,7 @@ class CarsController < ApplicationController
     # protect_from_forgery except: :edit
 
     def new
+        @brands = Brand.joins(:models).distinct
         @car = Car.new
     end
 

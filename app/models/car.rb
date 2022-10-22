@@ -10,13 +10,6 @@ class Car < ApplicationRecord
     has_many :appointments, dependent: :destroy
     has_many :notifications, dependent: :destroy
 
-    enum condition: {
-        Fair: '0',
-        Good: '1',
-        Very_Good: '2',
-        Excellent: '3'
-    }
-
     validates :city, presence: true
     validates :brand, presence: true
     validates :model, presence: true
@@ -24,6 +17,7 @@ class Car < ApplicationRecord
     validates :variant, presence: true
     validates :state, presence: true
     validates :km, presence: true
+    validates :condition, presence: true
 
     scope :filter_by_city, ->(city) { where city: city }
     scope :filter_by_year, ->(year) { where year: year }

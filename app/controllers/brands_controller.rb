@@ -1,7 +1,6 @@
 class BrandsController < ApplicationController
     include ApplicationHelper
     before_action :authorized_only_to_admin!
-    # before_action :get_brand, only: [:edit, :update, :destroy]
   
     def index
         @brands = Brand.all
@@ -21,7 +20,7 @@ class BrandsController < ApplicationController
     end
   
     def edit
-      @brand = Brand.find_by(id: params[:id])
+        @brand = Brand.find_by(id: params[:id])
     end
   
     def update
