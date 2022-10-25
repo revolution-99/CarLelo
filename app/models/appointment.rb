@@ -34,8 +34,7 @@ class Appointment < ApplicationRecord
             elsif is_approved == false
                 Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'rejected')
             end
-        end
-        if saved_change_to_status?
+        elsif saved_change_to_status?
             Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'status_changed')
             UserMailer.appointment_status_update(user, self).deliver_later
         elsif saved_change_to_appointment_date?

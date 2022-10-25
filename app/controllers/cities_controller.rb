@@ -1,8 +1,6 @@
 class CitiesController < ApplicationController
     include ApplicationHelper
     before_action :authorized_only_to_admin!
-
-    # before_action :get_city, only: [:edit, :update, :destroy]
   
     def index
       @cities = City.all
@@ -39,10 +37,6 @@ class CitiesController < ApplicationController
       @city.destroy
       redirect_to cities_path, notice: 'City has been succesfully deleted'
     end
-  
-    # def get_city
-    #   @city = City.find(params[:id])
-    # end
     
-  end
+end
   

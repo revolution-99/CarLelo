@@ -38,5 +38,5 @@ class BrandsController < ApplicationController
         redirect_to brands_path, notice: 'Brand has been succesfully deleted'
     end
     
-  end
+end
   

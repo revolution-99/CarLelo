@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_20_175631) do
+ActiveRecord::Schema.define(version: 2022_10_25_193830) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2022_10_20_175631) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_brands_on_name", unique: true
   end
 
   create_table "cars", force: :cascade do |t|
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(version: 2022_10_20_175631) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_cities_on_name", unique: true
   end
 
   create_table "conditions", force: :cascade do |t|
@@ -59,12 +61,15 @@ ActiveRecord::Schema.define(version: 2022_10_20_175631) do
     t.string "cost", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["condition"], name: "index_conditions_on_condition", unique: true
+    t.index ["cost"], name: "index_conditions_on_cost", unique: true
   end
 
   create_table "kilometers", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_kilometers_on_name", unique: true
   end
 
   create_table "maps", force: :cascade do |t|
@@ -81,6 +86,7 @@ ActiveRecord::Schema.define(version: 2022_10_20_175631) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["brand_id"], name: "index_models_on_brand_id"
+    t.index ["name"], name: "index_models_on_name", unique: true
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -100,6 +106,7 @@ ActiveRecord::Schema.define(version: 2022_10_20_175631) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_states_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -123,6 +130,7 @@ ActiveRecord::Schema.define(version: 2022_10_20_175631) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_variants_on_name", unique: true
   end
 
   create_table "years", force: :cascade do |t|

@@ -28,7 +28,7 @@ class ApplicationController < ActionController::Base
     # helper_method :logger
 
     def authorized_only_to_admin!
-        unless current_user and current_user.is_admin 
+        unless current_user&.is_admin 
             redirect_to root_path, notice: 'This feature can be unlocked with admin access. Please Log in as Admin to continue'
         end
     end

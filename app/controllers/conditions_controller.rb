@@ -42,5 +42,5 @@ class ConditionsController < ApplicationController
     def condition_params
         params.require(:condition).permit(:condition, :cost)
     end
-  end
+end
   

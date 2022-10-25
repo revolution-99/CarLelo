@@ -39,5 +39,5 @@ class KilometersController < ApplicationController
         redirect_to kilometers_path, notice: 'Kilometer has been succesfully deleted'
     end
     
-  end
+end
   

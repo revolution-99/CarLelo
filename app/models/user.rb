@@ -27,8 +27,8 @@ class User < ApplicationRecord
               length: { in: 6..20,
                         message: 'Password must be of minimum length 6 and maximum 20' }, if: :password
 
-    # validates :is_seller,
-    #           presence: { message: 'Must choose a role of seller or buyer' }, unless: :is_buyer
+    validates :is_seller,
+              presence: { message: 'Must choose a role of seller or buyer' }, unless: :is_buyer
 
     def email_activate
         self.email_confirmed = true

@@ -39,5 +39,5 @@ class StatesController < ApplicationController
         redirect_to states_path, notice: 'State has been succesfully deleted'
     end
     
-  end
+end
   

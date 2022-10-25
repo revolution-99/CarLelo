@@ -53,7 +53,7 @@ module Admin
                 if @appointment.update(appointments_approval_params)
                     redirect_to admin_dashboards_appointments_path, notice: 'Appointment is approved.'
                 else
-                    redirect_to admin_dashboards_path,  alert: 'Failed to approve the appointment'
+                    redirect_to admin_dashboards_path, alert: 'Failed to approve the appointment'
                 end
             end
         end

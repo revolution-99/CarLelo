@@ -47,12 +47,10 @@ RSpec.describe Car, :type => :model do
             car1.km = nil
             expect(car1).to_not be_valid
         end
-    end
-
-    context "Callback" do
-        it "will trigger after update." do
-            expect(car1).to receive(:notify_update)
-            car1.run_callbacks(:update)
+        it "Car is invalid without condition." do
+            expect(car1).to be_valid
+            car1.condition = nil
+            expect(car1).to_not be_valid
         end
     end
     

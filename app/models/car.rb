@@ -1,6 +1,6 @@
 class Car < ApplicationRecord
-    # searchkick
-    # Car.reindex
+    searchkick
+    Car.reindex
     # include Elasticsearch::Model
     # include Elasticsearch::Model::Callbacks
 
@@ -24,5 +24,4 @@ class Car < ApplicationRecord
     scope :filter_by_model, ->(model) { where model: model }
     scope :filter_by_state, ->(state) { where state: state }
     scope :filter_by_variant, ->(variant) { where variant: variant }
-
 end

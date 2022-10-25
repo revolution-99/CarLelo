@@ -39,5 +39,5 @@ class VariantsController < ApplicationController
         redirect_to variants_path, notice: 'Variant has been succesfully deleted'
     end
     
-  end
+end
   

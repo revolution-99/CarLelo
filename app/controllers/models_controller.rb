@@ -42,5 +42,5 @@ class ModelsController < ApplicationController
     def model_params
         params.require(:model).permit(:name, :brand_id)
     end
-  end
+end
   
