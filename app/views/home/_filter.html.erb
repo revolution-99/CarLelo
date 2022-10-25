@@ -1,25 +1,25 @@
 <%= form_with model:@car, url:home_filtered_path, method: :get do |form| %>
         <ul class="filter">
             <li class="filter--section">
-                <%= form.select(:city, ["Cuttack", "New Delhi", "Bangalore", "Hyderabad", "Kollata", "Mumbai", "Pune", "Gurgaon", "Chennai", "Others"],{prompt: 'Select your city'}, {class: 'form-select' })%>
+                 <%= form.collection_select :city, City.all, :name, :name, { prompt: "City" }, { class: "form-select" } %>
             </li>
             <li class="filter--section">
-                    <%= form.select(:year, [2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000],{prompt: 'Year'}, {class: "form-select"})%>
+                <%= form.select :year, ((Year.last.begin)..(Year.last.end)), { prompt: "Year" }, { class: "form-select" } %>
             </li>
             <li class="filter--section">
-                    <%= form.select(:km, ["Upto 10000 Km", "10,000 - 20,000 K m", "20,000 - 40,000 Km", "40,000 - 70,000 Km", "70,000 - 1,00,000 Km", "1,00,000 - 1,20,000 Km", "Above 1,20,000 Km"],{prompt: 'KMs Driven'}, {class: 'form-select' })%>
+                <%= form.collection_select :km, Kilometer.all, :name, :name, { prompt: "Kilometer Range" }, { class: "form-select" } %>
             </li>
             <li class="filter--section">
-                <%= form.select(:brand, [ "Maruti", "Hyundai", "Honda", "Mahindra", "Toyota", "Renault", "Ford", "Tata", "BMW", "Volkswagen", "Skoda", "Mercedes-Benz", "MG", "Kia", "Audi", "Chevrolet", "Fiat", "Nissan"], {prompt: "Choose brand"}, {id: "brand", class: "form-select"}) %>
+                <%= form.collection_select :brand, @brands, :name, :name, { prompt: "Brand" }, { class: "form-select" } %>
             </li>
             <li class="filter--section">
-                <%= form.select(:model, [], {prompt: "Choose model"},{id: "model", class: "form-select"})%>
+                <%= form.grouped_collection_select :model, @brands, :models, :name, :name, :name, { prompt: "Model" }, { class: "form-select" } %>
             </li>
             <li class="filter--section">
-                    <%= form.select(:state, ["AP", "AR", "AS", "BR", "DN", "DD", "GA", "HJ", "HR", "HP", "JK", "KA", "KL", "MP", "MH", "MZ", "NL", "OD", "PB", "RJ", "SK", "TN", "TS", "TR", "UP", "UK", "WB", "AN", "CH", "DM", "DD", "DL", "LA", "LD", "PY"], {prompt: 'RTO'}, {class: 'form-select' })%>
+                <%= form.collection_select :state, State.all, :name, :name, { prompt: "State" }, { class: "form-select" } %>
             </li>
             <li class="filter--section">
-                    <%= form.select(:variant, ["Petrol", "Disel", "CNG"], {prompt: 'Variant'},{class: "form-select"})%>
+                <%= form.collection_select :variant, Variant.all, :name, :name, { prompt: "Variant" }, { class: "form-select" } %>
             </li>
             <li class="filter--section">
                  <%= form.submit "Show Cars", class:"btn btn-primary"%>
@@ -27,4 +27,4 @@
         </ul>
 <%end%>
 
-<%= javascript_pack_tag 'form' %>
+<%= javascript_pack_tag 'form_filter' %>

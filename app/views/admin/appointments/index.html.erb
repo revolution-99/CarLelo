@@ -42,10 +42,16 @@
                     No
                 <%end%>
             </td>
-            <td><%= link_to "Edit", edit_admin_dashboards_appointment_path(app.id), class: "btn btn-primary" %></td>
+            <td>
+              <% if app.status == "Sold"%>
+                  <%= link_to "Edit", edit_admin_dashboards_appointment_path(app.id), class: "btn btn-secondary" %>
+              <% else%>
+                <%= link_to "Edit", edit_admin_dashboards_appointment_path(app.id), class: "btn btn-primary" %>
+              <%end%>
+            </td>
             <td>
               <% if app.is_approved%>
-                <button type="button" class="btn btn-secondary">Approved</button>
+                <%= link_to "Approve", admin_path(app.id), method: :patch, class: "btn btn-secondary" %>
               <% else %>
                 <%= link_to "Approve", admin_path(app.id), method: :patch, class: "btn btn-success" %>
               <%end%>

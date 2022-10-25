@@ -7,7 +7,6 @@
     </div>
 </div>
 
-
 <%= form_for @car, url:cars_path do |form| %>
  <%if @car.errors.any?%>
     <div class="alert alert-danger">
@@ -62,21 +61,4 @@
         <%end%>
     </div>
 </div>
-<script>
-  models = $('#car_model').html()
-  console.log("model is ",models,"\n")
-  var sanu = document.getElementById('car_brand')
-  sanu.addEventListener('change', function() {
-
-    brand = $('#car_brand :selected').text()
-    console.log("brand is ",brand,"\n")
-    options=$(models).filter(`optgroup[label='${brand}']`).html()
-    console.log("option is ", options,"\n")
-    if (options){
-      $('#car_model').html(options)
-    }
-    else{
-      $('#car_model').empty()
-    }
-  })
-</script>
+<%= javascript_pack_tag 'form_car' %>

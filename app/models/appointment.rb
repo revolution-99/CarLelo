@@ -2,7 +2,7 @@ class Appointment < ApplicationRecord
     after_create :notify_create
     after_update :notify_update
     # after_destroy :notify_update_delete
-    validate :appointment_date_can_not_be_in_past
+    validate :no_past_appointment_date
     belongs_to :user
     belongs_to :car
 
@@ -17,7 +17,7 @@ class Appointment < ApplicationRecord
 
     has_many :notifications, dependent: :destroy
 
-    def appointment_date_can_not_be_in_past 
+    def no_past_appointment_date
         if appointment_date < Time.zone.today
             errors.add(:appointment_date, 'can not be in the past')            
         end
@@ -31,14 +31,15 @@ class Appointment < ApplicationRecord
         if saved_change_to_is_approved?
             if is_approved == true
                 Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'approved')
+            elsif is_approved == false
+                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'rejected')
             end
-        else
-            if saved_change_to_status?
-                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'status_changed')
-                UserMailer.appointment_status_update(user, self).deliver_later
-            elsif saved_change_to_appointment_date?
-                Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'rescheduled')
-            end
+        end
+        if saved_change_to_status?
+            Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'status_changed')
+            UserMailer.appointment_status_update(user, self).deliver_later
+        elsif saved_change_to_appointment_date?
+            Notification.create(user_id: user.id, car_id: car.id, appointment_id: id, action: 'rescheduled')
         end
     end
 end

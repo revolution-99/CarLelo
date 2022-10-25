@@ -19,9 +19,11 @@ module Admin
 
         def show
             @current_car = Car.find_by(id: params[:id])
+            @brands = Brand.joins(:models).distinct
         end
 
         def update
+            @brands = Brand.joins(:models).distinct
             @current_car = Car.find_by(id: params[:id])
             if @current_car.update(car_params)
                 redirect_to admin_dashboards_path, notice: 'Your changes are upadted successully'

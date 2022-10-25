@@ -4,8 +4,6 @@ class Car < ApplicationRecord
     # include Elasticsearch::Model
     # include Elasticsearch::Model::Callbacks
 
-    after_update :notify_update
-
     belongs_to :user
     has_many :appointments, dependent: :destroy
     has_many :notifications, dependent: :destroy
@@ -27,11 +25,4 @@ class Car < ApplicationRecord
     scope :filter_by_state, ->(state) { where state: state }
     scope :filter_by_variant, ->(variant) { where variant: variant }
 
-    def notify_update
-        if saved_change_to_condition?
-            appointments.each do |app|
-                Notification.create(user_id: user.id, car_id: id, appointment_id: app.id, action: 'condition_updated')
-            end
-        end
-    end
 end

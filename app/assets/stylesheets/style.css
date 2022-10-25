@@ -212,9 +212,9 @@
 footer{
     display: flex;
     justify-content: center;
-    position: fixed;
-    left: 0;
-    bottom: 0;
+    /* position: fixed; */
+    /* left: 0;
+    bottom: 0; */
     margin-bottom: 1rem;
     padding-top: 1rem;
     font-size: 0.85rem;

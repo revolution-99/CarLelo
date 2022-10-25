@@ -14,7 +14,14 @@
         <%elsif notification.action == "approved"%>
             <li>
                 <span>
-                    Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is now <b>approved</b>. We will notify you once the status is updated.
+                    Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is now approved. Car's estimated price is:
+                    <b>
+                        <% if notification.car.condition == "Fair"%> ₹ 1,26,532 - ₹ 1,37,697
+                        <%elsif notification.car.condition == "Good"%> ₹1,35,464 - ₹ 1,60,026
+                        <%elsif notification.car.condition == "Very_Good"%> ₹ 1,57,793 - ₹ 1,68,958
+                        <%elsif notification.car.condition == "Excellent"%> ₹ 1,66,725 - ₹ 1,71,191
+                    </b>
+                    <%end%>
                 </span>
                 <hr>
             </li>
@@ -28,7 +35,18 @@
         <%elsif notification.action == "status_changed"%>
             <li>
                 <span>
-                    Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is now in <b><%= notification.appointment.status%></b> phase. We will notify you once the status is further updated.
+                    <%if  notification.appointment.status == 'Sold' %>
+                        <%if  notification.user.is_seller%>
+                            Congratulations! your <b><%= notification.car.brand%> <%= notification.car.model%></b> has been sold.
+                        <%elsif notification.user.is_buyer%>
+                            Congratulations! on your new car purchase of <b><%= notification.car.brand%> <%= notification.car.model%>.</b>
+                        <%end%>
+                        Make sure you check back with us for even better deals on used cars.
+                    <%elsif  notification.appointment.status == 'Investigating' %>
+                        Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is under investigation. We will notify you once the status is further updated.
+                    <%elsif  notification.appointment.status == 'Processing' %>
+                        Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is under process. We will notify you once the status is further updated.
+                    <%end%>
                 </span>
                 <hr>
             </li>
@@ -39,36 +57,6 @@
                 </span>
                 <hr>
             </li>
-        <%elsif notification.action == "condition_updated"%>
-            <% if notification.car.condition == "Fair"%>
-                <li>
-                    <span>
-                        <%= current_user.first_name%>, based on your car <b><%= notification.car.brand%> <%= notification.car.model%></b>'s condition, the estimated price is in between the range 1,00,000 to 2,00,000.
-                    </span>
-                    <hr>
-                </li>
-            <%elsif notification.car.condition == "Good"%>
-                <li>
-                    <span>
-                        <%= current_user.first_name%>, based on your car <b><%= notification.car.brand%> <%= notification.car.model%></b>'s condition, the estimated price is in between the range 2,00,000 to 5,00,000.
-                    </span>
-                    <hr>
-                </li>
-            <%elsif notification.car.condition == "Very_Good"%>
-                <li>
-                    <span>
-                        <%= current_user.first_name%>, based on your car <b><%= notification.car.brand%> <%= notification.car.model%></b>'s condition, the estimated price is in between the range 5,00,000 to 10,00,000.
-                    </span>
-                    <hr>
-                </li>
-            <%elsif notification.car.condition == "Excellent"%>
-                <li>
-                    <span>
-                        <%= current_user.first_name%>, based on your car <b><%= notification.car.brand%> <%= notification.car.model%></b>'s condition, the estimated price is above 10,00,000.
-                    </span>
-                    <hr>
-                </li>
-            <%end%>
         <%end%>
     <%end%>
     <%if @notifications.count == 0%>

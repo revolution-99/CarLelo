@@ -3,50 +3,56 @@
     <%= render partial: "search" %>
     <%= render partial: "filter" %>
 
-    <div class="car--card">
-        <% @cars.each do |car| %>
-            <a href="/appointment">
-                <div class="card" style="width: 18rem;">
-                    <%= image_tag "carrr.jpg", class:"card-img-top"%>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <%= car.year %>
+    <%if @cars.count == 0%>
+        <div class="d-flex flex-column align-items-center justify-content-center">
+            <h3> No matching car is found </h3>
+        </div>
+    <%else%>
+        <div class="car--card">
+            <% @cars.each do |car| %>
+                <a href="/appointment">
+                    <div class="card" style="width: 18rem;">
+                        <%= image_tag "carrr.jpg", class:"card-img-top"%>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= car.year %>
 
-                            <%= car.brand%>
+                                <%= car.brand%>
 
-                            <%= car.model%>
-                            <%= car.id%>
-                        </h5>
+                                <%= car.model%>
+                                <%= car.id%>
+                            </h5>
+                        </div>
+                        <ul class="card--body--custom">
+                            <li><%= car.state%></li>
+                            <li><%= car.city%></li>
+                        </ul>
+                        <ul class="card--body--custom">
+                            <li><%= car.km%></li>
+                            <li><%= car.variant%></li>
+                        </ul>
+                        <ul class="list-group list-group-flush">
+                        <% if car.condition == 'Fair'%>
+                                <li class="list-group-item">
+                                ₹ 1,00,000 - ₹ 2,00,000
+                                </li>
+                            <% elsif car.condition == 'Good'%>
+                                <li class="list-group-item">
+                                ₹ 2,00,000 - ₹ 5,00,000
+                                </li>
+                            <% elsif car.condition == 'Very_Good'%>
+                                <li class="list-group-item">
+                                ₹ 5,00,000 - ₹ 10,00,000
+                                </li>
+                            <% elsif car.condition == 'Excellent'%>
+                                <li class="list-group-item">
+                                Above ₹ 10,00,000
+                                </li>
+                            <%end%>
+                        </ul>
                     </div>
-                    <ul class="card--body--custom">
-                        <li><%= car.state%></li>
-                        <li><%= car.city%></li>
-                    </ul>
-                    <ul class="card--body--custom">
-                        <li><%= car.km%></li>
-                        <li><%= car.variant%></li>
-                    </ul>
-                    <ul class="list-group list-group-flush">
-                     <% if car.condition == 'Fair'%>
-                            <li class="list-group-item">
-                            ₹ 1,00,000 - ₹ 2,00,000
-                            </li>
-                        <% elsif car.condition == 'Good'%>
-                            <li class="list-group-item">
-                            ₹ 2,00,000 - ₹ 5,00,000
-                            </li>
-                        <% elsif car.condition == 'Very_Good'%>
-                            <li class="list-group-item">
-                            ₹ 5,00,000 - ₹ 10,00,000
-                            </li>
-                        <% elsif car.condition == 'Excellent'%>
-                            <li class="list-group-item">
-                            Above ₹ 10,00,000
-                            </li>
-                        <%end%>
-                    </ul>
-                </div>
-            </a>
-        <% end %>
-    </div>
+                </a>
+            <% end %>
+        </div>
+    <% end %>
 </div>

@@ -17,6 +17,9 @@ module Admin
             unless @appointment.is_approved
                 redirect_to admin_dashboards_appointments_path, alert: 'Please approve the appointment to edit it.'
             end
+            if @appointment.status == 'Sold'
+                redirect_to admin_dashboards_appointments_path, alert: 'Car is already sold.'
+            end
         end
 
         def index
@@ -43,11 +46,15 @@ module Admin
 
         def approve
             @appointment = Appointment.find(params[:id])
-            @appointment.is_approved = true
-            if @appointment.update(appointments_approval_params)
-                redirect_to admin_dashboards_appointments_path, notice: 'Appointment is approved.'
+            if @appointment.is_approved == true
+                redirect_to admin_dashboards_appointments_path, alert: 'Appointment is already approved.'
             else
-                redirect_to admin_dashboards_path,  alert: 'Failed to approve the appointment'
+                @appointment.is_approved = true
+                if @appointment.update(appointments_approval_params)
+                    redirect_to admin_dashboards_appointments_path, notice: 'Appointment is approved.'
+                else
+                    redirect_to admin_dashboards_path,  alert: 'Failed to approve the appointment'
+                end
             end
         end
 
