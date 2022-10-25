@@ -1,7 +1,188 @@
 <div class="d-flex flex-column align-items-center justify-content-center">
     <h1> Welcome to the Admin dashboard </h1>
 </div>
-<div class="dashboard">
+<%
+=begin%>
+ <div class="dashboard">
   <%= render partial:"sidebar" %>
   <div id = "partial_content"></div>
+</div> 
+<%
+=end%>
+
+<div class="admin__home--row">
+
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-pink order-card">
+        <div class="card-block">
+          <h4 class="m-b-20">Manage Cities</h4>
+          <h2 class="admin__home--row--text">
+            <i class="fa fa-building-o" aria-hidden="true"></i>
+            <span><%= count_models(City)%></span>
+          </h2>
+          <div class="float-end">        
+          <%= link_to cities_path do %>
+            <div class="admin__home--row--button">
+              <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-blue order-card">
+        <div class="card-block">
+          <h4 class="m-b-20">Manage Car Brands</h4>
+          <h2 class="admin__home--row--text">
+            <i class="fa fa-car" aria-hidden="true"></i>
+            <span><%= count_models(Brand)%></span>
+          </h2>
+          <div class="float-end">        
+          <%= link_to brands_path do %>
+            <div class="admin__home--row--button">
+              <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-green order-card">
+        <div class="card-block">
+          <h4 class="m-b-20">Manage Car Models</h4>
+          <h2 class="admin__home--row--text">
+            <i class="fa fa-car"></i>
+            <span><%= count_models(Model)%></span>
+          </h2>
+          <div class="float-end">        
+          <%= link_to models_path do %>
+            <div class="admin__home--row--button">
+              <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div class="admin__home--row">
+
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-pink order-card">
+        <div class="card-block">
+          <h4 class="m-b-20">Manage Car Year Ranges</h4>
+          <h2 class="admin__home--row--text">
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+            <span><%= count_models(Year)%></span>
+          </h2>
+          <div class="float-end">        
+          <%= link_to years_path do %>
+            <div class="admin__home--row--button">
+              <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-blue order-card">
+        <div class="card-block">
+          <h4 class="m-b-20">Manage Car Variants</h4>
+          <h2 class="admin__home--row--text">
+            <i class="fa fa-taxi" aria-hidden="true"></i>
+            <span><%= count_models(Variant)%></span>
+          </h2>
+          <div class="float-end">        
+          <%= link_to variants_path do %>
+            <div class="admin__home--row--button">
+              <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-green order-card">
+        <div class="card-block">
+          <h4 class="m-b-20">Manage Car States</h4>
+          <h2 class="admin__home--row--text">
+            <i class="fa fa-university"></i>
+            <span><%= count_models(State)%></span>
+          </h2>
+          <div class="float-end">        
+          <%= link_to states_path do %>
+            <div class="admin__home--row--button">
+              <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+  
+</div>
+<div class="admin__home--row">
+
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-pink order-card">
+        <div class="card-block">
+          <h4 class="m-b-20">Manage Kilometer Ranges</h4>
+          <h2 class="admin__home--row--text">
+            <i class="fa fa-road" aria-hidden="true"></i>
+            <span><%= count_models(Kilometer)%></span>
+          </h2>
+          <div class="float-end">        
+          <%= link_to kilometers_path do %>
+            <div class="admin__home--row--button">
+              <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-blue order-card">
+        <div class="card-block">
+          <h4 class="m-b-20">Manage Car Conditions</h4>
+          <h2 class="admin__home--row--text">
+            <i class="fa fa-clipboard" aria-hidden="true"></i>
+            <span><%= count_models(Condition)%></span>
+          </h2>
+          <div class="float-end">        
+          <%= link_to conditions_path do %>
+            <div class="admin__home--row--button">
+              <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-green order-card">
+        <div class="card-block">
+          <h4 class="m-b-20">Manage Appointments</h4>
+          <h2 class="admin__home--row--text">
+            <i class="fa fa-pencil-square-o"></i>
+            <span><%= count_models(Appointment)%></span>
+          </h2>
+          <div class="float-end">        
+          <%= link_to admin_dashboards_appointments_path do %>
+            <div class="admin__home--row--button">
+              <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+  </div>
+  
+
 </div>

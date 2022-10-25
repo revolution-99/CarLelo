@@ -55,7 +55,13 @@
       </div>
     </div>
 <% end %>
-
+<div class="car__details--bottom car--new">
+    <div class="car__details--bottom--buttons">
+        <%= link_to root_path, class: "btn btn-info" do %>
+            <i class="bi bi-caret-left-fill"></i>Back to Home
+        <%end%>
+    </div>
+</div>
 <script>
   models = $('#car_model').html()
   console.log("model is ",models,"\n")

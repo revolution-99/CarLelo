@@ -12,6 +12,17 @@ module Admin
             end
         end
 
+        def edit
+            @appointment = Appointment.find_by(id: params[:id])
+            unless @appointment.is_approved
+                redirect_to admin_dashboards_appointments_path, alert: 'Please approve the appointment to edit it.'
+            end
+        end
+
+        def index
+            @appointments = Appointment.all
+        end
+
         def destroy
             @appointment = Appointment.find_by(id: params[:id])
             @appointment.is_approved = false
@@ -23,21 +34,30 @@ module Admin
             # @car = Car.find_by(id: params[:car_id])
             @appointment = Appointment.find_by(id: params[:id])
             # @appointment.car_id = @car.id
-
             if @appointment.update!(appointment_params)
-                redirect_to admin_dashboards_path, notice: 'Your changes are upadted successully'
+                redirect_to admin_dashboards_appointments_path, notice: 'Your changes are upadted successully'
             else
-                redirect_to root_path
+                redirect_to admin_dashboards_path, alert: 'Failed to update the appointment record'
+            end
+        end
+
+        def approve
+            @appointment = Appointment.find(params[:id])
+            @appointment.is_approved = true
+            if @appointment.update(appointments_approval_params)
+                redirect_to admin_dashboards_appointments_path, notice: 'Appointment is approved.'
+            else
+                redirect_to admin_dashboards_path,  alert: 'Failed to approve the appointment'
             end
         end
 
         private
         def appointment_params
-            params.require(:@appointment).permit(:status, :is_approved, :appointment_date)
+            params.require(:appointment).permit(:status, :appointment_date)
         end
 
-        def appointments_params
-            params.permit(:status, :is_approved, :appointment_date)
+        def appointments_approval_params
+            params.permit(:is_approved)
         end
     end
 end

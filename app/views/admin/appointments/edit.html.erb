@@ -1,0 +1,29 @@
+<div class="d-flex flex-column align-items-center justify-content-center mb-2">
+    <h1>Edit Appointment</h1>
+<div class="mb-4">
+  <%= form_for @appointment, url:admin_dashboards_appointment_path do |form| %>
+    <%= render partial: "shared/error_messages", locals: { var: @appointment } %>
+      <%= form.label :reschedule_appointment_date%>
+      <%= form.date_field :appointment_date, class: "form-control"%>
+      <%= form.label :set_status%>
+      <%
+=begin%>
+ <%= form.select(:status, ["Processing", "Investigating", "Sold"],{prompt: "Change Status"}, {class: "form-select"})%> 
+<%
+=end%>
+
+      <%= form.select :status, ["Processing", "Investigating", "Sold"], {prompt: @appointment.status}, class: "form-select"%>
+      <div class="d-flex align-items-center justify-content-center mt-3">
+        <%= form.submit "Update", class: "btn btn-success" do %>
+          <i class="bi bi-caret-right-fill"></i>
+        <%end%>
+      </div>
+  <%end%>
+</div>
+<div class="car__details--bottom">
+  <div class="car__details--bottom--buttons">
+    <%= link_to admin_dashboards_appointments_path, class: "btn btn-info" do %>
+        <i class="bi bi-caret-left-fill"></i>Back
+    <%end%>
+</div>
+</div>

@@ -37,4 +37,9 @@ class ApplicationController < ActionController::Base
         Brand.find(model.brand_id)
     end
     helper_method :get_brand
+
+    def count_models(obj)
+        obj.count
+    end
+    helper_method :count_models
 end

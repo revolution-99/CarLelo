@@ -7,6 +7,7 @@ class CarsController < ApplicationController
     end
 
     def create
+        @brands = Brand.joins(:models).distinct
         @car = current_user.cars.create(car_params)
         # @car.user_id = current_user.id
         if @car.save

@@ -1,20 +1,79 @@
-<div class="d-flex flex-column align-items-center justify-content-center mb-3 mt-3">
-    <h5> Book your preferable slot for appointment </h5>
-    <%= form_with model:@appointment, url:admin_dashboards_car_appointments_path do |form| %>
-        <div class="mb-3">
-            <%= form.label :Your_Mobile_No, class:"fw-bolder"%>
-            <div class="form-control"><%=current_user.mobile_no%></div>
-        </div>
-        <div class="d-flex align-items-center justify-content-center flex-column">
-            <div class="mb-3">
-                <%= form.label :Select_your_preferable_date%>
-                <br>
-                <%= form.date_field :appointment_date, class: "form-control"%>
-            </div>
-            <div class="d-flex align-items-center justify-content-center mt-3">
-                <%= form.submit "Book Appointment", class:"btn btn-primary"%>
-            </div>
-        </div>
-    <%end%>
-</div>
+<% unless @appointments == [] %>
+  <div class="d-flex flex-column align-items-center justify-content-center mb-2">
+    <h1>List of Appointments </h1>
+  </div>
+  <div class="table--wrap">
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">ID</th>
+          <th scope="col">Car ID</th>
+          <th scope="col">User Role</th>
+          <th scope="col">Car Brand</th>
+          <th scope="col">Car Model</th>
+          <th scope="col">Date Created</th>
+          <th scope="col">Appointment Date</th>
+          <th scope="col">Status</th>
+          <th scope="col">Approval</th>
+          <th scope="col" colspan="3">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">  
+        <% @appointments.each do |app| %>
+          <tr>
+            <td><%= app.id %></td>
+            <td><%= app.car_id %></td>
+            <td>
+              <% if app.user.is_seller %>
+                Seller
+              <% elsif app.user.is_buyer %>
+                Buyer
+              <% end %>
+            </td>
+            <td><%= app.car.brand %></td>
+            <td><%= app.car.model%></td>
+            <td><%= app.created_at %></td>
+            <td><%= app.appointment_date %></td>
+            <td><%= app.status %></td>
+            <td>
+                <%if app.is_approved %>
+                    Yes
+                <%else%>
+                    No
+                <%end%>
+            </td>
+            <td><%= link_to "Edit", edit_admin_dashboards_appointment_path(app.id), class: "btn btn-primary" %></td>
+            <td>
+              <% if app.is_approved%>
+                <button type="button" class="btn btn-secondary">Approved</button>
+              <% else %>
+                <%= link_to "Approve", admin_path(app.id), method: :patch, class: "btn btn-success" %>
+              <%end%>
+            </td>
+            <td><%= link_to "Reject", admin_dashboards_appointment_path(app.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td> 
 
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class= "jumbotron text-center">
+    <h1>No Appointments is currently added</h1>
+    <p>Add new Appointments by clicking the below button, then it will show up in the list</p>
+  </div>
+<% end %>
+<div class="car__details--bottom">
+  <div class="car__details--bottom--buttons">
+    <%= link_to admin_dashboards_path, class: "btn btn-info" do %>
+        <i class="bi bi-caret-left-fill"></i>Back to Home
+    <%end%>
+    <%
+=begin%>
+ <%= link_to "/"+app+"/new", class: "btn btn-success" do%>
+        Add new Appointments<i class="bi bi-caret-right-fill"></i>
+    <%end%> 
+<%
+=end%>
+  </div>
+</div>
