@@ -10,7 +10,7 @@
     <%else%>
         <div class="car--card">
             <% @cars.each do |car| %>
-                <a href="/appointment">
+                <%= link_to car_details_path(car.id) do %>
                     <div class="card" style="width: 18rem;">
                         <%= image_tag "carrr.jpg", class:"card-img-top"%>
                         <div class="card-body">
@@ -51,7 +51,7 @@
                             <%end%>
                         </ul>
                     </div>
-                </a>
+                <% end %>
             <% end %>
         </div>
     <% end %>
