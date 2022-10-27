@@ -20,6 +20,7 @@ class HomeController < ApplicationController
   end
   
   def search
+    @brands = Brand.joins(:models).distinct
     @q = params[:search_query]
     @cars = Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant']) if @q
   end
