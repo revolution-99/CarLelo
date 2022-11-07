@@ -1,0 +1,29 @@
+<div class="d-flex flex-column align-items-center justify-content-center mb-2">
+    <h1> List of all buyers </h1>
+</div>
+
+<div class="table--wrap">
+    <table class="table table-striped">
+        <thead>
+            <tr class="table-dark">
+                <th scope="col">ID</th>
+                <th scope="col">Email</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <% @appointments.each do |app| %>
+            <tbody>
+                <tr>
+                    <%if app.user.is_buyer%> 
+                        <td> <%=app.user.id%> </td>
+                        <td> <%=app.user.email%> </td>
+                        <td> <%=app.user.first_name%> </td>
+                        <td> <%=app.user.last_name%> </td>
+                    <%end%>
+                </tr>
+            </tbody>
+        <%end%>
+    </table>
+</div>

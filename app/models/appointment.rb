@@ -7,9 +7,12 @@ class Appointment < ApplicationRecord
     belongs_to :car
 
     enum status: {
-        Processing: 0,
-        Investigating: 1,
-        Sold: 2
+        Pending_Approval: 0,
+        Processing: 1,
+        Investigating: 2,
+        Ready_For_Sell: 3,
+        Sold: 4,
+        Sell_Request_Cancelled: 5
     }
 
     validates :appointment_date, presence: true

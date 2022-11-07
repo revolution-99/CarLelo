@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   # constraints BuyerRouteConstraint.new do
     get "/dashboard", to:"buyer_dashboard#new", as: :buyer_dashboard 
     get "/dashboard/edit/:partial", to:"buyer_dashboard#edit", as: :buyer_dashboard_edit
+    get "/dashboard/show/:id", to:"buyer_dashboard#show", as: :buyer_dashboard_details
     patch "/dashboard/edit", to:"buyer_dashboard#update", as: :dashbaord_update_buyer
   # end
 
@@ -35,12 +36,13 @@ Rails.application.routes.draw do
   namespace :admin do
       resource :dashboards, only:[:show] do
         # resources :cars, only:[:create, :show, :destroy, :update] do
-          resources :appointments, only:[:create, :index, :destroy, :update, :edit]
+          resources :appointments, only:[:create, :index, :destroy, :update, :edit, :show]
         # end
       end
-
+      get "/dashboards/appointments/display/:id", to:"appointments#display"
       get "dashboard/edit/:partial", to:"dashboards#edit", as: :dashboard_edit
-      patch "/appointment/approve/:id", to:"appointments#approve"
+      patch "/appointment/approve/:id", to:"appointments#approve", as: :approve
+      get "/appointment/buyers/:id", to:"appointments#buyers_list", as: :buyers_list
   end
 
   resources :cities

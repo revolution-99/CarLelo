@@ -52,6 +52,10 @@
     font-size: 1.2rem;
 }
 
+.car__details--bottom #get--btn{
+    display: none;
+}
+
 .car__details--bottom--content{
     display: flex;
     flex-direction: column;
@@ -240,6 +244,9 @@ footer{
 }
 .table--wrap{
     padding: 2rem 5rem 2rem 5rem;
+}
+.table--wrap a{
+    text-decoration: none;
 }
 .table--wrap--button{
     display: flex;

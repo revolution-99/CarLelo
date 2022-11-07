@@ -1,5 +1,7 @@
+# require 'pry'
 class HomeController < ApplicationController
   skip_before_action :require_login
+  before_action :authorized_only_to_users!, only:[:show]
   
   def index
     @brands = Brand.joins(:models).distinct
@@ -23,6 +25,7 @@ class HomeController < ApplicationController
     @brands = Brand.joins(:models).distinct
     @q = params[:search_query]
     @cars = Car.joins(:appointments).where('is_approved=true').distinct & Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant']) if @q
+    # binding.pry
   end
 
   private

@@ -26,6 +26,14 @@ module Admin
             @appointments = Appointment.all
         end
 
+        def show
+            @car = Car.find_by(id: params[:id])
+        end
+
+        def display
+            @user = User.find_by(id: params[:id])
+        end
+
         def destroy
             @appointment = Appointment.find_by(id: params[:id])
             @appointment.is_approved = false
@@ -50,6 +58,7 @@ module Admin
                 redirect_to admin_dashboards_appointments_path, alert: 'Appointment is already approved.'
             else
                 @appointment.is_approved = true
+                @appointment.status = 1
                 if @appointment.update(appointments_approval_params)
                     redirect_to admin_dashboards_appointments_path, notice: 'Appointment is approved.'
                 else
@@ -58,6 +67,10 @@ module Admin
             end
         end
 
+        def buyers_list
+            @appointments = Appointment.where(car_id: params[:id])
+        end
+        
         private
         def appointment_params
             params.require(:appointment).permit(:status, :appointment_date)

@@ -33,6 +33,10 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def authorized_only_to_users!
+        redirect_to root_path, alert: 'Please log in to see the details.' unless current_user
+    end
+
     def get_brand(model)
         Brand.find(model.brand_id)
     end
@@ -42,4 +46,7 @@ class ApplicationController < ActionController::Base
         obj.count
     end
     helper_method :count_models
+
+    # def restrict_status_change
+    # end
 end

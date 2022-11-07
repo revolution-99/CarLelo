@@ -6,18 +6,55 @@
       <%= form.label :reschedule_appointment_date%>
       <%= form.date_field :appointment_date, class: "form-control"%>
       <%= form.label :set_status%>
-      <%= form.select :status, ["Processing", "Investigating", "Sold"], {prompt: @appointment.status}, class: "form-select"%>
-      <div class="d-flex align-items-center justify-content-center mt-3">
-        <%= form.submit "Update", class: "btn btn-success" do %>
-          <i class="bi bi-caret-right-fill"></i>
+
+      <% if @appointment.user.is_seller%>
+        <% if @appointment.status == "Processing"%>
+          <%= form.select :status, ["Investigating", "Ready for Sell", "Sold"], {prompt: @appointment.status}, class: "form-select"%>
+        <%elsif @appointment.status == "Investigating"%>
+          <%= form.select :status, ["Ready for Sell", "Sold"], {prompt: @appointment.status}, class: "form-select"%>
+        <%elsif @appointment.status == "Ready for Sell"%>
+          <%= form.select :status, ["Sold"], {prompt: @appointment.status}, class: "form-select"%>
         <%end%>
+        <%elsif @appointment.user.is_buyer%>
+          <% if @appointment.status == "Processing" %>
+          <%= form.select :status, ["Investigating", "Sold", "Sell request cancelled"], {prompt: @appointment.status}, class: "form-select"%>
+        <%end%>
+      <%end%>
+      <div class="car__details--bottom">
+        <div class="car__details--bottom--buttons">
+          <div id="update--btn">
+            <%= form.submit "Update", class: "btn btn-success mt-3" do %>
+              <i class="bi bi-caret-right-fill"></i>
+            <%end%>
+          </div>
+        </div>
+          <div id="get--btn">
+            <%= link_to admin_buyers_list_path(@appointment.car_id), class: "btn btn-success mt-3" do %>
+              Select Buyer<i class="bi bi-caret-right-fill"></i>
+            <%end%>
+          </div>
+        </div>
       </div>
     <%end%>
   <div class="car__details--bottom">
     <div class="car__details--bottom--buttons">
-      <%= link_to admin_dashboards_appointments_path, class: "btn btn-info mt-3" do %>
+      <%= link_to admin_dashboards_appointments_path, class: "btn btn-info" do %>
           <i class="bi bi-caret-left-fill"></i>Back
       <%end%>
     </div>
   </div>
 </div>
+
+<script>
+  $('#appointment_status').change(function() {
+    var statusValue = document.getElementById('appointment_status').value
+    console.log(statusValue)
+    var updateButton = document.getElementById('update--btn')
+    var getButton = document.getElementById('get--btn')
+    console.log(updateButton)
+    if (statusValue == "Sold"){
+      updateButton.style.display = "none"
+      getButton.style.display = "flex"
+    }
+  })
+</script>

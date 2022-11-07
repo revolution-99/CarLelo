@@ -1,6 +1,6 @@
 <%= form_with model:@appointment, url:seller_dashboard_edit_path(partial: 1), local: false, method: :get do |form| %>
     <ul class="filter__appointment">
-        <li>Sort By:</li>
+        <li>Search By:</li>
         <li class="filter__appointment--section">
             <%= form.select(:status, ["Processing","Investigating","Sold"],{prompt: 'Select appointment status'}, {class: 'form-select' })%>
         </li>
@@ -18,6 +18,15 @@
 <div class="appointment--heading"> 
     <div class="col-2 text-sm-center text-md-start align-self-center"> 
         <h1 class="h5 fw-bold">Appointment ID</h1> 
+    </div> 
+    <div class="col-1 text-sm-center text-md-start align-self-center"> 
+        <h1 class="h5 fw-bold">Car ID</h1> 
+    </div> 
+    <div class="col-2 text-sm-center text-md-start align-self-center"> 
+        <h1 class="h5 fw-bold">Brand</h1> 
+    </div> 
+    <div class="col-2 text-sm-center text-md-start align-self-center"> 
+        <h1 class="h5 fw-bold">Model</h1> 
     </div> 
     <div class="col-2 align-self-center"> 
         <h1 class="h5 fw-bold">Booked on</h1> 
@@ -38,17 +47,28 @@
     <% @appointments.each do |app| %>
         <div class="appointment--list__details"> 
             <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
-                        <h1 class="h6"><%= app.id%></h1> 
-                    </div> 
+                <h1 class="h6"><%= app.id%></h1> 
+            </div> 
+            <div class="col-md-1 text-sm-center text-md-start align-self-center my-2"> 
+                <h1 class="h6">
+                    <%= link_to app.car_id, buyer_dashboard_details_path(app.car_id)%>
+                </h1> 
+            </div> 
             <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
-                        <h1 class="h6"><%= app.created_at%></h1>
-                    </div> 
-            <div class="col-md-3 text-sm-center text-md-strt align-self-center my-2"> 
-                        <h1 class="h6"><%= app.appointment_date%></h1>
-                    </div> 
+                <h1 class="h6"><%= app.car.brand%></h1> 
+            </div> 
             <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
-                        <h1 class="h6"><%= app.status %></h1>
-                    </div> 
+                <h1 class="h6"><%= app.car.model%></h1> 
+            </div> 
+            <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
+                <h1 class="h6"><%= app.created_at%></h1>
+            </div> 
+            <div class="col-md-2 text-sm-center text-md-strt align-self-center my-2"> 
+                <h1 class="h6"><%= app.appointment_date%></h1>
+            </div> 
+            <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
+                <h1 class="h6"><%= app.status %></h1>
+            </div> 
         </div>
     <%end%>
 <%end%>

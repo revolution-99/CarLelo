@@ -76,3 +76,5 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end
+
+gem 'pry', '~> 0.13.1'
