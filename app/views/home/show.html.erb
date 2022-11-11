@@ -47,10 +47,10 @@
     </table>
     <%if current_user.is_buyer == true%>
         <div class="car__details--bottom">
-                <%if @appointment.status == 'Sold'%>
+                <%if @apps && @flag == true%>
                     <div class="car__details--bottom--content">
                         <span>
-                            Sorry this car is sold. You can check other cars. We have a variety of collection of used cars
+                            You have already booked an appointment for this car.
                         </span>
                         <div class="car__details--bottom--buttons">
                             <%= link_to root_path, class: "btn btn-info" do %>

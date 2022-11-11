@@ -1,3 +1,4 @@
+# require 'pry'
 module Admin
     class AppointmentsController < ApplicationController
         before_action :authorized_only_to_admin!
@@ -45,10 +46,10 @@ module Admin
             # @car = Car.find_by(id: params[:car_id])
             @appointment = Appointment.find_by(id: params[:id])
             # @appointment.car_id = @car.id
-            if @appointment.update!(appointment_params)
+            if @appointment.update(appointment_params)
                 redirect_to admin_dashboards_appointments_path, notice: 'Your changes are upadted successully'
             else
-                redirect_to admin_dashboards_path, alert: 'Failed to update the appointment record'
+                render :edit
             end
         end
 
@@ -71,6 +72,22 @@ module Admin
             @appointments = Appointment.where(car_id: params[:id])
         end
         
+        def sold_update
+            @appointment = Appointment.find_by(id: params[:id])
+            @appointments = Appointment.where(car_id: @appointment.car_id).where.not(id: params[:id])
+            @seller_appointment = Appointment.where(car_id: @appointment.car_id).joins(:user).where('is_seller=true')[0]
+            # binding.pry
+            @appointments.each do|app|
+                app.status = 5
+                app.update(appointments_status_params)
+            end
+            @appointment.status = 4
+            @seller_appointment.status = 4
+            @appointment.update(appointments_status_params)
+            @seller_appointment.update(appointments_status_params)
+            redirect_to admin_dashboards_appointments_path, notice: 'Your changes are upadted successully'
+        end
+
         private
         def appointment_params
             params.require(:appointment).permit(:status, :appointment_date)
@@ -78,6 +95,10 @@ module Admin
 
         def appointments_approval_params
             params.permit(:is_approved)
+        end
+
+        def appointments_status_params
+            params.permit(:status)
         end
     end
 end

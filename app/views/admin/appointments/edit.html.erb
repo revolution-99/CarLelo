@@ -5,21 +5,23 @@
       <%= render partial: "shared/error_messages", locals: { var: @appointment } %>
       <%= form.label :reschedule_appointment_date%>
       <%= form.date_field :appointment_date, class: "form-control"%>
-      <%= form.label :set_status%>
+      <%= form.label :status%>
 
       <% if @appointment.user.is_seller%>
-        <% if @appointment.status == "Processing"%>
-          <%= form.select :status, ["Investigating", "Ready for Sell", "Sold"], {prompt: @appointment.status}, class: "form-select"%>
-        <%elsif @appointment.status == "Investigating"%>
-          <%= form.select :status, ["Ready for Sell", "Sold"], {prompt: @appointment.status}, class: "form-select"%>
-        <%elsif @appointment.status == "Ready for Sell"%>
+        <% if @appointment.status_before_type_cast == 1%>
+            <%= form.select :status, Appointment.statuses.keys[1..4].map{ |key| [key.humanize, key] }, {prompt: @appointment.status}, class: "form-select"%>
+        <%elsif @appointment.status_before_type_cast == 2%>
+            <%= form.select :status, Appointment.statuses.keys[3..4].map{ |key| [key.humanize, key] }, {prompt: @appointment.status}, class: "form-select"%>
+        <%elsif @appointment.status_before_type_cast == 3%>
           <%= form.select :status, ["Sold"], {prompt: @appointment.status}, class: "form-select"%>
         <%end%>
         <%elsif @appointment.user.is_buyer%>
-          <% if @appointment.status == "Processing" %>
-          <%= form.select :status, ["Investigating", "Sold", "Sell request cancelled"], {prompt: @appointment.status}, class: "form-select"%>
+          <% if @appointment.status_before_type_cast == 1 %>
+            <%= form.select :status, Appointment.statuses.keys[2...3].map{ |key| [key.humanize, key] }, {prompt: @appointment.status}, class: "form-select"%>
+          <% elsif @appointment.status_before_type_cast == 2 %>
+            <%= form.label :can_be_updated_from_seller_status_for_the_same_car %>
+          <%end%>
         <%end%>
-      <%end%>
       <div class="car__details--bottom">
         <div class="car__details--bottom--buttons">
           <div id="update--btn">
@@ -45,16 +47,4 @@
   </div>
 </div>
 
-<script>
-  $('#appointment_status').change(function() {
-    var statusValue = document.getElementById('appointment_status').value
-    console.log(statusValue)
-    var updateButton = document.getElementById('update--btn')
-    var getButton = document.getElementById('get--btn')
-    console.log(updateButton)
-    if (statusValue == "Sold"){
-      updateButton.style.display = "none"
-      getButton.style.display = "flex"
-    }
-  })
-</script>
+<%= javascript_pack_tag 'form_status' %>

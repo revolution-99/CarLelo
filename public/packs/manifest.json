@@ -3,6 +3,7 @@
     "map.js": "/packs/js/map.js",
     "form_car.js": "/packs/js/form_car.js",
     "form_filter.js": "/packs/js/form_filter.js",
+    "form_status.js": "/packs/js/form_status.js",
     "application.js.map": "/packs/js/application-e421b4aa3f716bebdab1.js.map",
     "entrypoints": {
       "application": {

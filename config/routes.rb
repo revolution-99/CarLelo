@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       get "/dashboards/appointments/display/:id", to:"appointments#display"
       get "dashboard/edit/:partial", to:"dashboards#edit", as: :dashboard_edit
       patch "/appointment/approve/:id", to:"appointments#approve", as: :approve
+      patch "/dashboards/appointments/buyers/:id", to:"appointments#sold_update", as: :sold_update
       get "/appointment/buyers/:id", to:"appointments#buyers_list", as: :buyers_list
   end
 

@@ -7,20 +7,29 @@
         <thead>
             <tr class="table-dark">
                 <th scope="col">ID</th>
+                <th scope="col">User ID</th>
+                <th scope="col">Status</th>
                 <th scope="col">Email</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
-                <th scope="col">Actions</th>
+                <th scope="col-2">Actions</th>
             </tr>
         </thead>
         <% @appointments.each do |app| %>
             <tbody>
                 <tr>
                     <%if app.user.is_buyer%> 
+                        <td> <%=app.id%> </td>
                         <td> <%=app.user.id%> </td>
+                        <td> <%=app.status%> </td>
                         <td> <%=app.user.email%> </td>
                         <td> <%=app.user.first_name%> </td>
                         <td> <%=app.user.last_name%> </td>
+                        <td scope="col-2">
+                            <%= link_to admin_sold_update_path(app.id), method: :patch, class: "btn btn-success mt-3" do %>
+                                Sell<i class="bi bi-caret-right-fill"></i>
+                            <%end%>
+                        </td>
                     <%end%>
                 </tr>
             </tbody>

@@ -59,6 +59,7 @@
 .car__details--bottom--content{
     display: flex;
     flex-direction: column;
+    align-items: center
 }
 .car__details--bottom--content span{
     margin-bottom: 1.5rem;

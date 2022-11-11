@@ -1,16 +1,22 @@
-# require 'pry'
 class HomeController < ApplicationController
   skip_before_action :require_login
   before_action :authorized_only_to_users!, only:[:show]
   
   def index
     @brands = Brand.joins(:models).distinct
-    @cars = Car.joins(:appointments).where('is_approved=true').distinct
+    @cars = Car.joins(:appointments).where('is_approved=true AND status=3').distinct
   end
 
   def show
     @car = Car.find_by(id: params[:id])
     @appointment = Appointment.find_by(car_id: @car.id)
+    @apps = Appointment.where(car_id: @car.id).joins(:user).where('is_buyer=true')
+    @flag = false
+    @apps.each do |app|
+      if app.user_id == current_user.id
+        @flag = true
+      end
+    end 
   end
 
   def filter
