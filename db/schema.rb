@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_25_193830) do
+ActiveRecord::Schema.define(version: 2022_11_12_043133) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,18 +58,17 @@ ActiveRecord::Schema.define(version: 2022_10_25_193830) do
 
   create_table "conditions", force: :cascade do |t|
     t.string "condition", null: false
-    t.string "cost", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "price_start"
+    t.integer "price_end"
     t.index ["condition"], name: "index_conditions_on_condition", unique: true
-    t.index ["cost"], name: "index_conditions_on_cost", unique: true
   end
 
   create_table "kilometers", force: :cascade do |t|
-    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_kilometers_on_name", unique: true
+    t.string "name"
   end
 
   create_table "maps", force: :cascade do |t|
@@ -134,10 +133,9 @@ ActiveRecord::Schema.define(version: 2022_10_25_193830) do
   end
 
   create_table "years", force: :cascade do |t|
-    t.integer "begin", null: false
-    t.integer "end", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "name"
   end
 
 end

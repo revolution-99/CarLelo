@@ -5,49 +5,36 @@
     <h2 class="mb-3"> Showing results for search "<%= @q %>" </h2>
     <div class="car--card">
       <% @cars.each do |car| %>
-        <a href="/appointment">
-          <div class="card" style="width: 18rem;">
-            <%= image_tag "carrr.jpg", class:"card-img-top"%>
-              <div class="card-body">
-                  <h5 class="card-title">
-                      <%= car.year %>
+            <% @conditions.each do |cond| %>
+                <%= link_to car_details_path(car.id) do %>
+                    <div class="card" style="width: 18rem;">
+                        <%= image_tag "carrr.jpg", class:"card-img-top"%>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= car.year %>
 
-                      <%= car.brand%>
+                                <%= car.brand%>
 
-                      <%= car.model%>
-
-                      <%= car.id%>
-                  </h5>
-              </div>
-                <ul class="card--body--custom">
-                    <li><%= car.state%></li>
-                    <li><%= car.city%></li>
-                </ul>
-                <ul class="card--body--custom">
-                    <li><%= car.km%></li>
-                    <li><%= car.variant%></li>
-                </ul>
-                <ul class="list-group list-group-flush">
-                  <% if car.condition == 'Fair'%>
-                        <li class="list-group-item">
-                        ₹ 1,00,000 - ₹ 2,00,000
-                        </li>
-                    <% elsif car.condition == 'Good'%>
-                        <li class="list-group-item">
-                        ₹ 2,00,000 - ₹ 5,00,000
-                        </li>
-                    <% elsif car.condition == 'Very_Good'%>
-                        <li class="list-group-item">
-                        ₹ 5,00,000 - ₹ 10,00,000
-                        </li>
-                    <% elsif car.condition == 'Excellent'%>
-                        <li class="list-group-item">
-                        Above ₹ 10,00,000
-                        </li>
-                    <%end%>
-                </ul>
-            </div>
-        </a>
+                                <%= car.model%>
+                            </h5>
+                            </h5>
+                        </div>
+                        <ul class="card--body--custom">
+                            <li><%= car.state%></li>
+                            <li><%= car.city%></li>
+                        </ul>
+                        <ul class="card--body--custom">
+                            <li><%= car.km%></li>
+                            <li><%= car.variant%></li>
+                        </ul>
+                        <ul class="card--body--custom">
+                            <li class="list-group-item">
+                                ₹<%= cond.price_start%> - ₹<%= cond.price_end%>
+                            </li>
+                        </ul>
+                    </div>
+                <%end%>
+            <%end%>
       <% end %>
   </div>
 </div>

@@ -38,5 +38,3 @@ User.create_or_find_by!(
     confirm_token: nil,
     mobile_no: 9114890123
 )
-
-Year.create(begin: 2000, end: 2022)

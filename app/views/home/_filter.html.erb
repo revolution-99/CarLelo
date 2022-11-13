@@ -4,7 +4,7 @@
                  <%= form.collection_select :city, City.all, :name, :name, { prompt: "City" }, { class: "form-select" } %>
             </li>
             <li class="filter--section">
-                <%= form.select :year, ((Year.last.begin)..(Year.last.end)), { prompt: "Year" }, { class: "form-select" } %>
+                <%= form.collection_select :year, Year.all, :name, :name, { prompt: "Registration Year" }, { class: "form-select" } %>
             </li>
             <li class="filter--section">
                 <%= form.collection_select :km, Kilometer.all, :name, :name, { prompt: "Kilometer Range" }, { class: "form-select" } %>

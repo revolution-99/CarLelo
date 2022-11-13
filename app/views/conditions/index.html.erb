@@ -8,7 +8,8 @@
         <tr class="table-dark">
           <th scope="col">ID</th>
           <th scope="col">Condition</th>
-          <th scope="col">Cost</th>
+          <th scope="col">Starting Price</th>
+          <th scope="col">Ending Price</th>
           <th scope="col" colspan="2">Actions</th>
         </tr>
       </thead>
@@ -17,7 +18,8 @@
           <tr>
             <td><%= condition.id %></td>
             <td><%= condition.condition %></td>
-            <td><%= condition.cost %></td>
+            <td><%= condition.price_start %></td>
+            <td><%= condition.price_end %></td>
             <td><%= link_to "Edit", edit_condition_path(condition.id), class: "btn btn-primary" %></td>
             <td><%= link_to "Destroy", condition_path(condition.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td>
           </tr>

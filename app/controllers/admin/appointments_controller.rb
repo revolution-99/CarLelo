@@ -1,4 +1,3 @@
-# require 'pry'
 module Admin
     class AppointmentsController < ApplicationController
         before_action :authorized_only_to_admin!
@@ -29,6 +28,7 @@ module Admin
 
         def show
             @car = Car.find_by(id: params[:id])
+            # @condition = Condition.where(condition: @car.condition).joins("INNER JOIN cars ON cars.condition = conditions.condition").first
         end
 
         def display

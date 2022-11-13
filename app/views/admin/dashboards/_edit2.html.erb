@@ -20,10 +20,14 @@
           <%= form.label :model %>         
           <%= form.grouped_collection_select :model, @brands, :models, :name, :name, :name, { prompt: "Select" }, { class: "form-select" } %>
         </div>
-      <div class="mx-3">
+      <%
+=begin%>
+ <div class="mx-3">
           <%= form.label :Registration_Year%>
           <%= form.select :year, ((Year.last.begin)..(Year.last.end)), { prompt: "Select" }, { class: "form-select" } %>
-      </div>
+      </div> 
+<%
+=end%>
       <div class="mx-3">
           <%= form.label :Variant%>
           <%= form.collection_select :variant, Variant.all, :name, :name, { prompt: "Select" }, { class: "form-select" } %>

@@ -31,15 +31,7 @@
             <td scope="col"><%=@car.state%></td>
             <td scope="col"><%=@car.km%></td>
             <td scope="col">
-                <% if @car.condition == 'Fair'%>
-                    ₹ 1,00,000 - ₹ 2,00,000
-                <% elsif @car.condition == 'Good'%>
-                    ₹ 2,00,000 - ₹ 5,00,000
-                <% elsif @car.condition == 'Very_Good'%>
-                    ₹ 5,00,000 - ₹ 10,00,000
-                <% elsif @car.condition == 'Excellent'%>
-                    Above ₹ 10,00,000
-                <%end%>
+                ₹<%= current_condition.price_start%> - ₹<%= current_condition.price_end%>
             </th>
             <td scope="col"><%if current_user.is_seller%><%= @appointment.status %><%end%></td>
             </tr>

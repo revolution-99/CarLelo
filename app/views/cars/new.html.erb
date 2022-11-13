@@ -30,7 +30,7 @@
         </div>
       <div class="mx-3">
           <%= form.label :Registration_Year%>
-          <%= form.select :year, ((Year.last.begin)..(Year.last.end)), { prompt: "Select" }, { class: "form-select" } %>
+          <%= form.collection_select :year, Year.all, :name, :name, { prompt: "Select" }, {class: "form-select" } %>
       </div>
       <div class="mx-3">
           <%= form.label :Variant%>

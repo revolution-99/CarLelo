@@ -16,12 +16,8 @@
                 <span>
                     Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is now approved. Car's estimated price is:
                     <b>
-                        <% if notification.car.condition == "Fair"%> ₹ 1,26,532 - ₹ 1,37,697
-                        <%elsif notification.car.condition == "Good"%> ₹1,35,464 - ₹ 1,60,026
-                        <%elsif notification.car.condition == "Very Good"%> ₹ 1,57,793 - ₹ 1,68,958
-                        <%elsif notification.car.condition == "Excellent"%> ₹ 1,66,725 - ₹ 1,71,191
+                        ₹<%= current_condition.price_start%> - ₹<%= current_condition.price_end%>
                     </b>
-                    <%end%>
                 </span>
                 <hr>
             </li>

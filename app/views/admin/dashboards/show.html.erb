@@ -1,14 +1,6 @@
 <div class="d-flex flex-column align-items-center justify-content-center">
     <h1> Welcome to the Admin dashboard </h1>
 </div>
-<%
-=begin%>
- <div class="dashboard">
-  <%= render partial:"sidebar" %>
-  <div id = "partial_content"></div>
-</div> 
-<%
-=end%>
 
 <div class="admin__home--row">
 
@@ -73,7 +65,7 @@
   <div class="col-md-4 col-xl-3">
     <div class="card bg-c-pink order-card">
         <div class="card-block">
-          <h4 class="m-b-20">Manage Car Year Ranges</h4>
+          <h4 class="m-b-20">Manage Registration Year</h4>
           <h2 class="admin__home--row--text">
             <i class="fa fa-clock-o" aria-hidden="true"></i>
             <span><%= count_models(Year)%></span>
