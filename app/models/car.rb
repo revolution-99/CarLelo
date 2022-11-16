@@ -1,5 +1,5 @@
 class Car < ApplicationRecord
-    searchkick
+    searchkick word_middle: [:city, :year, :km, :brand, :model, :state, :variant]	
     Car.reindex
     # include Elasticsearch::Model
     # include Elasticsearch::Model::Callbacks

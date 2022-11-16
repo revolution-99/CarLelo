@@ -7,14 +7,14 @@ module Admin
             # @car.user_id = current_user.id
             if @car.save
                 session[:car_id] = @car.id
-                redirect_to admin_dashboards_car_appointments_path(@car.id), notice: 'Schedule the appointment to create the car record.'
+                redirect_to dashboard_car_appointments_path(@car.id), notice: 'Schedule the appointment to create the car record.'
             end
         end
 
         def destroy
             @car = Car.find_by(id: params[:id])
             @car.destroy
-            redirect_to admin_dashboards_path, notice: 'Car record is destroyed successfully'
+            redirect_to dashboard_path, notice: 'Car record is destroyed successfully'
         end
 
         def show
@@ -26,7 +26,7 @@ module Admin
             @brands = Brand.joins(:models).distinct
             @current_car = Car.find_by(id: params[:id])
             if @current_car.update(car_params)
-                redirect_to admin_dashboards_path, notice: 'Your changes are upadted successully'
+                redirect_to dashboard_path, notice: 'Your changes are upadted successully'
             else
                 render :show
             end

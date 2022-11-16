@@ -8,17 +8,17 @@ module Admin
             @appointment.car_id = current_car.id
             if @appointment.save
                 session[:appointment_id] = @appointment_id
-                redirect_to admin_dashboards_path, notice: 'One appointment record is created successfully.'
+                redirect_to dashboard_path, notice: 'One appointment record is created successfully.'
             end
         end
 
         def edit
             @appointment = Appointment.find_by(id: params[:id])
             unless @appointment.is_approved
-                redirect_to admin_dashboards_appointments_path, alert: 'Please approve the appointment to edit it.'
+                redirect_to dashboard_appointments_path, alert: 'Please approve the appointment to edit it.'
             end
             if @appointment.status == 'Sold'
-                redirect_to admin_dashboards_appointments_path, alert: 'Car is already sold.'
+                redirect_to dashboard_appointments_path, alert: 'Car is already sold.'
             end
         end
 
@@ -39,7 +39,7 @@ module Admin
             @appointment = Appointment.find_by(id: params[:id])
             @appointment.is_approved = false
             @appointment.destroy
-            redirect_to admin_dashboards_path, notice: 'Appointment record is destroyed successfully'
+            redirect_to dashboard_path, notice: 'Appointment record is destroyed successfully'
         end
 
         def update
@@ -47,7 +47,7 @@ module Admin
             @appointment = Appointment.find_by(id: params[:id])
             # @appointment.car_id = @car.id
             if @appointment.update(appointment_params)
-                redirect_to admin_dashboards_appointments_path, notice: 'Your changes are upadted successully'
+                redirect_to dashboard_appointments_path, notice: 'Your changes are upadted successully'
             else
                 render :edit
             end
@@ -56,14 +56,14 @@ module Admin
         def approve
             @appointment = Appointment.find(params[:id])
             if @appointment.is_approved == true
-                redirect_to admin_dashboards_appointments_path, alert: 'Appointment is already approved.'
+                redirect_to dashboard_appointments_path, alert: 'Appointment is already approved.'
             else
                 @appointment.is_approved = true
                 @appointment.status = 1
                 if @appointment.update(appointments_approval_params)
-                    redirect_to admin_dashboards_appointments_path, notice: 'Appointment is approved.'
+                    redirect_to dashboard_appointments_path, notice: 'Appointment is approved.'
                 else
-                    redirect_to admin_dashboards_path, alert: 'Failed to approve the appointment'
+                    redirect_to dashboard_path, alert: 'Failed to approve the appointment'
                 end
             end
         end
@@ -85,7 +85,7 @@ module Admin
             @seller_appointment.status = 4
             @appointment.update(appointments_status_params)
             @seller_appointment.update(appointments_status_params)
-            redirect_to admin_dashboards_appointments_path, notice: 'Your changes are upadted successully'
+            redirect_to dashboard_appointments_path, notice: 'Your changes are upadted successully'
         end
 
         private

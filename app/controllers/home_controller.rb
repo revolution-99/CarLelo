@@ -32,7 +32,7 @@ class HomeController < ApplicationController
   def search
     @brands = Brand.joins(:models).distinct
     @q = params[:search_query]
-    @cars = Car.joins(:appointments).where('is_approved=true').distinct & Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant']) if @q
+    @cars = Car.joins(:appointments).where('is_approved=true').distinct & Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant'], match: :word_middle) if @q
     @conditions = Condition.joins("INNER JOIN cars ON cars.condition = conditions.condition")
     # binding.pry
   end

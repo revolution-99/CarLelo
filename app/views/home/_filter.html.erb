@@ -1,28 +1,25 @@
 <%= form_with model:@car, url:home_filtered_path, method: :get do |form| %>
         <ul class="filter">
             <li class="filter--section">
-                 <%= form.collection_select :city, City.all, :name, :name, { prompt: "City" }, { class: "form-select" } %>
+                <%= form.collection_select :city, City.all, :name, :name, {prompt: "City", selected: params[:city]}, { class: "form-select", onchange: "this.form.submit()"} %>
             </li>
             <li class="filter--section">
-                <%= form.collection_select :year, Year.all, :name, :name, { prompt: "Registration Year" }, { class: "form-select" } %>
+                <%= form.collection_select :year, Year.all, :name, :name, {prompt: "Year", selected: params[:year]}, { class: "form-select", onchange: "this.form.submit()"} %>
             </li>
             <li class="filter--section">
-                <%= form.collection_select :km, Kilometer.all, :name, :name, { prompt: "Kilometer Range" }, { class: "form-select" } %>
+                <%= form.collection_select :km, Kilometer.all, :name, :name, { prompt: "Kilometer Range", selected: params[:km] }, { class: "form-select", onchange: "this.form.submit()"} %>
             </li>
             <li class="filter--section">
-                <%= form.collection_select :brand, @brands, :name, :name, { prompt: "Brand" }, { class: "form-select" } %>
+                <%= form.collection_select :brand, @brands, :name, :name, { prompt: "Brand", selected: params[:brand] }, { class: "form-select", onchange: "this.form.submit()"} %>
             </li>
             <li class="filter--section">
-                <%= form.grouped_collection_select :model, @brands, :models, :name, :name, :name, { prompt: "Model" }, { class: "form-select" } %>
+                <%= form.grouped_collection_select :model, @brands, :models, :name, :name, :name, { prompt: "Model", selected: params[:model] }, { class: "form-select", onchange: "this.form.submit()"} %>
             </li>
             <li class="filter--section">
-                <%= form.collection_select :state, State.all, :name, :name, { prompt: "State" }, { class: "form-select" } %>
+                <%= form.collection_select :state, State.all, :name, :name, { prompt: "State", selected: params[:state]}, { class: "form-select", onchange: "this.form.submit()"} %>
             </li>
             <li class="filter--section">
-                <%= form.collection_select :variant, Variant.all, :name, :name, { prompt: "Variant" }, { class: "form-select" } %>
-            </li>
-            <li class="filter--section">
-                 <%= form.submit "Show Cars", class:"btn btn-primary"%>
+                <%= form.collection_select :variant, Variant.all, :name, :name, { prompt: "Variant", selected: params[:variant] }, { class: "form-select", onchange: "this.form.submit()"} %>
             </li>
         </ul>
 <%end%>

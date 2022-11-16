@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-items-center justify-content-center mb-2">
   <h1>Edit Appointment</h1>
   <div class="d-flex flex-column align-items-center justify-content-center mb-4">
-    <%= form_for @appointment, url:admin_dashboards_appointment_path do |form| %>
+    <%= form_for @appointment, url:dashboard_appointment_path do |form| %>
       <%= render partial: "shared/error_messages", locals: { var: @appointment } %>
       <%= form.label :reschedule_appointment_date%>
       <%= form.date_field :appointment_date, class: "form-control"%>
@@ -31,7 +31,7 @@
           </div>
         </div>
           <div id="get--btn">
-            <%= link_to admin_buyers_list_path(@appointment.car_id), class: "btn btn-success mt-3" do %>
+            <%= link_to buyers_list_path(@appointment.car_id), class: "btn btn-success mt-3" do %>
               Select Buyer<i class="bi bi-caret-right-fill"></i>
             <%end%>
           </div>
@@ -40,7 +40,7 @@
     <%end%>
   <div class="car__details--bottom">
     <div class="car__details--bottom--buttons">
-      <%= link_to admin_dashboards_appointments_path, class: "btn btn-info" do %>
+      <%= link_to dashboard_appointments_path, class: "btn btn-info" do %>
           <i class="bi bi-caret-left-fill"></i>Back
       <%end%>
     </div>

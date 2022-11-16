@@ -7,10 +7,6 @@ class BuyerDashboardController < ApplicationController
     def show
         @car = Car.find_by(id: params[:id])
         @partial_to_render = params[:partial]
-        # respond_to do |format|
-        #     # format.html{}
-        #     format.js
-        # end
     end
 
     def edit

@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-items-center justify-content-center mb-3">
     <h1> EDIT CAR DETAILS </h1>
 </div>
-<%= form_for @current_car, url:admin_dashboards_car_path do |form| %>
+<%= form_for @current_car, url:dashboard_car_path do |form| %>
     <%if @current_car.errors.any?%>
         <div class="alert alert-danger">
             <% @current_car.errors.full_messages.each do |message|%>
@@ -62,8 +62,8 @@
     </div>
 <% end %>
 <div class="table--wrap--button">
-    <%= button_to "Back", admin_dashboards_path, class: "btn btn-info", method: :get %>
-    <%= button_to "Delete", admin_dashboards_car_path(@current_car.id), class: "btn btn-danger", method: :delete%>
+    <%= button_to "Back", dashboard_path, class: "btn btn-info", method: :get %>
+    <%= button_to "Delete", dashboard_car_path(@current_car.id), class: "btn btn-danger", method: :delete%>
 </div>
 
 <%= javascript_pack_tag 'form_select' %>
