@@ -1,6 +1,7 @@
 <% unless @appointments == [] %>
   <div class="d-flex flex-column align-items-center justify-content-center mb-2">
     <h1>List of Appointments </h1>
+    <%= render partial: "filter"%>
   </div>
   <div class="table--wrap">
     <table class="table table-striped">
@@ -8,15 +9,29 @@
         <tr class="table-dark">
           <th scope="col">ID</th>
           <th scope="col">Car ID</th>
-          <th scope="col">User Role</th>
-          <th scope="col">User Name</th>
-          <th scope="col">Car Brand</th>
-          <th scope="col">Car Model</th>
-          <th scope="col">Date Created</th>
-          <th scope="col">Appointment Date</th>
-          <th scope="col">Status</th>
+          <th scope="col">
+            <%= sortable 'User Role', 'is_seller', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'User Name', 'first_name', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'Car Brand', 'brand', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'Car Model', 'model', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'Date Created', 'created_at', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'Appointment Date', 'appointment_date', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'Status', 'status', 'asc' %>
+          </th>
           <th scope="col">Approval</th>
-          <th scope="col" colspan="3">Actions</th>
+          <th scope="col" colspan="4">Actions</th>
         </tr>
       </thead>
       <tbody class="text-center">  
@@ -43,27 +58,29 @@
             <td><%= app.status %></td>
             <td>
                 <%if app.is_approved %>
-                    Yes
+                    Approved
+                <%elsif app.status == "Rejected"%>
+                    Rejected
                 <%else%>
-                    No
+                    Pending
                 <%end%>
             </td>
             <td>
-              <% if app.status == "Sold"%>
-                  <%= link_to "Edit", edit_dashboard_appointment_path(app.id), class: "btn btn-secondary" %>
-              <% else%>
-                <%= link_to "Edit", edit_dashboard_appointment_path(app.id), class: "btn btn-primary" %>
+              <% unless app.status_before_type_cast == 4 || app.status_before_type_cast == 6%>
+                <%= link_to "Edit", edit_dashboard_appointment_path(app.id), class: "btn btn-outline-primary" %>
               <%end%>
             </td>
-            <td>
-              <% if app.is_approved%>
-                <%= link_to "Approve", approve_path(app.id), method: :patch, remote: true, class: "btn btn-secondary" %>
-              <% else %>
-                <%= link_to "Approve", approve_path(app.id), method: :patch, remote: true, class: "btn btn-success" %>
+            <% unless app.is_approved || app.status_before_type_cast == 6%>
+              <td>
+                  <%= link_to "Approve", approve_path(app.id), method: :patch, remote: true, data: { confirm: "Are you sure? Once the appointment is approved it can't be reverted." }, class: "btn btn-outline-success" %>
+              </td>
+              <td>
+                <%= link_to "Reject", reject_path(app.id), method: :patch, data: { confirm: "Are you sure? Once the appointment is rejected it can't be reverted." }, class: "btn btn-outline-warning" %>
+              </td>
               <%end%>
+              <td>
+              <%= link_to "Destroy", dashboard_appointment_path(app.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
             </td>
-            <td><%= link_to "Reject", dashboard_appointment_path(app.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td> 
-
           </tr>
         <% end %>
       </tbody>
@@ -75,8 +92,8 @@
     <p>Add new Appointments by clicking the below button, then it will show up in the list</p>
   </div>
 <% end %>
-<div class="car__details--bottom">
-  <div class="car__details--bottom--buttons">
+<div class="button__details--bottom">
+  <div class="button__details--bottom--buttons">
     <%= link_to dashboard_path, class: "btn btn-info" do %>
         <i class="bi bi-caret-left-fill"></i>Back to Home
     <%end%>

@@ -1,4 +1,5 @@
 class Car < ApplicationRecord
+    # include Filterable
     searchkick word_middle: [:city, :year, :km, :brand, :model, :state, :variant]	
     Car.reindex
     # include Elasticsearch::Model

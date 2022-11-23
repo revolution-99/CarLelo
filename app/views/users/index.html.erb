@@ -1,0 +1,59 @@
+<div class="d-flex flex-column align-items-center justify-content-center mb-2">
+    <h1> List Of Users </h1>
+</div>
+
+<div class="table--wrap">
+    <table class="table table-striped">
+        <thead>
+            <tr class="table-dark">
+                <th scope="col">ID</th>
+                <th scope="col">Email</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Mobile No.</th>
+                <th scope="col">Role</th>
+                <th scope="col">Email confirmation</th>
+                <th scope="col" colspan="3">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @users.each do |user| %>
+            <tr>
+                <td> <%=user.id%> </td>
+                <td> <%=user.email%> </td>
+                <td> <%=user.first_name%> </td>
+                <td> <%=user.last_name%> </td>
+                <td> <%=user.mobile_no%> </td>
+                <td>
+                <% if user.is_seller %>
+                    Seller
+                <% elsif user.is_buyer %>
+                    Buyer
+                <% elsif user.is_admin %>
+                    Admin
+                <% end %>
+                </td>
+                <td>
+                    <%= user.email_confirmed %>
+                </td>
+                <td>
+                    <% if user.is_admin %>
+                        Already an Admin
+                    <% else %>
+                        <%= link_to "Make Admin", admin_upgradation_path(user.id), method: :patch, data: { confirm: "Are you sure? Once the user became admin, the permission can't be reverted." }, class:"btn btn-outline-primary"%>
+                    <% end %>
+                </td>
+                <td>
+                    <%= link_to "Destroy", user_path(user.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-outline-danger" %>
+                </td>
+            <% end %>
+        </tbody>
+    </table>
+    <div class="button__details--bottom">
+        <div class="button__details--bottom--buttons">
+            <%= link_to dashboard_path, class: "btn btn-info" do %>
+                <i class="bi bi-caret-left-fill"></i>Back to Home
+            <%end%>
+        </div>
+    </div>
+</div>

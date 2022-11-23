@@ -38,13 +38,13 @@
         </tbody>
     </table>
     <%if current_user.is_buyer == true%>
-        <div class="car__details--bottom">
+        <div class="button__details--bottom">
                 <%if @apps && @flag == true%>
-                    <div class="car__details--bottom--content">
+                    <div class="button__details--bottom--content">
                         <span>
                             You have already booked an appointment for this car.
                         </span>
-                        <div class="car__details--bottom--buttons">
+                        <div class="button__details--bottom--buttons">
                             <%= link_to root_path, class: "btn btn-info" do %>
                                 <i class="bi bi-caret-left-fill"></i>Back to Home
                             <%end%>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                 <%else%>
-                    <div class="car__details--bottom--buttons">
+                    <div class="button__details--bottom--buttons">
                         <%= link_to root_path, class: "btn btn-info" do %>
                             <i class="bi bi-caret-left-fill"></i>Back to Home
                         <%end%>
@@ -66,8 +66,8 @@
             </div>
         </div>
     <%elsif current_user.is_seller == true%>
-    <div class="car__details--bottom">
-        <div class="car__details--bottom--buttons">
+    <div class="button__details--bottom">
+        <div class="button__details--bottom--buttons">
             <%= link_to root_path, class: "btn btn-info" do %>
                 <i class="bi bi-caret-left-fill"></i>Back to Home
             <%end%>

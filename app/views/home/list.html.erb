@@ -1,0 +1,60 @@
+<%
+=begin%>
+ <%= turbo_frame_tag "players", class: "shadow overflow-hidden rounded border-b border-gray-200" do %> 
+<%
+=end%>
+  <div class="flex justify-end mb-1">
+    <%= form_with url: list_cars_path, method: :get do |form| %>
+      <%= form.search_field :search_query, class:"search--bar", value: params[:search_query], class: "border border-blue-500 rounded p-2" %>
+      <%= form.button "Search", class: "bg-blue-500 text-white p-2 rounded-sm" %>
+    <% end %>
+  </div>
+  <!-- Snip the table -->
+    <%= render partial: "filter" %>
+
+    <div class="car--card">
+      <% @cars.each do |car| %>
+            <%
+=begin%>
+ <% @conditions.each do |cond| %> 
+<%
+=end%>
+                <%= link_to car_details_path(car.id) do %>
+                    <div class="card" style="width: 18rem;">
+                        <%= image_tag "carrr.jpg", class:"card-img-top"%>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= car.year %>
+
+                                <%= car.brand%>
+
+                                <%= car.model%>
+                            </h5>
+                            </h5>
+                        </div>
+                        <ul class="card--body--custom">
+                            <li><%= car.state%></li>
+                            <li><%= car.city%></li>
+                        </ul>
+                        <ul class="card--body--custom">
+                            <li><%= car.km%></li>
+                            <li><%= car.variant%></li>
+                        </ul>
+                        <ul class="card--body--custom">
+                            <li class="list-group-item">
+                                <%
+=begin%>
+ ₹<%= cond.price_start%> - ₹<%= cond.price_end%> 
+<%
+=end%>
+                            </li>
+                        </ul>
+                    </div>
+                <%
+=begin%>
+ <%end%> 
+<%
+=end%>
+            <%end%>
+      <% end %>
+  </div>

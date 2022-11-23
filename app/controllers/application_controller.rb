@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     helper_method :current_appointment
 
     def require_login
-        redirect_to login_path, notice: 'You must logged in first' unless current_user
+        redirect_to login_path, alert: 'You must logged in first' unless current_user
     end
     # helper_method :logger
 

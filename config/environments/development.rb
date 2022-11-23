@@ -90,4 +90,6 @@ Rails.application.configure do
     tls: false,
     enable_starttls_auto: true
   }
+
+  # config.action_view.form_with_generates_remote_forms = true
 end

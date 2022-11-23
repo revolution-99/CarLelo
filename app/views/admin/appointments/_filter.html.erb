@@ -1,0 +1,11 @@
+<%= form_with model:@appointment, url: dashboard_appointments_path, method: :get do |form| %>
+    <ul class="filter__appointment">
+        <li>Search By:</li>
+        <li class="filter__appointment--section">
+            <%= form.select(:status, ["Processing","Investigating","Ready_For_Sell", "Sold"],{prompt: 'Select appointment status'}, {class: 'form-select' })%>
+        </li>
+        <li class="filter__appointment--section">
+            <%= form.submit "Show Results", class:"btn btn-primary"%>
+        </li>
+    </ul>
+<%end%>

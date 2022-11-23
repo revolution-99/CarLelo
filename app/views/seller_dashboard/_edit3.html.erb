@@ -7,7 +7,7 @@
         </div>
     <%end%>
     <div class="profile--card">
-    <%= link_to users_path do%>
+    <%= link_to user_path(@user.id) do%>
         <i class="bi bi-pencil-square"></i>
           <strong>Edit profile details</strong>
     <%end%>

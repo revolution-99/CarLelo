@@ -1,11 +1,13 @@
 <div class="d-flex flex-column align-items-center justify-content-center">
     <h1> Welcome to Car Lelo </h1>
-    <% if current_user%>
-        <% if current_user.is_buyer == true%>
-            <%= render partial: "search" %>
-        <% end %>
-    <% end %>
+
+ <% if current_user%>
     <%= render partial: "filter" %>
+    <%if @cars.count == 0%>
+        <div class="d-flex flex-column align-items-center justify-content-center">
+            <h3> No matching car is found </h3>
+        </div>
+    <%else%>
     <div class="car--card">
         <% @cars.each do |car| %>
             <%= link_to car_details_path(car.id) do %>
@@ -42,8 +44,9 @@
                 </div>
             <%end%>
         <% end %>
+        <% end %>
     </div>
 </div>
-<div class="car-card--filtered">
-
-</div>
+<% else%>
+    <%= render partial: "landing" %>
+<% end %> 

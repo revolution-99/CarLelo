@@ -1,0 +1,22 @@
+  <br/>
+<%
+=begin%>
+ <%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %> 
+<%
+=end%>
+<div class="row">
+  <div class="columns large-12">
+    <ul class="button-group">
+      Sort by: &nbsp;
+      <li><%= sortable 'Date', 'appointment_date', 'desc' %></li>
+      <li><%= sortable 'Created Date', 'created_at', 'asc' %></li>
+      <li><%= sortable 'Status', 'status', 'asc' %></li>
+      <li><%= sortable 'id', 'id', 'desc' %></li>
+      <li><%= sortable 'User Name', 'first_name', 'asc' %></li>
+      <li><%= sortable 'Car Brand', 'brand', 'asc' %></li>
+      <li><%= sortable 'Car Model', 'model', 'asc' %></li>
+    </ul>
+  </div>
+</div>
+<br/>

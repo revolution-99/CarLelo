@@ -1,7 +1,8 @@
 module Admin
     class AppointmentsController < ApplicationController
         before_action :authorized_only_to_admin!
-        
+        helper_method :sort_column, :sort_direction
+
         def create
             @appointment = Appointment.new(appointments_params)
             @appointment.user_id = current_user.id
@@ -23,7 +24,19 @@ module Admin
         end
 
         def index
-            @appointments = Appointment.all
+            @appointments = Appointment.order(Arel.sql("#{sort_column} #{sort_direction}"))
+            # binding.pry
+            # if params[:sort] == 'first_name'
+            #     @appointments = Appointment.joins(:user).order("first_name #{sort_direction}")
+            # elsif params[:sort] == 'is_seller'
+            #     @appointments = Appointment.joins(:user).order("is_seller #{sort_direction}")
+            # elsif params[:sort] == 'brand'
+            #     @appointments = Appointment.joins(:car).order("brand #{sort_direction}")
+            # elsif params[:sort] == 'model'
+            #     @appointments = Appointment.joins(:car).order("model #{sort_direction}")
+            # end
+            @appointments = @appointments.filter_by_status(params[:status]) if params[:status].present?
+            # binding.pry
         end
 
         def show
@@ -55,16 +68,21 @@ module Admin
 
         def approve
             @appointment = Appointment.find(params[:id])
-            if @appointment.is_approved == true
-                redirect_to dashboard_appointments_path, alert: 'Appointment is already approved.'
+            @appointment.is_approved = true
+            @appointment.status = 1
+            if @appointment.update(appointments_approval_params)
+                redirect_to dashboard_appointments_path, notice: 'Appointment is approved.'
             else
-                @appointment.is_approved = true
-                @appointment.status = 1
-                if @appointment.update(appointments_approval_params)
-                    redirect_to dashboard_appointments_path, notice: 'Appointment is approved.'
-                else
-                    redirect_to dashboard_path, alert: 'Failed to approve the appointment'
-                end
+                redirect_to dashboard_path, alert: 'Failed to approve the appointment'
+            end
+        end
+
+        def reject
+            @appointment = Appointment.find(params[:id])
+            # @appointment.is_approved = false
+            @appointment.status = 6
+            if @appointment.update(appointments_approval_params)
+                redirect_to dashboard_appointments_path, notice: 'Appointment is rejected.'
             end
         end
 
@@ -76,7 +94,6 @@ module Admin
             @appointment = Appointment.find_by(id: params[:id])
             @appointments = Appointment.where(car_id: @appointment.car_id).where.not(id: params[:id])
             @seller_appointment = Appointment.where(car_id: @appointment.car_id).joins(:user).where('is_seller=true')[0]
-            # binding.pry
             @appointments.each do|app|
                 app.status = 5
                 app.update(appointments_status_params)
@@ -93,12 +110,24 @@ module Admin
             params.require(:appointment).permit(:status, :appointment_date)
         end
 
+        private
         def appointments_approval_params
             params.permit(:is_approved)
         end
 
+        private
         def appointments_status_params
             params.permit(:status)
+        end
+
+        private
+
+        def sort_column
+            params[:sort] || "status"
+        end
+
+        def sort_direction
+            %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
         end
     end
 end

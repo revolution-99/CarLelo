@@ -1,5 +1,5 @@
 class Map < ApplicationRecord
-    geocoded_by :address
-    # reverse_geocoded_by :latitude, :longitude, address: :loc
-    after_validation :geocode
+    validates :address, presence: true
+    validates :latitude, presence: true, numericality: true, uniqueness: true
+    validates :longitude, presence: true, numericality: true, uniqueness: true
 end

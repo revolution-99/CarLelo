@@ -175,6 +175,43 @@
       </div>
     </div>
   </div>
-  
+</div>
 
+  <div class="admin__home--row">
+    <div class="col-md-4 col-xl-3">
+      <div class="card bg-c-pink order-card">
+          <div class="card-block">
+            <h4 class="m-b-20">Manage Users</h4>
+            <h2 class="admin__home--row--text">
+              <i class="fa fa-user"></i>
+              <span><%= count_models(User)%></span>
+            </h2>
+            <div class="float-end">        
+            <%= link_to users_path do %>
+              <div class="admin__home--row--button">
+                <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+              </div>
+            <%end%>
+            </div>
+        </div>
+      </div>
+    </div>
+  <div class="col-md-4 col-xl-3">
+    <div class="card bg-c-green order-card">
+        <div class="card-block">
+          <h4 class="m-b-20">Manage Car Branches</h4>
+          <h2 class="admin__home--row--text">
+            <i class="fa fa-home"></i>
+            <span><%= count_models(Map)%></span>
+          </h2>
+          <div class="float-end">        
+          <%= link_to maps_table_path do %>
+            <div class="admin__home--row--button">
+              <strong>View Details</strong><i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </div>
+          <%end%>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>

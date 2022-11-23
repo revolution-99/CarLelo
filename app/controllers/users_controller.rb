@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
     skip_before_action :require_login
+    before_action :authorized_only_to_admin!, only: [:index, :destroy, :admin_upgradation ]
 
     def new
         @user = User.new
+    end
+
+    def index
+        @users = User.all
     end
 
     def create
@@ -20,6 +25,12 @@ class UsersController < ApplicationController
 
     def show
         @user = current_user
+    end
+
+    def destroy
+        @user = User.find(params[:id])
+        @user.destroy
+        redirect_to dashboard_path, notice: 'User record is destroyed successfully.'
     end
 
     def update
@@ -42,8 +53,25 @@ class UsersController < ApplicationController
         end
     end
 
+    def admin_upgradation
+        @user = User.find(params[:id])
+        @user.is_seller = false
+        @user.is_buyer = false
+        @user.is_admin = true
+        if @user.update(admin_upgradation_params)
+            redirect_to dashboard_path, notice: 'Successfully upgraded user to admin'
+        else
+            redirect_to dashboard_path, alert: 'Failed to upgrade user to admin'
+        end
+    end
+
     private
     def user_params
         params.require(:user).permit(:email, :first_name, :last_name, :mobile_no, :password, :password_confirmation, :is_admin, :is_buyer, :is_seller)
+    end
+
+    private
+    def admin_upgradation_params
+        params.permit(:is_admin, :is_buyer, :is_seller)
     end
 end

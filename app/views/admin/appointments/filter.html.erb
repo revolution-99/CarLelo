@@ -1,0 +1,85 @@
+<div class="d-flex flex-column align-items-center justify-content-center mb-2">
+    <h1>List of Appointments </h1>
+    <%= render partial: "filter"%>
+  </div>
+  <div class="table--wrap">
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">ID</th>
+          <th scope="col">Car ID</th>
+          <th scope="col">
+            <%= sortable 'User Role', 'is_seller', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'User Name', 'first_name', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'Car Brand', 'brand', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'Car Model', 'model', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'Date Created', 'created_at', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'Appointment Date', 'appointment_date', 'asc' %>
+          </th>
+          <th scope="col">
+            <%= sortable 'Status', 'status', 'asc' %>
+          </th>
+          <th scope="col">Approval</th>
+          <th scope="col" colspan="3">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">  
+        <% @appointments.each do |app| %>
+          <tr>
+            <td><%= app.id %></td>
+            <td>
+              <%= link_to app.car_id, dashboard_appointment_path(app.car_id)%>
+            </td>
+            <td>
+              <% if app.user.is_seller %>
+                Seller
+              <% elsif app.user.is_buyer %>
+                Buyer
+              <% end %>
+            </td>
+            <td>
+              <%= link_to "#{app.user.first_name} #{app.user.last_name}", user_details_path(app.user_id)%> 
+            </td>
+            <td><%= app.car.brand %></td>
+            <td><%= app.car.model%></td>
+            <td><%= app.created_at %></td>
+            <td><%= app.appointment_date %></td>
+            <td><%= app.status %></td>
+            <td>
+                <%if app.is_approved %>
+                    Yes
+                <%else%>
+                    No
+                <%end%>
+            </td>
+            <td>
+              <% if app.status == "Sold"%>
+                  <%= link_to "Edit", edit_dashboard_appointment_path(app.id), class: "btn btn-secondary" %>
+              <% else%>
+                <%= link_to "Edit", edit_dashboard_appointment_path(app.id), class: "btn btn-primary" %>
+              <%end%>
+            </td>
+            <td>
+              <% if app.is_approved%>
+                <%= link_to "Approve", approve_path(app.id), method: :patch, remote: true, class: "btn btn-secondary" %>
+              <% else %>
+                <%= link_to "Approve", approve_path(app.id), method: :patch, remote: true, class: "btn btn-success" %>
+              <%end%>
+            </td>
+            <td><%= link_to "Reject", dashboard_appointment_path(app.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td> 
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

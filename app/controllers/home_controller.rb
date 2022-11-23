@@ -5,7 +5,17 @@ class HomeController < ApplicationController
   def index
     @brands = Brand.joins(:models).distinct
     @cars = Car.joins(:appointments).where('is_approved=true AND status=3').distinct
-    @conditions = Condition.joins("INNER JOIN cars ON cars.condition = conditions.condition")
+    # @conditions = Condition.joins("INNER JOIN cars ON cars.condition = conditions.condition")
+    @q = params[:search_query]
+    @cars = Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant'], match: :word_middle) if @q
+    
+    filtering_params(params).each do |key, value|
+      if value.present? & @q
+        @cars = Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant'], match: :word_middle, scope_results: ->(r) { r.public_send("filter_by_#{key}", value)})
+      else
+        @cars = Car.public_send("filter_by_#{key}", value)
+      end
+    end
   end
 
   def show
@@ -24,9 +34,10 @@ class HomeController < ApplicationController
     @brands = Brand.joins(:models).distinct
     @cars = Car.joins(:appointments).where('is_approved=true').distinct
     filtering_params(params).each do |key, value|
-      @cars = @cars.public_send("filter_by_#{key}", value) if value.present?
+      @cars = @cars & @cars.public_send("filter_by_#{key}", value) if value.present?
     end
-    @conditions = Condition.joins("INNER JOIN cars ON cars.condition = conditions.condition")
+    # binding.pry
+    # @conditions = Condition.joins("INNER JOIN cars ON cars.condition = conditions.condition")
   end
   
   def search

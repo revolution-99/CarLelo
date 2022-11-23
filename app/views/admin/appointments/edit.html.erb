@@ -8,13 +8,7 @@
       <%= form.label :status%>
 
       <% if @appointment.user.is_seller%>
-        <% if @appointment.status_before_type_cast == 1%>
             <%= form.select :status, Appointment.statuses.keys[1..4].map{ |key| [key.humanize, key] }, {prompt: @appointment.status}, class: "form-select"%>
-        <%elsif @appointment.status_before_type_cast == 2%>
-            <%= form.select :status, Appointment.statuses.keys[3..4].map{ |key| [key.humanize, key] }, {prompt: @appointment.status}, class: "form-select"%>
-        <%elsif @appointment.status_before_type_cast == 3%>
-          <%= form.select :status, ["Sold"], {prompt: @appointment.status}, class: "form-select"%>
-        <%end%>
         <%elsif @appointment.user.is_buyer%>
           <% if @appointment.status_before_type_cast == 1 %>
             <%= form.select :status, Appointment.statuses.keys[2...3].map{ |key| [key.humanize, key] }, {prompt: @appointment.status}, class: "form-select"%>
@@ -22,8 +16,8 @@
             <%= form.label :can_be_updated_from_seller_status_for_the_same_car %>
           <%end%>
         <%end%>
-      <div class="car__details--bottom">
-        <div class="car__details--bottom--buttons">
+      <div class="button__details--bottom">
+        <div class="button__details--bottom--buttons">
           <div id="update--btn">
             <%= form.submit "Update", class: "btn btn-success mt-3" do %>
               <i class="bi bi-caret-right-fill"></i>
@@ -38,8 +32,8 @@
         </div>
       </div>
     <%end%>
-  <div class="car__details--bottom">
-    <div class="car__details--bottom--buttons">
+  <div class="button__details--bottom">
+    <div class="button__details--bottom--buttons">
       <%= link_to dashboard_appointments_path, class: "btn btn-info" do %>
           <i class="bi bi-caret-left-fill"></i>Back
       <%end%>

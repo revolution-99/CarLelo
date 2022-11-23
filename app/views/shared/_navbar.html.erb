@@ -14,23 +14,17 @@
                 <a class="nav-link" href="/">Buy used Car</a>
               </li>
           <%elsif current_user.is_admin%>
-              <a class="navbar-brand me--auto" href="/admin/dashboards">Car Lelo</a>
+              <a class="navbar-brand me--auto" href="/dashboard">Car Lelo</a>
           <%end%>
         <%else%>
             <a class="navbar-brand" href="/">Car Lelo</a>
-            <li class="nav-item">
-                <a class="nav-link" href="/cars/new">Sell Used Car</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/">Buy used Car</a>
-            </li>
         <%end%>
       </ul>
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <%if current_user%>
             <%if current_user.is_admin%>
               <li class="nav-item">
-                <a class="nav-link" href="/admin/dashboards">Dashboard</a>
+                <a class="nav-link" href="/dashboard">Dashboard</a>
               </li>
             <%else%>
               <li class="nav-item">

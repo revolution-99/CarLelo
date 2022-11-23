@@ -2,11 +2,15 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "home#index"
   get "/filter", to:"home#filter", as: :home_filtered
-  get "/search", to:"home#search", as: :home_searched
+  # get "/search", to:"home#search", as: :home_searched
   get "/car/details/:id", to:"home#show", as: :car_details
   get "/notification", to:"notification#index",  as: :notifications
 
-  resource :users, only:[:new, :create, :show, :update]
+  resources :users
+  patch "/users/upgrade/:id", to:"users#admin_upgradation", as: :admin_upgradation
+
+  resources :maps, only:[:new, :create, :index, :edit, :destroy, :update]
+  get 'maps/tables', to:"maps#admin_index", as: :maps_table
   
   get '/:token/confirm_email/', :to => "users#confirm_email", as: 'confirm_email'
 
@@ -39,9 +43,11 @@ Rails.application.routes.draw do
           resources :appointments, only:[:create, :index, :destroy, :update, :edit, :show]
         # end
       end
+      get "/appointments/filter", to:"appointments#filter", as: :dashboard_appointments_filtered
       get "/dashboard/appointments/display/:id", to:"appointments#display", as: :user_details
       get "dashboard/edit/:partial", to:"dashboards#edit", as: :dashboard_edit
       patch "/appointment/approve/:id", to:"appointments#approve", as: :approve
+      patch "/appointment/reject/:id", to:"appointments#reject", as: :reject
       patch "/dashboard/appointments/buyers/:id", to:"appointments#sold_update", as: :sold_update
       get "/appointment/buyers/:id", to:"appointments#buyers_list", as: :buyers_list
   end

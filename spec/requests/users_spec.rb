@@ -5,7 +5,7 @@ RSpec.describe "Users", type: :request do
 
   context "GET /users" do
     it "renders the sign up page." do
-      get new_users_path
+      get new_user_path
       expect(response).to have_http_status(200)
       expect(response).to_not have_http_status(400)
     end
@@ -15,7 +15,7 @@ RSpec.describe "Users", type: :request do
     context "with valid credentials." do
       it "send email for confirmation." do
           expect{
-            post users_path, params: {
+            post user_path, params: {
               user: {
                 email: "chand@carlelo.in",
                 first_name: "Chand",
@@ -30,7 +30,7 @@ RSpec.describe "Users", type: :request do
       end
       
       it "saves the user in database and redirects to login page." do
-        post users_path, params: {
+        post user_path, params: {
                 user: {
                   email: "chand@carlelo.in",
                   first_name: "Chand",
@@ -52,7 +52,7 @@ RSpec.describe "Users", type: :request do
     context "with invalid credentials." do
       it "renders the signup page again." do
         expect {
-          post users_path, params: {
+          post user_path, params: {
             user: {
               email: "chand@carlelo.in",
               first_name: "",

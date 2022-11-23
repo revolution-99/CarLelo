@@ -26,7 +26,7 @@
                         <td> <%=app.user.first_name%> </td>
                         <td> <%=app.user.last_name%> </td>
                         <td scope="col-2">
-                            <%= link_to admin_sold_update_path(app.id), method: :patch, class: "btn btn-success mt-3" do %>
+                            <%= link_to sold_update_path(app.id), method: :patch, class: "btn btn-success mt-3" do %>
                                 Sell<i class="bi bi-caret-right-fill"></i>
                             <%end%>
                         </td>

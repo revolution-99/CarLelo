@@ -1,4 +1,8 @@
-<%= form_with model:@car, url:home_filtered_path, method: :get do |form| %>
+<%= form_with model:@car, url:root_path, method: :get do |form| %>
+        <%= form.search_field :search_query, class:"search--bar", value: params[:search_query]%>
+        <%= button_tag(type: 'submit', class: "btn btn-outline-primary") do %>
+            <i class="bi bi-search"></i> search
+        <% end %>
         <ul class="filter">
             <li class="filter--section">
                 <%= form.collection_select :city, City.all, :name, :name, {prompt: "City", selected: params[:city]}, { class: "form-select", onchange: "this.form.submit()"} %>

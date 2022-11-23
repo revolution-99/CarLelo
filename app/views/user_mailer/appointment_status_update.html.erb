@@ -1,7 +1,11 @@
 <span class="fs-4">
     Hii <%=@user.first_name%> <%=@user.last_name%>
 </span>
-<p>
-    Your appointment status is under <%= @appointment.status%> stage.
-    For more information visit our page <%= link_to "CarLelo", root_url %>
+<p>    
+    <% if @appointment.status_before_type_cast == 6 %>
+        Your appointment with appointment id : <%= @appointment.id%> is rejected. Sorry for the inconvenience.
+    <%else%>
+        Your appointment status is under <%= @appointment.status%> stage.
+        For more information visit our page <%= link_to "CarLelo", root_url %>
+    <%end%>
 </p>

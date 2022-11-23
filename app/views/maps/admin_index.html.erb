@@ -1,0 +1,48 @@
+<% unless @maps == [] %>
+  <div class="d-flex flex-column align-items-center justify-content-center mb-2">
+    <h1>List of CarLelo Branches</h1>
+  </div>
+  <div class="table--wrap">
+    <table class="table table-striped">
+      <thead>
+        <tr class="table-dark">
+          <th scope="col">ID</th>
+          <th scope="col">Address</th>
+          <th scope="col">Latitude</th>
+          <th scope="col">Longitude</th>
+          <th scope="col" colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-center">  
+        <% @maps.each do |map| %>
+          <tr>
+            <td><%= map.id %></td>
+            <td><%= map.address %></td>
+            <td><%= map.latitude %></td>
+            <td><%= map.longitude %></td>
+            <td><%= link_to "Edit", edit_map_path(map.id), class: "btn btn-primary" %></td>
+            <td><%= link_to "Destroy", map_path(map.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <div class= "jumbotron text-center">
+    <h1>No CarLelo Branch is currently added</h1>
+    <p>Add new CarLelo branch by clicking the below button, then it will show up in the list</p>
+  </div>
+<% end %>
+<div class="button__details--bottom">
+  <div class="button__details--bottom--buttons">
+    <%= link_to dashboard_path, class: "btn btn-info" do %>
+        <i class="bi bi-caret-left-fill"></i>Back to Home
+    <%end%>
+    <%= link_to maps_path, class: "btn btn-info" do %>
+        Locate Branches
+    <%end%>
+    <%= link_to new_map_path, class: "btn btn-success" do%>
+        Add New Branch<i class="bi bi-caret-right-fill"></i>
+    <%end%>
+  </div>
+</div>

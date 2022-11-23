@@ -16,15 +16,12 @@
                 <span>
                     Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is now approved. Car's estimated price is:
                     <b>
-                        ₹<%= current_condition.price_start%> - ₹<%= current_condition.price_end%>
+                        <%
+=begin%>
+ ₹<%= current_condition.price_start%> - ₹<%= current_condition.price_end%> 
+<%
+=end%>
                     </b>
-                </span>
-                <hr>
-            </li>
-        <%elsif notification.action == "rejected"%>
-            <li>
-                <span>
-                    Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is <b>rejected.</b> Sorry for the inconvinenece.
                 </span>
                 <hr>
             </li>
@@ -42,6 +39,8 @@
                         Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is under investigation. We will notify you once the status is further updated.
                     <%elsif  notification.appointment.status == 'Processing' %>
                         Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is under process. We will notify you once the status is further updated.
+                    <%elsif  notification.appointment.status == 'Rejected' %>
+                        Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is rejected. Sorry for the inconvinenece.
                     <%end%>
                 </span>
                 <hr>
