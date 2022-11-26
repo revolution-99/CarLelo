@@ -50,7 +50,6 @@ class Appointment < ApplicationRecord
     
     def one_directional_status
         if Appointment.statuses[status] < Appointment.statuses[status_was]
-        # binding.pry
             errors.add(:base, 'Previous status can not be selected.')
         end
     end

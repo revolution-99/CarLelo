@@ -5,40 +5,45 @@
 </div>
 <div id="map"></div>
 
-<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyDeOMuBsMU1OXuvBaSLUbS3JfuAJWroM7U&libraries=places"%>
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ ENV['API_KEY'] }&callback=initialize"%>
 
 <script>
     var map;
     var service;
     var infowindow;
     var place;
-    var locations = []
-    <% @maps.each do |m| %>
-      locations.push([<%= raw m.address.to_json %>, <%= m.latitude %>, <%= m.longitude %>])
-    <% end %>
-    console.log(locations)
-  
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 7,
-      center: new google.maps.LatLng(20.940920, 84.803467),
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
     
-    var infowindow = new google.maps.InfoWindow();
-
-    var marker, i;
+    function initialize(){
+      var locations = []
+      <% @maps.each do |m| %>
+        locations.push([<%= raw m.address.to_json %>, <%= m.latitude %>, <%= m.longitude %>])
+      <% end %>
+      console.log(locations)
     
-    for (i = 0; i < locations.length; i++) {  
-      marker = new google.maps.Marker({
-        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-        map: map
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 7,
+        center: new google.maps.LatLng(20.940920, 84.803467),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       });
       
-      google.maps.event.addListener(marker, 'click', (function(marker, i) {
-        return function() {
-          infowindow.setContent(locations[i][0]);
-          infowindow.open(map, marker);
-        }
-      })(marker, i));
+      var infowindow = new google.maps.InfoWindow();
+  
+      var marker, i;
+      
+      for (i = 0; i < locations.length; i++) {  
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+          map: map
+        });
+        
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+          return function() {
+            infowindow.setContent(locations[i][0]);
+            infowindow.open(map, marker);
+          }
+        })(marker, i));
+      }
     }
+    // window.initMap = initMap;
+
 </script>

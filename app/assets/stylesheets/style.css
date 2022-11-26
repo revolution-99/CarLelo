@@ -24,7 +24,12 @@
     list-style: none;
     gap: 1rem;
 }
-
+/* .kilometer-form{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    margin-bottom: 2rem;
+} */
 /* Car Section of the home page */
 .card{
     border: none;

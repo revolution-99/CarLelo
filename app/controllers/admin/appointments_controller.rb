@@ -1,7 +1,7 @@
 module Admin
     class AppointmentsController < ApplicationController
         before_action :authorized_only_to_admin!
-        helper_method :sort_column, :sort_direction
+        helper_method :sort_column, :sort_direction, :filter_status
 
         def create
             @appointment = Appointment.new(appointments_params)
@@ -25,18 +25,19 @@ module Admin
 
         def index
             @appointments = Appointment.order(Arel.sql("#{sort_column} #{sort_direction}"))
-            # binding.pry
-            # if params[:sort] == 'first_name'
-            #     @appointments = Appointment.joins(:user).order("first_name #{sort_direction}")
-            # elsif params[:sort] == 'is_seller'
-            #     @appointments = Appointment.joins(:user).order("is_seller #{sort_direction}")
-            # elsif params[:sort] == 'brand'
-            #     @appointments = Appointment.joins(:car).order("brand #{sort_direction}")
-            # elsif params[:sort] == 'model'
-            #     @appointments = Appointment.joins(:car).order("model #{sort_direction}")
-            # end
-            @appointments = @appointments.filter_by_status(params[:status]) if params[:status].present?
-            # binding.pry
+            if params[:sort] == 'first_name' || params[:sort] == 'is_seller'
+                @appointments = Appointment.joins(:user).order("#{params[:sort]} #{sort_direction}")
+            elsif params[:sort] == 'brand' || params[:sort] == 'model'
+                @appointments = Appointment.joins(:car).order("brand #{sort_direction}")
+            end
+            if params[:status].present?
+                @appointments = Appointment.order(Arel.sql("#{sort_column} #{sort_direction}")).where(status: params[:status])
+                if params[:sort] == 'first_name' || params[:sort] == 'is_seller'
+                    @appointments = Appointment.joins(:user).order("#{params[:sort]} #{sort_direction}").where(status: params[:status])
+                elsif params[:sort] == 'brand' || params[:sort] == 'model'
+                    @appointments = Appointment.joins(:car).order("brand #{sort_direction}").where(status: params[:status])
+                end
+            end
         end
 
         def show
@@ -87,7 +88,7 @@ module Admin
         end
 
         def buyers_list
-            @appointments = Appointment.where(car_id: params[:id])
+            @appointments = Appointment.where(car_id: params[:id]).where(is_approved: true)
         end
         
         def sold_update
@@ -129,5 +130,13 @@ module Admin
         def sort_direction
             %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
         end
+
+        def sort_direction
+            %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+        end
+
+        def filter_status
+            params[:status] || ""
+        end 
     end
 end

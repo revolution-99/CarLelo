@@ -2,7 +2,7 @@
     <ul class="filter__appointment">
         <li>Search By:</li>
         <li class="filter__appointment--section">
-            <%= form.select(:status, ["Processing","Investigating","Ready_For_Sell", "Sold"],{prompt: 'Select appointment status'}, {class: 'form-select' })%>
+            <%= form.select :status, Appointment.statuses.keys[1..6].map{ |key| [key.humanize, key] }, {prompt: "All Appointment Status"}, class: "form-select"%>
         </li>
         <li class="filter__appointment--section">
             <%= form.submit "Show Results", class:"btn btn-primary"%>

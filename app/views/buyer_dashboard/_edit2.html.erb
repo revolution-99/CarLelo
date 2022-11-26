@@ -5,7 +5,7 @@
 </div>
 <div id="map"></div>
 
-<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=AIzaSyDeOMuBsMU1OXuvBaSLUbS3JfuAJWroM7U&libraries=places&callback=initialize"%>
+<%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?key=#{ ENV['API_KEY'] }&callback=initialize"%>
 
 <script>
     var map;

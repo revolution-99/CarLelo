@@ -1,4 +1,4 @@
-$('#appointment_status').load(function() {
+$('#appointment_status').on('change', (function() {
     var statusValue = document.getElementById('appointment_status').value
     console.log(statusValue)
     var updateButton = document.getElementById('update--btn')
@@ -12,4 +12,4 @@ $('#appointment_status').load(function() {
       updateButton.style.display = "flex"
       getButton.style.display = "none"
     }
-  })
+  }))

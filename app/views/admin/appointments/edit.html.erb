@@ -11,7 +11,7 @@
             <%= form.select :status, Appointment.statuses.keys[1..4].map{ |key| [key.humanize, key] }, {prompt: @appointment.status}, class: "form-select"%>
         <%elsif @appointment.user.is_buyer%>
           <% if @appointment.status_before_type_cast == 1 %>
-            <%= form.select :status, Appointment.statuses.keys[2...3].map{ |key| [key.humanize, key] }, {prompt: @appointment.status}, class: "form-select"%>
+            <%= form.select :status, Appointment.statuses.keys[1..2].map{ |key| [key.humanize, key] }, {prompt: @appointment.status}, class: "form-select"%>
           <% elsif @appointment.status_before_type_cast == 2 %>
             <%= form.label :can_be_updated_from_seller_status_for_the_same_car %>
           <%end%>

@@ -18,7 +18,7 @@ development:
   adapter: postgresql
   encoding: unicode
   database: CarLelo_development
-  pool: 5
+  pool: 30
   username: sanu
   password: chand
   timeout: 5000
@@ -48,7 +48,7 @@ test:
   adapter: postgresql
   encoding: unicode
   database: CarLelo_test
-  pool: 5
+  pool: 30
   username: sanu
   password: chand
   timeout: 5000

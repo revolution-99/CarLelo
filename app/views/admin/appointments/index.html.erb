@@ -10,25 +10,25 @@
           <th scope="col">ID</th>
           <th scope="col">Car ID</th>
           <th scope="col">
-            <%= sortable 'User Role', 'is_seller', 'asc' %>
+            <%= sortable 'User Role', 'is_seller', 'asc', params[:status] %>
           </th>
           <th scope="col">
-            <%= sortable 'User Name', 'first_name', 'asc' %>
+            <%= sortable 'User Name', 'first_name', 'asc', params[:status] %>
           </th>
           <th scope="col">
-            <%= sortable 'Car Brand', 'brand', 'asc' %>
+            <%= sortable 'Car Brand', 'brand', 'asc', params[:status] %>
           </th>
           <th scope="col">
-            <%= sortable 'Car Model', 'model', 'asc' %>
+            <%= sortable 'Car Model', 'model', 'asc', params[:status] %>
           </th>
           <th scope="col">
-            <%= sortable 'Date Created', 'created_at', 'asc' %>
+            <%= sortable 'Date Created', 'created_at', 'asc', params[:status] %>
           </th>
           <th scope="col">
-            <%= sortable 'Appointment Date', 'appointment_date', 'asc' %>
+            <%= sortable 'Appointment Date', 'appointment_date', 'asc', params[:status] %>
           </th>
           <th scope="col">
-            <%= sortable 'Status', 'status', 'asc' %>
+            <%= sortable 'Status', 'status', 'asc', params[:status] %>
           </th>
           <th scope="col">Approval</th>
           <th scope="col" colspan="4">Actions</th>

@@ -18,7 +18,7 @@
                     <b>
                         <%
 =begin%>
- ₹<%= current_condition.price_start%> - ₹<%= current_condition.price_end%> 
+ ₹<%= @condition.price_start%> - ₹<%= @condition.price_end%> 
 <%
 =end%>
                     </b>
@@ -41,6 +41,8 @@
                         Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is under process. We will notify you once the status is further updated.
                     <%elsif  notification.appointment.status == 'Rejected' %>
                         Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is rejected. Sorry for the inconvinenece.
+                    <%elsif  notification.appointment.status_before_type_cast == 5 %>
+                        Sell request is cancelled for appointment of <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is rejected. Sorry for the inconvinenece.
                     <%end%>
                 </span>
                 <hr>

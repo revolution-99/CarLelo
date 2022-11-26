@@ -5,15 +5,23 @@ class HomeController < ApplicationController
   def index
     @brands = Brand.joins(:models).distinct
     @cars = Car.joins(:appointments).where('is_approved=true AND status=3').distinct
-    # @conditions = Condition.joins("INNER JOIN cars ON cars.condition = conditions.condition")
     @q = params[:search_query]
-    @cars = Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant'], match: :word_middle) if @q
     
-    filtering_params(params).each do |key, value|
-      if value.present? & @q
-        @cars = Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant'], match: :word_middle, scope_results: ->(r) { r.public_send("filter_by_#{key}", value)})
-      else
-        @cars = Car.public_send("filter_by_#{key}", value)
+    args = {}
+    args[:city] = params[:city] if params[:city].present?
+    args[:year] = params[:year] if params[:year].present?
+    args[:km] = params[:km] if params[:km].present?
+    args[:brand] = params[:brand] if params[:brand].present?
+    args[:model] = params[:model] if params[:model].present?
+    args[:state] = params[:state] if params[:state].present?
+    args[:variant] = params[:variant] if params[:variant].present?
+
+    if @q.present?
+      @cars = @cars & Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant'], match: :word_middle, where: args,aggs: {city: {}, year: {}, km: {}, brand: {}, model: {}, state: {},variant: {}}) 
+    else
+      filtering_params(params).each do |key, value|
+        @cars = @cars & Car.public_send("filter_by_#{key}", value) if value.present?
+        @cars = Car.where(id: @cars.map(&:id))
       end
     end
   end

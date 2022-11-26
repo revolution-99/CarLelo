@@ -2,6 +2,6 @@
     Hii <%=@user.first_name%> <%=@user.last_name%>
 </span>
 <p>
-    Congratulations. Your appointment is booked with appointment id : <%= @appointment.id%>. 
+    Congratulations. Your appointment for <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> is booked with appointment id : <%= @appointment.id%>. 
     For more information visit our page <%= link_to "CarLelo", root_url %>
 </p>

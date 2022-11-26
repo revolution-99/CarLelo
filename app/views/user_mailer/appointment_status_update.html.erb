@@ -1,11 +1,19 @@
 <span class="fs-4">
     Hii <%=@user.first_name%> <%=@user.last_name%>
 </span>
-<p>    
-    <% if @appointment.status_before_type_cast == 6 %>
-        Your appointment with appointment id : <%= @appointment.id%> is rejected. Sorry for the inconvenience.
+<p>
+    <% if @appointment.status_before_type_cast == 4 %>
+        <%if  @appointment.user.is_seller%>
+            Congratulations! your <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> has been sold.
+        <%elsif @appointment.user.is_buyer%>
+            Congratulations! on your new car purchase of <b><%= @appointment.car.brand%> <%= @appointment.car.model%>.</b>
+        <% end %>
+    <% elsif @appointment.status_before_type_cast == 5 %>
+        Sell request is cancelled for your car <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> appointment with appointment id: <%= @appointment.id%>. Sorry for the inconvenience.
+    <% elsif @appointment.status_before_type_cast == 6 %>
+        Your appointment for <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> with appointment id : <%= @appointment.id%> is rejected. Sorry for the inconvenience.
     <%else%>
-        Your appointment status is under <%= @appointment.status%> stage.
-        For more information visit our page <%= link_to "CarLelo", root_url %>
+        Your appointment for <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> with appointment id: <%= @appointment.id%> is under <%= @appointment.status%> stage.
     <%end%>
+    For more information visit our page <%= link_to "CarLelo", root_url %>
 </p>
