@@ -1,0 +1,80 @@
+<div class="d-flex flex-column align-items-center justify-content-center">
+    <h1> Welcome back <%=current_user.first_name%>&nbsp<%=current_user.last_name%></h1>
+</div>
+<div class="dashboard">
+    <%= render partial: "sidebar" %>
+    <div id = "partial_content">
+        <%= form_with model:@appointment, url:buyer_dashboard_appointments_list_path, method: :get do |form| %>
+            <ul class="filter__appointment">
+                <li>Search By:</li>
+                <li class="filter__appointment--section">
+                    <%= form.select(:status, ["Processing","Investigating", "Sell_Request_Cancelled","Rejected"],{prompt: 'Select appointment status'}, {class: 'form-select' })%>
+                </li>
+                <li class="filter__appointment--section">
+                    <%= form.submit "Show Results", class:"btn btn-primary"%>
+                </li>
+            </ul>
+            <ul class="filter__appointment"> 
+                <li class="filter__appointment--section">
+                    <%= link_to "Book a new appointment", root_path, class: "btn btn-primary" %>
+                </li>
+            </ul>
+        <%end%>
+        <div class="appointment--heading"> 
+            <div class="col-2 text-sm-center text-md-start align-self-center"> 
+                <h1 class="h5 fw-bold">Appointment ID</h1> 
+            </div> 
+            <div class="col-1 text-sm-center text-md-start align-self-center"> 
+                <h1 class="h5 fw-bold">Car ID</h1> 
+            </div> 
+            <div class="col-2 text-sm-center text-md-start align-self-center"> 
+                <h1 class="h5 fw-bold">Brand</h1> 
+            </div> 
+            <div class="col-2 text-sm-center text-md-start align-self-center"> 
+                <h1 class="h5 fw-bold">Model</h1> 
+            </div> 
+            <div class="col-2 align-self-center"> 
+                <h1 class="h5 fw-bold">Booked on</h1> 
+            </div> 
+            <div class="col-2 align-self-center"> 
+                <h1 class="h5 fw-bold">Appointment Date</h1> 
+            </div>  
+            <div class="col-2 align-self-center"> 
+                <h1 class="h5 fw-bold">Status</h1> 
+            </div>
+        </div>
+        <%if @appointments.count == 0%>
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <h3> No matching result </h3>
+            </div>
+        <%else%>
+            <% @appointments.each do |app| %>
+                <div class="appointment--list__details"> 
+                    <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
+                        <h1 class="h6"><%= app.id%></h1> 
+                    </div> 
+                    <div class="col-md-1 text-sm-center text-md-start align-self-center my-2"> 
+                        <h1 class="h6">
+                            <%= link_to app.car_id, buyer_dashboard_details_path(app.car_id)%>
+                        </h1> 
+                    </div> 
+                    <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
+                        <h1 class="h6"><%= app.car.brand%></h1> 
+                    </div> 
+                    <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
+                        <h1 class="h6"><%= app.car.model%></h1> 
+                    </div> 
+                    <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
+                        <h1 class="h6"><%= app.created_at%></h1>
+                    </div> 
+                    <div class="col-md-2 text-sm-center text-md-strt align-self-center my-2"> 
+                        <h1 class="h6"><%= app.appointment_date%></h1>
+                    </div> 
+                    <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
+                        <h1 class="h6"><%= app.status %></h1>
+                    </div> 
+                </div>
+            <%end%>
+        <%end%> 
+    </div>
+</div>

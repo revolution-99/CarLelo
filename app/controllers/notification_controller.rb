@@ -5,8 +5,5 @@ class NotificationController < ApplicationController
             # format.html{}
             format.js
         end
-        # @notification = Notification.find_by(id: params[:id])
-        # @car = Car.find_by(id: @notification.car_id)
-        # @condition = Condition.where(condition: @car.condition).joins("INNER JOIN cars ON cars.condition = conditions.condition INNER JOIN Notifications ON cars.id = notificatins.car_id").first
     end
 end

@@ -20,14 +20,19 @@ Rails.application.routes.draw do
   get "/logout", to:"sessions#destroy_in_dashbaord"
 
   constraints SellerRouteConstraint.new do
-    get "/dashboard", to:"seller_dashboard#new", as: :seller_dashboard
-    get "/dashboard/edit/:partial", to:"seller_dashboard#edit", as: :seller_dashboard_edit
+    get "/dashboard", to:"seller_dashboard#index", as: :seller_dashboard
+    get "/dashboard/appointments/list", to:"seller_dashboard#appointments_list", as: :seller_dashboard_appointments_list
+    get "/dashboard/user/profile", to:"seller_dashboard#user_profile", as: :seller_dashboard_user_profile
+    get "/dashboard/branches", to:"seller_dashboard#car_branches", as: :seller_dashboard_car_branches
+    get "/dashboard/show/:id", to:"seller_dashboard#show", as: :seller_dashboard_details
     patch "/dashboard/edit", to:"seller_dashboard#update", as: :dashbaord_update
   end
 
   constraints BuyerRouteConstraint.new do
-    get "/dashboard", to:"buyer_dashboard#new", as: :buyer_dashboard 
-    get "/dashboard/edit/:partial", to:"buyer_dashboard#edit", as: :buyer_dashboard_edit
+    get "/dashboard", to:"buyer_dashboard#index", as: :buyer_dashboard
+    get "/dashboard/appointments/list", to:"buyer_dashboard#appointments_list", as: :buyer_dashboard_appointments_list
+    get "/dashboard/user/profile", to:"buyer_dashboard#user_profile", as: :buyer_dashboard_user_profile
+    get "/dashboard/branches", to:"buyer_dashboard#car_branches", as: :buyer_dashboard_car_branches
     get "/dashboard/show/:id", to:"buyer_dashboard#show", as: :buyer_dashboard_details
     patch "/dashboard/edit", to:"buyer_dashboard#update", as: :dashbaord_update_buyer
   end

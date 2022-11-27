@@ -36,7 +36,11 @@ class UsersController < ApplicationController
     def update
         @user = current_user
         if @user.update(user_params)
-            redirect_to root_path, notice: 'Your changes are upadted successully'
+            if @user.is_buyer
+                redirect_to buyer_dashboard_user_profile_path, notice: 'Your changes are upadted successfully.'
+            elsif @user.is_seller
+                redirect_to seller_dashboard_user_profile_path, notice: 'Your changes are upadted successfully.'
+            end
         else
             render :show
         end

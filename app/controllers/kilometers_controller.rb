@@ -12,12 +12,12 @@ class KilometersController < ApplicationController
     end
   
     def create
-        @kilometer = Kilometer.new(model_params(:kilometer))
-        if @kilometer.save
-          redirect_to kilometers_path, notice: 'Kilometer added Succesfully'
-        else
-          render :new
-        end
+      @kilometer = Kilometer.new(kilometer_params)
+      if @kilometer.save
+        redirect_to kilometers_path, notice: 'Kilometer added Succesfully'
+      else
+        render :new
+      end
     end
   
     def edit
@@ -39,5 +39,9 @@ class KilometersController < ApplicationController
         redirect_to kilometers_path, notice: 'Kilometer has been succesfully deleted'
     end
     
+    private
+    def kilometer_params 
+      params.require(:kilometer).permit(:name, :km_start, :km_end)
+    end
 end
   

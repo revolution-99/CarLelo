@@ -1,1 +1,45 @@
-<%= render partial: "shared/admin_table", locals: { object: @kilometers, name: "kilometers" } %>
+<% unless @kilometers == [] %>
+    <div class="d-flex flex-column align-items-center justify-content-center mb-2">
+        <h1>List of Car Kilometer Ranges</h1>
+    </div>
+    <div class="table--wrap">
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-dark">
+                    <th scope="col">ID</th>
+                    <th scope="col">Name Of Range</th>
+                    <th scope="col">Starting Kilometer Range</th>
+                    <th scope="col">Ending Kilometer Range</th>
+                    <th scope="col" colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="text-center"> 
+                <% @kilometers.each do |kilometer| %>
+                    <tr>
+                        <td><%= kilometer.id %></td>
+                        <td><%= kilometer.name %></td>
+                        <td><%= kilometer.km_start %></td>
+                        <td><%= kilometer.km_end %></td>
+                        <td><%= link_to "Edit", edit_kilometer_path(kilometer.id), class: "btn btn-primary" %></td>
+                        <td><%= link_to "Destroy", kilometer_path(kilometer.id), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+<% else %>
+    <div class= "jumbotron text-center">
+        <h1>No Car Kilometer is currently added</h1>
+        <p>Add new car kilometer by clicking the below button, then it will show up in the list</p>
+    </div>
+<% end %>
+<div class="button__details--bottom">
+    <div class="button__details--bottom--buttons">
+        <%= link_to dashboard_path, class: "btn btn-info" do %>
+            <i class="bi bi-caret-left-fill"></i>Back to Home
+        <%end%>
+        <%= link_to new_kilometer_path, class: "btn btn-success" do%>
+            Add New Kilometer<i class="bi bi-caret-right-fill"></i>
+        <%end%>
+    </div>
+</div>

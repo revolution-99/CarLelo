@@ -16,7 +16,11 @@ class AppointmentsController < ApplicationController
         if @appointment.save
             session[:appointment_id] = @appointment_id
             UserMailer.appointment_confirmation(current_user, @appointment).deliver_later
-            redirect_to root_path, notice: 'You will be notified about your appointment soon.'
+            if current_user.is_seller  
+                redirect_to seller_dashboard_appointments_list_path, notice: "Congratulations! Your appointment is booked. You will be notified about your appointment's status soon."
+            elsif current_user.is_buyer
+                redirect_to buyer_dashboard_appointments_list_path, notice: "Congratulations! Your appointment is booked. You will be notified about your appointment's status soon."
+            end
         else
             render :new
         end

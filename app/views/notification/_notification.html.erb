@@ -4,6 +4,7 @@
     </div>
 
     <% @notifications.each do |notification|%>
+        <% condition = Condition.where(condition: notification.car.condition).pluck(:price_start, :price_end) %>
         <%if notification.action == "booked" %>
             <li>
                 <span>
@@ -16,11 +17,7 @@
                 <span>
                     Your appointment for <%= notification.car.brand%> <%= notification.car.model%> with appointment id  <%= notification.appointment_id%> is now approved. Car's estimated price is:
                     <b>
-                        <%
-=begin%>
- ₹<%= @condition.price_start%> - ₹<%= @condition.price_end%> 
-<%
-=end%>
+                        ₹<%= condition[0][0]%> - ₹<%= condition[0][1]%>  
                     </b>
                 </span>
                 <hr>

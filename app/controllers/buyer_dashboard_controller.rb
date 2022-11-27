@@ -2,23 +2,24 @@ class BuyerDashboardController < ApplicationController
     
     skip_before_action :require_login
 
-    def new; end
+    def index; end
 
     def show
         @car = Car.find_by(id: params[:id])
         @partial_to_render = params[:partial]
     end
 
-    def edit
-        @user = current_user
-        @cars = @user.cars
-        @appointments = @user.appointments
-        @partial_to_render = params[:partial]
-        respond_to do |format|
-            # format.html{}
-            format.js
-        end
+    def appointments_list
+        @appointments = current_user.appointments
         @appointments = @appointments.filter_by_status(params[:status]) if params[:status].present? 
+    end
+
+    def user_profile
+        @user = current_user
+    end
+
+    def car_branches
+      @maps = Map.all
     end
 
     def update

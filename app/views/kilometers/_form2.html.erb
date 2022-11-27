@@ -1,6 +1,8 @@
 <div class="mb-4">
   <%= form_for @kilometer do |form| %>
     <%= render partial: "shared/error_messages", locals: { var: @kilometer } %>
+      <%= form.label :Name_of_range%>
+      <%= form.text_field :name, class: "form-control mb-3"%>
       <%= form.label :starting_km_range%>
       <%= form.text_field :km_start, class: "form-control mb-3"%>
       <%= form.label :ending_km_range%>

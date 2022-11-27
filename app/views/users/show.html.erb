@@ -30,5 +30,18 @@
         <%= form.text_field :mobile_no,  placeholder: "+91", class: "form-control"%>
       </div>
       <%= form.submit "Update", class:"btn btn-primary"%>
+      <div class="button__details--bottom mt-3">
+        <div class="button__details--bottom--buttons">
+          <% if current_user.is_buyer%>
+              <%= link_to buyer_dashboard_user_profile_path, class: "btn btn-info" do %>
+                  <i class="bi bi-caret-left-fill"></i>Back to Profile
+              <%end%>
+          <%elsif current_user.is_seller%>
+              <%= link_to seller_dashboard_user_profile_path, class: "btn btn-info" do %>
+                  <i class="bi bi-caret-left-fill"></i>Back to Profile
+              <%end%>
+          <%end%>
+        </div>
+    </div>
     </div>
 <% end %>

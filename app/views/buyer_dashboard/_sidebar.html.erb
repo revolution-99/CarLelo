@@ -1,0 +1,24 @@
+  <div class="d-flex flex-column flex-shrink-0 ps-3 ms-2 bg-light" id="sidebar">
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="mb-3">
+        <%= link_to buyer_dashboard_appointments_list_path do%>
+          <i class="bi bi-clipboard2-check-fill"></i>
+          <strong>My appointments</strong>
+        <%end%> 
+      </li>
+      <li class="mb-3">
+        <%= link_to buyer_dashboard_car_branches_path do%>
+          <i class="bi bi-geo-alt-fill" width="32" height="32"></i>
+          <strong>Locate Nearby Branches</strong>
+        <%end%>
+      </li>
+      <li class="mb-3">
+        <%= link_to buyer_dashboard_user_profile_path do%>
+          <i class="bi bi-person-circle " width="32" height="32"></i>
+          <strong>Profile</strong>
+        <%end%>
+      </li>
+    </ul>
+    <hr>
+  </div>

@@ -1,8 +1,5 @@
 /config/local_env.yml
 /tmp
 .rspec
-/spec/tmp
 /log/*
-!/log/.keep
-!/tmp/.keep
 node_modules/
