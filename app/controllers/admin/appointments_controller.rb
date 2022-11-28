@@ -61,7 +61,7 @@ module Admin
             @appointment = Appointment.find_by(id: params[:id])
             # @appointment.car_id = @car.id
             if @appointment.update(appointment_params)
-                redirect_to dashboard_appointments_path, notice: 'Your changes are upadted successully'
+                redirect_to dashboard_appointments_path, notice: 'Your changes are updated successully'
             else
                 render :edit
             end
@@ -93,7 +93,7 @@ module Admin
         
         def sold_update
             @appointment = Appointment.find_by(id: params[:id])
-            @appointments = Appointment.where(car_id: @appointment.car_id).where.not(id: params[:id])
+            @appointments =Appointment.joins(:user).where("is_buyer=true").where(car_id: @appointment.car_id).where.not(id: params[:id])
             @seller_appointment = Appointment.where(car_id: @appointment.car_id).joins(:user).where('is_seller=true')[0]
             @appointments.each do|app|
                 app.status = 5
@@ -103,7 +103,7 @@ module Admin
             @seller_appointment.status = 4
             @appointment.update(appointments_status_params)
             @seller_appointment.update(appointments_status_params)
-            redirect_to dashboard_appointments_path, notice: 'Your changes are upadted successully'
+            redirect_to dashboard_appointments_path, notice: 'Your changes are updated successully'
         end
 
         private

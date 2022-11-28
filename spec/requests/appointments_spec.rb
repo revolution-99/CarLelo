@@ -27,7 +27,7 @@ RSpec.describe "Appointments", type: :request do
             }
           }
         }.to change(Appointment, :count).by(1)
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(seller_dashboard_appointments_list_path)
         session[:car_id] = 1
         expect(session[:car_id]).to eq(1)
       end

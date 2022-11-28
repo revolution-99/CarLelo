@@ -26,7 +26,7 @@ module Admin
             @brands = Brand.joins(:models).distinct
             @current_car = Car.find_by(id: params[:id])
             if @current_car.update(car_params)
-                redirect_to dashboard_path, notice: 'Your changes are upadted successully'
+                redirect_to dashboard_path, notice: 'Your changes are updated successully'
             else
                 render :show
             end

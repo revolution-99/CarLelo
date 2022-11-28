@@ -1,14 +1,16 @@
 <%= form_with model:@car, url:root_path, method: :get do |form| %>
-        <%= form.search_field :search_query, class:"search--bar", value: params[:search_query]%>
-        <%= button_tag(type: 'submit', class: "btn btn-outline-primary") do %>
-            <i class="bi bi-search"></i> search
-        <% end %>
+        <div class="search--form">
+            <%= form.search_field :search_query, class:"search--bar", value: params[:search_query]%>
+            <%= button_tag(type: 'submit', class: "btn btn-outline-primary") do %>
+                <i class="bi bi-search"></i> search
+            <% end %>
+        </div>
         <ul class="filter">
             <li class="filter--section">
                 <%= form.collection_select :city, City.all, :name, :name, {prompt: "City", selected: params[:city]}, { class: "form-select", onchange: "this.form.submit()"} %>
             </li>
             <li class="filter--section">
-                <%= form.collection_select :year, Year.all, :name, :name, {prompt: "Year", selected: params[:year]}, { class: "form-select", onchange: "this.form.submit()"} %>
+                <%= form.collection_select :year, Year.all.order(:name), :name, :name, {prompt: "Year", selected: params[:year]}, { class: "form-select", onchange: "this.form.submit()"} %>
             </li>
             <li class="filter--section">
                 <%= form.collection_select :km, Kilometer.all, :name, :name, { prompt: "Kilometer Range", selected: params[:km] }, { class: "form-select", onchange: "this.form.submit()"} %>

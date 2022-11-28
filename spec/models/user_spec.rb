@@ -26,12 +26,6 @@ RSpec.describe User, :type => :model do
           user1.password = nil
           expect(user1).to_not be_valid
         end
-        it "It is invalid without a role" do
-          expect(user1).to be_valid
-          user1.is_seller = nil
-          user1.is_buyer = nil
-          expect(user1).to_not be_valid
-        end
 
         it "Email should have proper format." do
           expect(user1).to be_valid

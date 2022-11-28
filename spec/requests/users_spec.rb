@@ -15,7 +15,7 @@ RSpec.describe "Users", type: :request do
     context "with valid credentials." do
       it "send email for confirmation." do
           expect{
-            post user_path, params: {
+            post users_path, params: {
               user: {
                 email: "chand@carlelo.in",
                 first_name: "Chand",
@@ -30,7 +30,7 @@ RSpec.describe "Users", type: :request do
       end
       
       it "saves the user in database and redirects to login page." do
-        post user_path, params: {
+        post users_path, params: {
                 user: {
                   email: "chand@carlelo.in",
                   first_name: "Chand",
@@ -52,7 +52,7 @@ RSpec.describe "Users", type: :request do
     context "with invalid credentials." do
       it "renders the signup page again." do
         expect {
-          post user_path, params: {
+          post users_path, params: {
             user: {
               email: "chand@carlelo.in",
               first_name: "",

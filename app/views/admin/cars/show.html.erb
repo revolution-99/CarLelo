@@ -42,7 +42,7 @@
                         <%= form.grouped_collection_select :model, @brands, :models, :name, :name, :name, { class: "form-select" } %>
                     </td>
                     <td>
-                        <%= form.select :year, Year.all, :name, :name, { class: "form-select" } %>
+                        <%= form.select :year, Year.all.order(:name), :name, :name, { class: "form-select" } %>
                     </td>
                     <td>
                         <%= form.collection_select :variant, Variant.all, :name, :name, { class: "form-select" } %>

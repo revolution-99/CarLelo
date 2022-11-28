@@ -21,7 +21,7 @@ class UserMailer < ApplicationMailer
     def appointment_status_approval(user, appointment)
         @user = user
         @appointment = appointment
-        @subject = "Appointment Status Update for #{@user.first_name} #{@user.last_name} at #{@appointment.created_at}"
+        @subject = "Appointment Status Approval for #{@user.first_name} #{@user.last_name} at #{@appointment.created_at}"
         mail(to: @user.email, subject: @subject)
     end
 end

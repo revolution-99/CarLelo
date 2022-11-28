@@ -1,5 +1,5 @@
 <div class="sell__car--heading">
-    <h1> Welcome to Car Lelo </h1>
+    <h1> Get the best price for your car</h1>
     <div class="sell__car--heading--content">
       <h5>Sell From Your Home ||&nbsp</h5>
       <h5> Instant Payment ||&nbsp</h5>
@@ -30,7 +30,7 @@
         </div>
       <div class="mx-3">
           <%= form.label :Registration_Year%>
-          <%= form.collection_select :year, Year.all, :name, :name, { prompt: "Select" }, {class: "form-select" } %>
+          <%= form.collection_select :year, Year.all.order(:name), :name, :name, { prompt: "Select" }, {class: "form-select" } %>
       </div>
       <div class="mx-3">
           <%= form.label :Variant%>
@@ -42,7 +42,7 @@
       </div>
       <div class="mx-3">
           <%= form.label :Kilometer %>
-          <%= form.collection_select :km, Kilometer.all, :name, :name, { prompt: "Select" }, { class: "form-select" } %>
+          <%= form.collection_select :km, Kilometer.all.order(:name), :name, :name, { prompt: "Select" }, { class: "form-select" } %>
       </div>
         <div class="mx-3">
           <%= form.label :condition %>          

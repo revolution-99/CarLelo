@@ -1,38 +1,51 @@
 <div class="d-flex flex-column align-items-center justify-content-center mb-2">
     <h1> List of all buyers </h1>
 </div>
-
-<div class="table--wrap">
-    <table class="table table-striped">
-        <thead>
-            <tr class="table-dark">
-                <th scope="col">ID</th>
-                <th scope="col">User ID</th>
-                <th scope="col">Status</th>
-                <th scope="col">Email</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col-2">Actions</th>
-            </tr>
-        </thead>
-        <% @appointments.each do |app| %>
-            <tbody>
-                <tr>
-                    <%if app.user.is_buyer%> 
-                        <td> <%=app.id%> </td>
-                        <td> <%=app.user.id%> </td>
-                        <td> <%=app.status%> </td>
-                        <td> <%=app.user.email%> </td>
-                        <td> <%=app.user.first_name%> </td>
-                        <td> <%=app.user.last_name%> </td>
-                        <td scope="col-2">
-                            <%= link_to sold_update_path(app.id), method: :patch, class: "btn btn-success mt-3" do %>
-                                Sell<i class="bi bi-caret-right-fill"></i>
-                            <%end%>
-                        </td>
-                    <%end%>
+<% unless @appointments.count == 1 %>
+    <div class="table--wrap">
+        <table class="table table-striped">
+            <thead>
+                <tr class="table-dark">
+                    <th scope="col">ID</th>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col-2">Actions</th>
                 </tr>
-            </tbody>
+            </thead>
+            <% @appointments.each do |app| %>
+                <tbody>
+                    <tr>
+                        <%if app.user.is_buyer%> 
+                            <td> <%=app.id%> </td>
+                            <td> <%=app.user.id%> </td>
+                            <td> <%=app.status%> </td>
+                            <td> <%=app.user.email%> </td>
+                            <td> <%=app.user.first_name%> </td>
+                            <td> <%=app.user.last_name%> </td>
+                            <td scope="col-2">
+                                <%= link_to sold_update_path(app.id), method: :patch, class: "btn btn-success mt-3" do %>
+                                    Sell<i class="bi bi-caret-right-fill"></i>
+                                <%end%>
+                            </td>
+                        <%end%>
+                    </tr>
+                </tbody>
+            <%end%>
+        </table>
+    </div>
+<%else%>
+    <div class= "jumbotron text-center">
+        <h3>No buyer booked appointment for your car yet.</h3>
+        <p>Please comeback after sometime to check the buyers.</p>
+    </div>
+<% end %>
+<div class="button__details--bottom">
+    <div class="button__details--bottom--buttons">
+        <%= link_to dashboard_path, class: "btn btn-info" do %>
+            <i class="bi bi-caret-left-fill"></i>Back to Home
         <%end%>
-    </table>
+    </div>
 </div>

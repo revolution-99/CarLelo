@@ -6,6 +6,9 @@
 }
 
 /* Filter Section of the home page */
+.search--form{
+    margin: 1rem 17rem;
+}
 .landing__container{
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -116,7 +119,6 @@
     margin-top: 3rem;
 }
 .dashboard a{
-    color: #363636;
     text-decoration: none;
 }
 

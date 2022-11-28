@@ -25,21 +25,23 @@
         <%elsif notification.action == "status_changed"%>
             <li>
                 <span>
-                    <%if  notification.appointment.status == 'Sold' %>
+                    <%if  notification.appointment.status_before_type_cast == 4 %>
                         <%if  notification.user.is_seller%>
-                            Congratulations! your <b><%= notification.car.brand%> <%= notification.car.model%></b> has been sold.
+                            Congratulations!! your <b><%= notification.car.brand%> <%= notification.car.model%></b> has been sold.
                         <%elsif notification.user.is_buyer%>
                             Congratulations! on your new car purchase of <b><%= notification.car.brand%> <%= notification.car.model%>.</b>
                         <%end%>
                         Make sure you check back with us for even better deals on used cars.
-                    <%elsif  notification.appointment.status == 'Investigating' %>
-                        Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is under investigation. We will notify you once the status is further updated.
-                    <%elsif  notification.appointment.status == 'Processing' %>
+                    <%elsif  notification.appointment.status_before_type_cast == 1 %>
                         Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is under process. We will notify you once the status is further updated.
-                    <%elsif  notification.appointment.status == 'Rejected' %>
-                        Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is rejected. Sorry for the inconvinenece.
+                    <%elsif  notification.appointment.status_before_type_cast == 2 %>
+                        Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is under investigation. We will notify you once the status is further updated.
+                    <%elsif  notification.appointment.status_before_type_cast == 3 %>
+                        Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is now ready for sell. We will notify you once the status is further updated.
                     <%elsif  notification.appointment.status_before_type_cast == 5 %>
-                        Sell request is cancelled for appointment of <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is rejected. Sorry for the inconvinenece.
+                        Sell request is cancelled for appointment of <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is rejected. Sorry for the inconvinence.
+                    <%elsif  notification.appointment.status_before_type_cast == 6 %>
+                        Your appointment for <b><%= notification.car.brand%> <%= notification.car.model%></b> with appointment id  <%= notification.appointment_id%> is rejected. Sorry for the inconvinenece.
                     <%end%>
                 </span>
                 <hr>

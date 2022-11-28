@@ -37,9 +37,9 @@ class UsersController < ApplicationController
         @user = current_user
         if @user.update(user_params)
             if @user.is_buyer
-                redirect_to buyer_dashboard_user_profile_path, notice: 'Your changes are upadted successfully.'
+                redirect_to buyer_dashboard_user_profile_path, notice: 'Your changes are updated successfully.'
             elsif @user.is_seller
-                redirect_to seller_dashboard_user_profile_path, notice: 'Your changes are upadted successfully.'
+                redirect_to seller_dashboard_user_profile_path, notice: 'Your changes are updated successfully.'
             end
         else
             render :show

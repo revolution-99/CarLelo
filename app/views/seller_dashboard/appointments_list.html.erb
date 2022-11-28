@@ -8,7 +8,7 @@
             <ul class="filter__appointment">
                 <li>Search By:</li>
                 <li class="filter__appointment--section">
-                    <%= form.select :status, Appointment.statuses.keys[1..6].map{ |key| [key.humanize, key] }, {prompt: 'Select appointment status'}, class: "form-select"%>
+                    <%= form.select :status, ["Processing","Investigating", "Ready_For_Sell", "Sold","Rejected"].map{ |key| [key.humanize, key] }, {prompt: 'Select appointment status'}, class: "form-select"%>
                 </li>
                 <li class="filter__appointment--section">
                     <%= form.submit "Show Results", class:"btn btn-primary"%>
@@ -71,7 +71,7 @@
                         <h1 class="h6"><%= app.appointment_date%></h1>
                     </div> 
                     <div class="col-md-2 text-sm-center text-md-start align-self-center my-2"> 
-                        <h1 class="h6"><%= app.status %></h1>
+                        <h1 class="h6"><%= app.status.humanize %></h1>
                     </div> 
                 </div>
             <%end%>

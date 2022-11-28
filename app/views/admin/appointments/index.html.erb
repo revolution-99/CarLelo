@@ -9,9 +9,7 @@
         <tr class="table-dark">
           <th scope="col">ID</th>
           <th scope="col">Car ID</th>
-          <th scope="col">
-            <%= sortable 'User Role', 'is_seller', 'asc', params[:status] %>
-          </th>
+          <th scope="col">User Role</th>
           <th scope="col">
             <%= sortable 'User Name', 'first_name', 'asc', params[:status] %>
           </th>
@@ -55,7 +53,7 @@
             <td><%= app.car.model%></td>
             <td><%= app.created_at %></td>
             <td><%= app.appointment_date %></td>
-            <td><%= app.status %></td>
+            <td><%= app.status.humanize %></td>
             <td>
                 <%if app.is_approved %>
                     Approved
@@ -66,7 +64,7 @@
                 <%end%>
             </td>
             <td>
-              <% unless app.status_before_type_cast == 4 || app.status_before_type_cast == 6%>
+              <% unless app.status_before_type_cast == 4 || app.status_before_type_cast == 6 || app.status_before_type_cast == 0%>
                 <%= link_to "Edit", edit_dashboard_appointment_path(app.id), class: "btn btn-outline-primary" %>
               <%end%>
             </td>
@@ -75,7 +73,7 @@
                   <%= link_to "Approve", approve_path(app.id), method: :patch, remote: true, data: { confirm: "Are you sure? Once the appointment is approved it can't be reverted." }, class: "btn btn-outline-success" %>
               </td>
               <td>
-                <%= link_to "Reject", reject_path(app.id), method: :patch, data: { confirm: "Are you sure? Once the appointment is rejected it can't be reverted." }, class: "btn btn-outline-warning" %>
+                <%= link_to "Reject", reject_path(app.id), method: :patch, remote: true, data: { confirm: "Are you sure? Once the appointment is rejected it can't be reverted." }, class: "btn btn-outline-warning" %>
               </td>
               <%end%>
               <td>
