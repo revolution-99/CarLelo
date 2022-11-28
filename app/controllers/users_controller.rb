@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
     skip_before_action :require_login
-    before_action :authorized_only_to_admin!, only: [:index, :destroy, :admin_upgradation ]
+    before_action :authorized_only_to_admin!, only: %i[index destroy admin_upgradation]
 
     def new
         @user = User.new
     end
 
     def index
-        @users = User.all
+        @users = User.all.where.not(id: current_user.id)
     end
 
     def create
@@ -74,7 +74,6 @@ class UsersController < ApplicationController
         params.require(:user).permit(:email, :first_name, :last_name, :mobile_no, :password, :password_confirmation, :is_admin, :is_buyer, :is_seller)
     end
 
-    private
     def admin_upgradation_params
         params.permit(:is_admin, :is_buyer, :is_seller)
     end

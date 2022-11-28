@@ -33,7 +33,7 @@
             <td scope="col">
                 ₹<%= current_condition.price_start%> - ₹<%= current_condition.price_end%>
             </td>
-            <td scope="col"><%if current_user.is_seller%><%= @appointment.status %><%end%></td>
+            <td scope="col"><%if current_user.is_seller%><%= @appointment.status.humanize %><%end%></td>
             </tr>
         </tbody>
     </table>

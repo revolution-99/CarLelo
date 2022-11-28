@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "home#index"
-  get "/filter", to:"home#filter", as: :home_filtered
-  # get "/search", to:"home#search", as: :home_searched
   get "/car/details/:id", to:"home#show", as: :car_details
   get "/notification", to:"notification#index",  as: :notifications
 

@@ -8,14 +8,16 @@
         <%elsif @appointment.user.is_buyer%>
             Congratulations! on your new car purchase of <b><%= @appointment.car.brand%> <%= @appointment.car.model%>.</b>
         <% end %>
+    <% elsif @appointment.status_before_type_cast == 1 %>
+        We are processing your appointment for <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> appointment with appointment id: <%= @appointment.id%>. We will notify you once the status is further updated.
+    <% elsif @appointment.status_before_type_cast == 2 %>
+        Your appointment for <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> appointment with appointment id: <%= @appointment.id%> is under investigation. We will notify you once the status is further updated.
     <% elsif @appointment.status_before_type_cast == 3 %>
         Your appointment for <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> appointment with appointment id: <%= @appointment.id%> is now ready for sell. We will notify you once the status is further updated.
     <% elsif @appointment.status_before_type_cast == 5 %>
         Sell request is cancelled for your car <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> appointment with appointment id: <%= @appointment.id%>. Sorry for the inconvenience.
     <% elsif @appointment.status_before_type_cast == 6 %>
         Your appointment for <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> with appointment id : <%= @appointment.id%> is rejected. Sorry for the inconvenience.
-    <%else%>
-        Your appointment for <b><%= @appointment.car.brand%> <%= @appointment.car.model%></b> with appointment id: <%= @appointment.id%> is under <%= @appointment.status%> stage.
     <%end%>
     For more information visit our page <%= link_to "CarLelo", root_url %>
 </p>

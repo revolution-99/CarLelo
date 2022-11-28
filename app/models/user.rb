@@ -5,12 +5,13 @@ class User < ApplicationRecord
     has_many :notifications, dependent: :destroy
     has_secure_password
 
-    validates :email, presence: true, uniqueness: { case_sensitive: false}, format: { with: /\A[\w.+-]+@\w+\.\w+\z/ }
+    validates :email, presence: true, uniqueness: { case_sensitive: false }, format: { with: /\A[\w.+-]+@\w+\.\w+\z/ }
 
-    validates :mobile_no, presence: true,
-              numericality: { only_integer: true},
-              uniqueness: { scope: %i[is_seller is_buyer]},
-              format: { with: /\A\d{10}\z/}
+    validates :mobile_no, 
+              presence: true,
+              numericality: { only_integer: true },
+              uniqueness: { scope: %i[is_seller is_buyer] },
+              format: { with: /\A\d{10}\z/ }
 
     validates :first_name, presence: true
     validates :password, presence: true, length: { in: 6..20 }, if: :password

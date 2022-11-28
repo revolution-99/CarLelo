@@ -6,10 +6,10 @@ class Kilometer < ApplicationRecord
     validates :km_start, presence: true, numericality: { only_integer: true }, uniqueness: true
     validates :km_end, presence: true, numericality: { only_integer: true }, uniqueness: true
     
-    scope :in_range, ->(range) { where("km_end >= ?", range.first).where("km_start <= ?", range.last) }
+    scope :in_range, ->(range) { where('km_end >= ?', range.first).where('km_start <= ?', range.last) }
 
     def already_in_range?
-        if Kilometer.in_range(km_start..km_end).count > 0
+        if Kilometer.in_range(km_start..km_end).count.positive?
             errors.add(:base, 'Range is already alloted')
         end        
     end

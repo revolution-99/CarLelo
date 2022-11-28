@@ -1,4 +1,3 @@
-require "pry"
 class ConditionsController < ApplicationController
     include ApplicationHelper
     before_action :authorized_only_to_admin!
@@ -14,7 +13,6 @@ class ConditionsController < ApplicationController
     def create
         @condition = Condition.new(condition_params)
         if @condition.save
-          # binding.pry
           redirect_to conditions_path, notice: 'Condition added Succesfully'
         else
           render :new

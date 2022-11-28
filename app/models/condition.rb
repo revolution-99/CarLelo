@@ -5,11 +5,10 @@ class Condition < ApplicationRecord
     validates :price_start, presence: true, numericality: { only_integer: true }, uniqueness: true
     validates :price_end, presence: true, numericality: { only_integer: true }, uniqueness: true
 
-    scope :in_range, ->(range) { where("price_end >= ?", range.first).where("price_start <= ?", range.last) }
+    scope :in_range, ->(range) { where('price_end >= ?', range.first).where('price_start <= ?', range.last) }
 
     def already_in_range?
-        if Condition.in_range(price_start..price_end).count > 0
-        # if Condition.pluck(:price_start, :price_end).any? { |min, max| (min..max).overlaps?(price_start..price_end) }
+        if Condition.in_range(price_start..price_end).count.positive?
             errors.add(:base, 'Range is already alloted')
         end        
     end

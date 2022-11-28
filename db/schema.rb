@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_26_195746) do
+ActiveRecord::Schema.define(version: 2022_11_28_054355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,25 +60,33 @@ ActiveRecord::Schema.define(version: 2022_11_26_195746) do
     t.string "condition", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "price_start"
-    t.integer "price_end"
+    t.integer "price_start", null: false
+    t.integer "price_end", null: false
     t.index ["condition"], name: "index_conditions_on_condition", unique: true
+    t.index ["price_end"], name: "index_conditions_on_price_end", unique: true
+    t.index ["price_start"], name: "index_conditions_on_price_start", unique: true
   end
 
   create_table "kilometers", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.integer "km_start"
-    t.integer "km_end"
+    t.string "name", null: false
+    t.integer "km_start", null: false
+    t.integer "km_end", null: false
+    t.index ["km_end"], name: "index_kilometers_on_km_end", unique: true
+    t.index ["km_start"], name: "index_kilometers_on_km_start", unique: true
+    t.index ["name"], name: "index_kilometers_on_name", unique: true
   end
 
   create_table "maps", force: :cascade do |t|
-    t.text "address"
-    t.float "latitude"
-    t.float "longitude"
+    t.text "address", null: false
+    t.float "latitude", null: false
+    t.float "longitude", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["address"], name: "index_maps_on_address", unique: true
+    t.index ["latitude"], name: "index_maps_on_latitude", unique: true
+    t.index ["longitude"], name: "index_maps_on_longitude", unique: true
   end
 
   create_table "models", force: :cascade do |t|
@@ -137,7 +145,8 @@ ActiveRecord::Schema.define(version: 2022_11_26_195746) do
   create_table "years", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "name"
+    t.integer "name", null: false
+    t.index ["name"], name: "index_years_on_name", unique: true
   end
 
 end

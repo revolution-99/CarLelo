@@ -42,7 +42,6 @@ module Admin
 
         def show
             @car = Car.find_by(id: params[:id])
-            # @condition = Condition.where(condition: @car.condition).joins("INNER JOIN cars ON cars.condition = conditions.condition").first
         end
 
         def display
@@ -93,9 +92,9 @@ module Admin
         
         def sold_update
             @appointment = Appointment.find_by(id: params[:id])
-            @appointments =Appointment.joins(:user).where("is_buyer=true").where(car_id: @appointment.car_id).where.not(id: params[:id])
+            @appointments = Appointment.joins(:user).where('is_buyer=true').where(car_id: @appointment.car_id).where.not(id: params[:id])
             @seller_appointment = Appointment.where(car_id: @appointment.car_id).joins(:user).where('is_seller=true')[0]
-            @appointments.each do|app|
+            @appointments.each do |app|
                 app.status = 5
                 app.update(appointments_status_params)
             end
@@ -111,24 +110,16 @@ module Admin
             params.require(:appointment).permit(:status, :appointment_date)
         end
 
-        private
         def appointments_approval_params
             params.permit(:is_approved)
         end
 
-        private
         def appointments_status_params
             params.permit(:status)
         end
 
-        private
-
         def sort_column
-            params[:sort] || "status"
-        end
-
-        def sort_direction
-            %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+            params[:sort] || 'status'
         end
 
         def sort_direction
@@ -136,7 +127,7 @@ module Admin
         end
 
         def filter_status
-            params[:status] || ""
+            params[:status] || ''
         end 
     end
 end

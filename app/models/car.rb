@@ -1,6 +1,6 @@
 class Car < ApplicationRecord
     # include Filterable
-    searchkick word_middle: [:city, :year, :km, :brand, :model, :state, :variant]	
+    searchkick word_middle: %I[city year km brand model state variant]	
     Car.reindex
     # include Elasticsearch::Model
     # include Elasticsearch::Model::Callbacks
@@ -26,16 +26,4 @@ class Car < ApplicationRecord
     scope :filter_by_state, ->(state) { where state: state }
     scope :filter_by_variant, ->(variant) { where variant: variant }
     scope :search_import, -> { includes(:state, :variant) }
-
-    # def search_data
-    # {
-    #     city: city,
-    #     year: year,
-    #     km: km,
-    #     brand: brand,
-    #     model: model,
-    #     state: state,
-    #     variant: variant
-    # }
-    # end
 end

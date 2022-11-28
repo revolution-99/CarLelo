@@ -21,7 +21,7 @@
                         <%if app.user.is_buyer%> 
                             <td> <%=app.id%> </td>
                             <td> <%=app.user.id%> </td>
-                            <td> <%=app.status%> </td>
+                            <td> <%=app.status.humanize%> </td>
                             <td> <%=app.user.email%> </td>
                             <td> <%=app.user.first_name%> </td>
                             <td> <%=app.user.last_name%> </td>
@@ -44,8 +44,8 @@
 <% end %>
 <div class="button__details--bottom">
     <div class="button__details--bottom--buttons">
-        <%= link_to dashboard_path, class: "btn btn-info" do %>
-            <i class="bi bi-caret-left-fill"></i>Back to Home
+        <%= link_to dashboard_appointments_path, class: "btn btn-info" do %>
+            <i class="bi bi-caret-left-fill"></i>Back to Appointments
         <%end%>
     </div>
 </div>

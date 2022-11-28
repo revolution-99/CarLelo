@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   skip_before_action :require_login
-  before_action :authorized_only_to_users!, only:[:show]
+  before_action :authorized_only_to_users!, only: [:show]
   
   def index
     @brands = Brand.joins(:models).distinct
@@ -17,10 +17,10 @@ class HomeController < ApplicationController
     args[:variant] = params[:variant] if params[:variant].present?
 
     if @q.present?
-      @cars = @cars & Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant'], match: :word_middle, where: args,aggs: {city: {}, year: {}, km: {}, brand: {}, model: {}, state: {},variant: {}}) 
+      @cars &= Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant'], match: :word_middle, where: args, aggs: { city: {}, year: {}, km: {}, brand: {}, model: {}, state: {}, variant: {} }) 
     else
       filtering_params(params).each do |key, value|
-        @cars = @cars & Car.public_send("filter_by_#{key}", value) if value.present?
+        @cars &= Car.public_send("filter_by_#{key}", value) if value.present?
         @cars = Car.where(id: @cars.map(&:id))
       end
     end
@@ -36,24 +36,6 @@ class HomeController < ApplicationController
         @flag = true
       end
     end 
-  end
-
-  def filter
-    @brands = Brand.joins(:models).distinct
-    @cars = Car.joins(:appointments).where('is_approved=true').distinct
-    filtering_params(params).each do |key, value|
-      @cars = @cars & @cars.public_send("filter_by_#{key}", value) if value.present?
-    end
-    # binding.pry
-    # @conditions = Condition.joins("INNER JOIN cars ON cars.condition = conditions.condition")
-  end
-  
-  def search
-    @brands = Brand.joins(:models).distinct
-    @q = params[:search_query]
-    @cars = Car.joins(:appointments).where('is_approved=true').distinct & Car.search(@q, fields: ['city', 'year', 'km', 'brand', 'model', 'state', 'variant'], match: :word_middle) if @q
-    @conditions = Condition.joins("INNER JOIN cars ON cars.condition = conditions.condition")
-    # binding.pry
   end
 
   private
