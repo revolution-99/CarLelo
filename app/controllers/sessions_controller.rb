@@ -18,12 +18,18 @@ class SessionsController < ApplicationController
         if user.present? && user.authenticate(params[:password]) && user.email_confirmed == true
             session[:user_id] = user.id
            if user.is_seller == true
-            redirect_to seller_dashboard_path, notice: 'Logged in Successfully as a seller'
+            flash[:notice] = 'Logged in Successfully as a seller'
+            redirect_back_or(seller_dashboard_path)
            elsif user.is_buyer == true
-            redirect_to buyer_dashboard_path, notice: 'Logged in Successfully as a buyer'
+            flash[:notice] = 'Logged in Successfully as a buyer'
+            redirect_back_or(buyer_dashboard_path)
            elsif user.is_admin == true
-            redirect_to dashboard_path, notice: 'Logged in Successfully as an admin'
+            flash[:notice] = 'Logged in Successfully as an admin'
+            redirect_back_or(dashboard_path)
            end
+        elsif user.present? && user.email_confirmed == false
+            flash[:alert] = 'Please confirm your email to login.'
+            render :new
         else
             flash[:alert] = 'Invalid email id or password'
             render :new

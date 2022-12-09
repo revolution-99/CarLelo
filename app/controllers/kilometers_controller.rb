@@ -26,7 +26,7 @@ class KilometersController < ApplicationController
   
     def update
         @kilometer = Kilometer.find_by(id: params[:id])
-        if @kilometer.update(model_params(:kilometer))
+        if @kilometer.update(kilometer_params)
           redirect_to kilometers_path, notice: 'Kilometer has been succesfully Updated'
         else
           render :edit

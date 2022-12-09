@@ -38,7 +38,7 @@ class MapsController < ApplicationController
     def destroy
       @map = Map.find_by(id: params[:id])
       @map.destroy
-      redirect_to cities_path, notice: 'Map record has been succesfully deleted'
+      redirect_to maps_table_path, notice: 'Map record has been succesfully deleted'
     end
 
     private

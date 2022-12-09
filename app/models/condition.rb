@@ -6,9 +6,10 @@ class Condition < ApplicationRecord
     validates :price_end, presence: true, numericality: { only_integer: true }, uniqueness: true
 
     scope :in_range, ->(range) { where('price_end >= ?', range.first).where('price_start <= ?', range.last) }
+    scope :exclude_self, ->(id) { where.not(id: id) }
 
     def already_in_range?
-        if Condition.in_range(price_start..price_end).count.positive?
+        if Condition.exclude_self(id).in_range(price_start..price_end).count.positive?
             errors.add(:base, 'Range is already alloted')
         end        
     end

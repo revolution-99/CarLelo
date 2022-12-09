@@ -1,6 +1,7 @@
 class CarsController < ApplicationController
     # protect_from_forgery except: :edit
-
+    before_action :authorized_only_to_seller!
+    
     def new
         @brands = Brand.joins(:models).distinct
         @car = Car.new

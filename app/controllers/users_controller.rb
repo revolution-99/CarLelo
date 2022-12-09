@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     def destroy
         @user = User.find(params[:id])
         @user.destroy
-        redirect_to dashboard_path, notice: 'User record is destroyed successfully.'
+        redirect_to users_path, notice: 'User record is destroyed successfully.'
     end
 
     def update
@@ -63,9 +63,9 @@ class UsersController < ApplicationController
         @user.is_buyer = false
         @user.is_admin = true
         if @user.update(admin_upgradation_params)
-            redirect_to dashboard_path, notice: 'Successfully upgraded user to admin'
+            redirect_to users_path, notice: 'Successfully upgraded user to admin'
         else
-            redirect_to dashboard_path, alert: 'Failed to upgrade user to admin'
+            redirect_to users_path, alert: 'Failed to upgrade user to admin'
         end
     end
 

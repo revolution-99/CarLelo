@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get "/car/details/:id", to:"home#show", as: :car_details
   get "/notification", to:"notification#index",  as: :notifications
 
-  resources :users
+  resources :users, only:[:new, :create, :index, :destroy, :update]
   patch "/users/upgrade/:id", to:"users#admin_upgradation", as: :admin_upgradation
 
   resources :maps, only:[:new, :create, :index, :edit, :destroy, :update]
@@ -42,9 +42,7 @@ Rails.application.routes.draw do
   # For admin
   scope module: 'admin' do
       resource :dashboard, only:[:show] do
-        # resources :cars, only:[:create, :show, :destroy, :update] do
-          resources :appointments, only:[:create, :index, :destroy, :update, :edit, :show]
-        # end
+        resources :appointments, only:[:create, :index, :destroy, :update, :edit, :show]
       end
       get "/appointments/filter", to:"appointments#filter", as: :dashboard_appointments_filtered
       get "/dashboard/appointments/display/:id", to:"appointments#display", as: :user_details

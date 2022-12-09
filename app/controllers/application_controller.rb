@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :require_login
+    include SessionsHelper
     # before_action :set_notifications, if: :current_user
 
     def current_user
@@ -23,13 +24,22 @@ class ApplicationController < ActionController::Base
     helper_method :current_appointment
 
     def require_login
-        redirect_to login_path, alert: 'You must logged in first' unless current_user
+        unless current_user
+            store_location
+            redirect_to login_path, alert: 'You must logged in first'
+        end
     end
     # helper_method :logger
 
     def authorized_only_to_admin!
         unless current_user&.is_admin 
             redirect_to root_path, notice: 'This feature can be unlocked with admin access. Please Log in as Admin to continue'
+        end
+    end
+
+    def authorized_only_to_seller!
+        unless current_user&.is_seller
+            redirect_to root_path, notice: 'This feature is only available for sellers. Please Log in as a seller to continue'
         end
     end
 
