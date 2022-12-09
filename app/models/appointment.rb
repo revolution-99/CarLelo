@@ -23,8 +23,10 @@ class Appointment < ApplicationRecord
     has_many :notifications, dependent: :destroy
 
     def no_past_appointment_date
-        if appointment_date < Time.zone.today
-            errors.add(:appointment_date, 'can not be in the past')          
+        if appointment_date.present?
+            if appointment_date < Time.zone.today
+                errors.add(:appointment_date, 'can not be in the past')          
+            end
         end
     end
 

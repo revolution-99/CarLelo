@@ -17,7 +17,7 @@ class HomeController < ApplicationController
     args[:variant] = params[:variant] if params[:variant].present?
 
     if @q.present?
-      @cars &= Car.search(@q.upcase, fields: ['city', {'year': 'exact'}, 'km', 'brand', 'model', {'state': 'exact'}, 'variant'], match: :word_middle, where: args, aggs: { city: {}, year: {}, km: {}, brand: {}, model: {}, state: {}, variant: {} },misspellings: {below: 2})
+      @cars &= Car.search(@q.upcase, fields: ['city', { 'year': 'exact' }, 'km', 'brand', 'model', { 'state': 'exact' }, 'variant'], match: :word_middle, where: args, aggs: { city: {}, year: {}, km: {}, brand: {}, model: {}, state: {}, variant: {} }, misspellings: { below: 2 })
     else
       filtering_params(params).each do |key, value|
         @cars &= Car.public_send("filter_by_#{key}", value) if value.present?
